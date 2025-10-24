@@ -6,14 +6,14 @@
     private string $hashed_password;
     private string $role;
 
-    public function __construct(int | null $id, string $email, string $password, string $role) {
+    public function __construct(?int $id, string $email, ?string $hashed_password, string $role) {
         $this->id = $id;
         $this->email = $email;
-        $this->set_password($password);
+        $this->hashed_password = $hashed_password;
         $this->role = $role;
     }
 
-    public function get_id(): int | null {
+    public function get_id(): ?int {
         return $this->id;
     }
 
@@ -29,12 +29,12 @@
         $this->email = $email;
     }
 
-    public function get_hashed_password(): string {
+    public function get_hashed_password(): ?string {
         return $this->hashed_password;
     }
 
-    public function set_password(string $password) {
-        $this->hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    public function set_hashed_password(string $hashed_password) {
+        $this->hashed_password = $hashed_password;
     }
 
     public function get_role(): string {

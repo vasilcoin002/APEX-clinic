@@ -39,7 +39,9 @@
             $this->validate_email($email);
             $this->validate_password($password);
 
-            $user = new User(null, $email, $password, Roles::USER);
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+            $user = new User(null, $email, $hashed_password, Roles::USER);
             return $this->user_repository->add_user($user);
         }
 
@@ -50,17 +52,22 @@
             if ($user == null) {
                 throw new ValueError("User not found. Please, provide the right email");
             }
-
-            echo "{$password} <br>";
-            echo "{$user->get_hashed_password()} <br>";
-
             if (!password_verify($password, $user->get_hashed_password())) {
                 throw new ValueError("Password is incorrect. Please, provide the right one");
             }
 
             $_SESSION["user_id"] = $user->get_id();
-            $_SESSION["email"] = $user->get_email();
+            $_SESSION["user_email"] = $user->get_email();
+            $_SESSION["user_role"] = $user->get_role();
+
+            echo "<a href='../index.php'>go back</a>";
+
             return $user;
+        }
+
+        public function logout() {
+            session_destroy();
+            echo "<a href='../index.php'>go back</a>";
         }
     }
 

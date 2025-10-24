@@ -32,10 +32,23 @@
             $user_data = $this->get_filtered_email_and_password_from_input();
             return $this->user_service->login($user_data["email"], $user_data["password"]);
         }
+
+        public function check_if_logined() {
+            echo "{$_SESSION['user_id']}<br>";
+            echo "{$_SESSION['user_email']}<br>";
+            echo "{$_SESSION['user_role']}<br>";
+            echo "<a href='../index.php'>go back</a>";
+        }
+
+        public function logout() {
+            $this->user_service->logout();
+        }
     }
 
     $user_controller = new UserController();
 
     if (isset($_POST["register"])) {$user_controller->add_user();}
     elseif (isset($_POST["login"])) {$user_controller->login();}
+    elseif (isset($_POST["check-if-logined"])) {$user_controller->check_if_logined();}
+    elseif (isset($_POST["logout"])) {$user_controller->logout();}
 ?>

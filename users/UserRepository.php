@@ -84,13 +84,13 @@
                 $user->set_id(0);
             }
 
-            $this->debug_to_console($user->get_hashed_password());
+            // $this->debug_to_console($user->get_hashed_password());
 
             $users[] = $user;
-            $this->var_dump_pretty($users);
+            // $this->var_dump_pretty($users);
             $this->rewrite_db($users);
 
-            $this->debug_to_console($this->find_user_by_email($user->get_email())->get_hashed_password());
+            // $this->debug_to_console($this->find_user_by_email($user->get_email())->get_hashed_password());
             return $user;
         }
 
