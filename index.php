@@ -10,12 +10,12 @@
     <form action="users/userController.php" method="post">
         <div><label>email:<input type="email" name="email"></label></div>
         <div><label>password:<input type="password" name="password"></label></div>
-        <div><label>avatar: <input type="file" accept="image/*" name="avatar"></label></div>
         <div>
-            <input type="submit" name="register" value="register">
-            <input type="submit" name="login" value="login">
-            <input type="submit" name="check-if-logined" value="check-if-logined">
-            <input type="submit" name="logout" value="logout">
+            <input type="submit" name="action" value="register">
+            <input type="submit" name="action" value="login">
+            <input type="submit" name="action" value="check-if-logined">
+            <input type="submit" name="action" value="logout">
+            <input type="submit" name="action" value="delete-account">
         </div>
     </form>
 </body>

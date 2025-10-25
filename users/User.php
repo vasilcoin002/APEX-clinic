@@ -1,7 +1,7 @@
 <?php
     class User {
 
-    private int | null $id;
+    private ?int $id;
     private string $email;
     private string $hashed_password;
     private string $role;

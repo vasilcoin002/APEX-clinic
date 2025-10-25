@@ -17,38 +17,69 @@
             $this->user_service = new UserService();
         }
 
-        private function get_filtered_email_and_password_from_input() {
-            $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS);
-            $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
-            return array("email"=>$email, "password"=>$password);
+        // private function get_email_and_password_from_input() {
+        //     $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS);
+        //     $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
+        //     return array("email"=>$email, "password"=>$password);
+        // }
+
+        public function add_user(UserDTO $userDTO) {
+            echo "<a href='../index.php'>go back</a><br>";
+            // $user_data = $this->get_email_and_password_from_input();
+            return $this->user_service->add_user($userDTO);
         }
 
-        public function add_user() {
-            $user_data = $this->get_filtered_email_and_password_from_input();
-            return $this->user_service->add_user($user_data["email"], $user_data["password"]);
-        }
-
-        public function login() {
-            $user_data = $this->get_filtered_email_and_password_from_input();
-            return $this->user_service->login($user_data["email"], $user_data["password"]);
+        public function login(UserDTO $userDTO) {
+            echo "<a href='../index.php'>go back</a><br>";
+            // $user_data = $this->get_email_and_password_from_input();
+            return $this->user_service->login($userDTO);
         }
 
         public function check_if_logined() {
+            echo "<a href='../index.php'>go back</a><br>";
             echo "{$_SESSION['user_id']}<br>";
             echo "{$_SESSION['user_email']}<br>";
             echo "{$_SESSION['user_role']}<br>";
-            echo "<a href='../index.php'>go back</a>";
         }
 
         public function logout() {
+            echo "<a href='../index.php'>go back</a><br>";
             $this->user_service->logout();
+        }
+
+        public function delete_account(UserDTO $userDTO) {
+            echo "<a href='../index.php'>go back</a><br>";
+            // $user_data = $this->get_email_and_password_from_input();
+            return $this->user_service->delete_user_by_user_data($userDTO);
         }
     }
 
     $user_controller = new UserController();
-
-    if (isset($_POST["register"])) {$user_controller->add_user();}
-    elseif (isset($_POST["login"])) {$user_controller->login();}
-    elseif (isset($_POST["check-if-logined"])) {$user_controller->check_if_logined();}
-    elseif (isset($_POST["logout"])) {$user_controller->logout();}
+    if (isset($_POST["action"])) {
+        $userDTO = new UserDTO;
+        if (isset($_POST["email"])) {
+            $userDTO->email = $_POST["email"];
+        }
+        if (isset($_POST["password"])) {
+            $userDTO->password = $_POST["password"];
+        }
+        
+        switch ($_POST["action"]) {
+            case "register":
+                $user_controller->add_user($userDTO);
+                break;
+            case "login":
+                $user_controller->login($userDTO);
+                break;
+            case "check-if-logined":
+                $user_controller->check_if_logined();
+                break;
+            case "logout":
+                $user_controller->logout();
+                break;
+            case "delete-account":
+                $user_controller->delete_account($userDTO);
+                break;
+        }
+    }
 ?>

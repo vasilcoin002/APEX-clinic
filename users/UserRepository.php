@@ -102,6 +102,20 @@
             }
             return null;
         }
+
+        public function delete_user(User $user): void {
+            $users = $this->get_users();
+            
+
+            foreach ($users as $i=>$current_user) {
+                if ($current_user->get_id() == $user->get_id()) {
+                    unset($users[$i]);
+                    break;
+                }
+            }
+
+            $this->rewrite_db($users);
+        }
     }
 
 ?>

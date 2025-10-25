@@ -2,6 +2,7 @@
 
     require_once "./UserRepository.php";
     require_once "./User.php";
+    require_once "./UserDTO.php";
     require_once "./Roles.php";
 
     class UserService {
@@ -13,13 +14,18 @@
             $this->user_repository = new UserRepository();
         }
 
+        private function get_user_and_verify(UserDTO $userDTO): User {
+            $user = $this->user_repository->find_user_by_email($userDTO->email);
 
-        public function debug_to_console($data) {
-            $output = $data;
-            if (is_array($output))
-                $output = implode(',', $output);
+            if (!isset($user)) {
+                throw new ValueError("User not found. Please, provide the rigth email");
+            }
 
-            echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+            if (!password_verify($userDTO->password, $user->get_hashed_password())) {
+                throw new ValueError("Password is incorrect. Please, provide the right one");
+            }
+
+            return $user;
         }
 
 
@@ -35,39 +41,36 @@
         }
 
 
-        public function add_user(string $email, string $password): ?User {
-            $this->validate_email($email);
-            $this->validate_password($password);
+        public function add_user(UserDTO $userDTO): ?User {
+            $this->validate_email($userDTO->email);
+            $this->validate_password($userDTO->password);
 
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $hashed_password = password_hash($userDTO->password, PASSWORD_DEFAULT);
 
-            $user = new User(null, $email, $hashed_password, Roles::USER);
+            $user = new User(null, $userDTO->email, $hashed_password, Roles::USER);
             return $this->user_repository->add_user($user);
         }
 
 
-        public function login(string $email, string $password): User {
-            $user = $this->user_repository->find_user_by_email($email);
-
-            if ($user == null) {
-                throw new ValueError("User not found. Please, provide the right email");
-            }
-            if (!password_verify($password, $user->get_hashed_password())) {
-                throw new ValueError("Password is incorrect. Please, provide the right one");
-            }
+        public function login(UserDTO $userDTO): User {
+            $user = $this->get_user_and_verify($userDTO);
 
             $_SESSION["user_id"] = $user->get_id();
             $_SESSION["user_email"] = $user->get_email();
             $_SESSION["user_role"] = $user->get_role();
-
-            echo "<a href='../index.php'>go back</a>";
 
             return $user;
         }
 
         public function logout() {
             session_destroy();
-            echo "<a href='../index.php'>go back</a>";
+        }
+
+        public function delete_user_by_user_data(UserDTO $userDTO) {
+            $user = $this->get_user_and_verify($userDTO);
+
+            $this->user_repository->delete_user($user);
+            $this->logout();
         }
     }
 
