@@ -6,7 +6,7 @@
     private string $hashed_password;
     private string $role;
 
-    public function __construct(?int $id, string $email, ?string $hashed_password, string $role) {
+    public function __construct(?int $id, string $email, string $hashed_password, string $role) {
         $this->id = $id;
         $this->email = $email;
         $this->hashed_password = $hashed_password;
@@ -29,7 +29,7 @@
         $this->email = $email;
     }
 
-    public function get_hashed_password(): ?string {
+    public function get_hashed_password(): string {
         return $this->hashed_password;
     }
 

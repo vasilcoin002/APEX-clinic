@@ -7,8 +7,6 @@
     require_once "./User.php";
     require_once "./Roles.php";
 
-    session_start();
-
     class UserController {
 
         private UserService $user_service;
@@ -25,21 +23,28 @@
 
         public function add_user(UserDTO $userDTO) {
             echo "<a href='../index.php'>go back</a><br>";
-            // $user_data = $this->get_email_and_password_from_input();
             return $this->user_service->add_user($userDTO);
         }
 
         public function login(UserDTO $userDTO) {
             echo "<a href='../index.php'>go back</a><br>";
-            // $user_data = $this->get_email_and_password_from_input();
             return $this->user_service->login($userDTO);
         }
 
         public function check_if_logined() {
             echo "<a href='../index.php'>go back</a><br>";
-            echo "{$_SESSION['user_id']}<br>";
-            echo "{$_SESSION['user_email']}<br>";
-            echo "{$_SESSION['user_role']}<br>";
+            if (isset($_SESSION["user_id"])) {
+                $user_id = htmlspecialchars($_SESSION['user_id']);
+                echo $user_id . "<br>";
+            }
+            if (isset($_SESSION["user_email"])) {
+                $user_email = htmlspecialchars($_SESSION['user_email']);
+                echo $user_email . "<br>";
+            }
+            if (isset($_SESSION["user_role"])) {
+                $user_role = htmlspecialchars($_SESSION['user_role']);
+                echo $user_role . "<br>";
+            }
         }
 
         public function logout() {
@@ -49,13 +54,19 @@
 
         public function delete_account(UserDTO $userDTO) {
             echo "<a href='../index.php'>go back</a><br>";
-            // $user_data = $this->get_email_and_password_from_input();
-            return $this->user_service->delete_user_by_user_data($userDTO);
+            $this->user_service->delete_user_by_user_data($userDTO);
+        }
+
+        public function update_email(UserDTO $userDTO): User {
+            echo "<a href='../index.php'>go back</a><br>";
+            return $this->user_service->update_email($userDTO);
         }
     }
 
     $user_controller = new UserController();
     if (isset($_POST["action"])) {
+        session_start();
+
         $userDTO = new UserDTO;
         if (isset($_POST["email"])) {
             $userDTO->email = $_POST["email"];
@@ -63,23 +74,16 @@
         if (isset($_POST["password"])) {
             $userDTO->password = $_POST["password"];
         }
-        
-        switch ($_POST["action"]) {
-            case "register":
-                $user_controller->add_user($userDTO);
-                break;
-            case "login":
-                $user_controller->login($userDTO);
-                break;
-            case "check-if-logined":
-                $user_controller->check_if_logined();
-                break;
-            case "logout":
-                $user_controller->logout();
-                break;
-            case "delete-account":
-                $user_controller->delete_account($userDTO);
-                break;
-        }
+
+        $endpoints = array(
+            "register" => fn() => $user_controller->add_user($userDTO),
+            "login" => fn() => $user_controller->login($userDTO),
+            "check-if-logined" => fn() => $user_controller->check_if_logined(),
+            "logout" => fn() => $user_controller->logout(),
+            "delete-account" => fn() => $user_controller->delete_account($userDTO),
+            "update-email" => fn() => $user_controller->update_email($userDTO)
+        );
+
+        $endpoints[$_POST["action"]]();
     }
 ?>

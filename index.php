@@ -16,6 +16,7 @@
             <input type="submit" name="action" value="check-if-logined">
             <input type="submit" name="action" value="logout">
             <input type="submit" name="action" value="delete-account">
+            <input type="submit" name="action" value="update-email">
         </div>
     </form>
 </body>

@@ -73,24 +73,21 @@
         public function add_user(User $user): User {
             $users = $this->get_users();
 
-            if ($this->find_user_by_email($user->get_email()) !== null) {
-                throw new ValueError("User with this email already exists. Please, provide another one");
+            $user_with_same_email = $this->find_user_by_email($user->get_email());
+            if (isset($user_with_same_email)) {
+                throw new InvalidArgumentException("This email is already taken. Please, provide another one");
             }
 
             # cheking if db is not empty
             if (count($users) > 0) {
                 $user->set_id(end($users)->get_id() + 1);
             } else {
-                $user->set_id(0);
+                $user->set_id(1);
             }
 
-            // $this->debug_to_console($user->get_hashed_password());
-
             $users[] = $user;
-            // $this->var_dump_pretty($users);
             $this->rewrite_db($users);
 
-            // $this->debug_to_console($this->find_user_by_email($user->get_email())->get_hashed_password());
             return $user;
         }
 
@@ -103,18 +100,53 @@
             return null;
         }
 
-        public function delete_user(User $user): void {
-            $users = $this->get_users();
-            
+        public function find_user_by_id(int $id): ?User {
+            foreach ($this->get_users() as $user) {
+                if ($id == $user->get_id()) {
+                    return $user;
+                }
+            }
+            return null;
+        }
 
+        public function delete_user(User $user): void {
+            $user_id = $user->get_id();
+            if (!isset($user_id)) {
+                throw new InvalidArgumentException("User does not have id. Please, provide user with id");
+            }
+
+            $users = $this->get_users();
             foreach ($users as $i=>$current_user) {
                 if ($current_user->get_id() == $user->get_id()) {
                     unset($users[$i]);
+                    $this->rewrite_db($users);
+                    break;
+                }
+            }
+        }
+
+        public function update_user(User $user) {
+
+            $user_id = $user->get_id();
+            if (!isset($user_id)) {
+                throw new InvalidArgumentException("User does not have id. Please, provide user with id");
+            }
+
+            $user_with_same_email = $this->find_user_by_email($user->get_email());
+            if (isset($user_with_same_email) && $user->get_id() != $user_with_same_email->get_id()) {
+                throw new InvalidArgumentException("This email is already taken. Please, provide another one");
+            }
+
+            $users = $this->get_users();
+            foreach ($users as $i=>$current_user) {
+                if ($current_user->get_id() == $user->get_id()) {
+                    $users[$i] = $user;
+                    $this->rewrite_db($users);
                     break;
                 }
             }
 
-            $this->rewrite_db($users);
+            return $user;
         }
     }
 

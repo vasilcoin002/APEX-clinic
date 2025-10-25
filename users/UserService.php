@@ -18,11 +18,11 @@
             $user = $this->user_repository->find_user_by_email($userDTO->email);
 
             if (!isset($user)) {
-                throw new ValueError("User not found. Please, provide the rigth email");
+                throw new InvalidArgumentException("User not found. Please, provide the rigth email");
             }
 
             if (!password_verify($userDTO->password, $user->get_hashed_password())) {
-                throw new ValueError("Password is incorrect. Please, provide the right one");
+                throw new InvalidArgumentException("Password is incorrect. Please, provide the right one");
             }
 
             return $user;
@@ -71,6 +71,25 @@
 
             $this->user_repository->delete_user($user);
             $this->logout();
+        }
+
+        public function update_email(UserDTO $userDTO): User {
+            if (!isset($_SESSION["user_id"])) {
+                throw new BadMethodCallException("You need to be authorized to do this action");
+            }
+
+            $user = $this->user_repository->find_user_by_id($_SESSION["user_id"]);
+            if (!isset($user)) {
+                throw new InvalidArgumentException("User not found");
+            }
+            if ($userDTO->email == $user->get_email()) {
+                throw new InvalidArgumentException("You provided the same email as it is");
+            }
+
+            $user->set_email($userDTO->email);
+            $user = $this->user_repository->update_user($user);
+            $_SESSION["user_email"] = $user->get_email();
+            return $user;
         }
     }
 
