@@ -15,12 +15,6 @@
             $this->user_service = new UserService();
         }
 
-        // private function get_email_and_password_from_input() {
-        //     $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS);
-        //     $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
-        //     return array("email"=>$email, "password"=>$password);
-        // }
-
         public function add_user(UserDTO $userDTO) {
             echo "<a href='../index.php'>go back</a><br>";
             return $this->user_service->add_user($userDTO);
