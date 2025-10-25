@@ -17,6 +17,7 @@
             <input type="submit" name="action" value="logout">
             <input type="submit" name="action" value="delete-account">
             <input type="submit" name="action" value="update-email">
+            <input type="submit" name="action" value="update-password">
         </div>
     </form>
 </body>

@@ -55,6 +55,11 @@
             echo "<a href='../index.php'>go back</a><br>";
             return $this->user_service->update_email($userDTO);
         }
+
+        public function update_password(UserDTO $userDTO): void {
+            echo "<a href='../index.php'>go back</a><br>";
+            $this->user_service->update_password($userDTO);
+        }
     }
 
     $user_controller = new UserController();
@@ -75,7 +80,8 @@
             "check-if-logined" => fn() => $user_controller->check_if_logined(),
             "logout" => fn() => $user_controller->logout(),
             "delete-account" => fn() => $user_controller->delete_account($userDTO),
-            "update-email" => fn() => $user_controller->update_email($userDTO)
+            "update-email" => fn() => $user_controller->update_email($userDTO),
+            "update-password" => fn() => $user_controller->update_password($userDTO)
         );
 
         $endpoints[$_POST["action"]]();
