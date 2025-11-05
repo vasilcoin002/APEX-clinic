@@ -60,6 +60,16 @@
             echo "<a href='../index.php'>go back</a><br>";
             $this->user_service->update_password($userDTO);
         }
+
+        public function update_avatar(UserDTO $userDTO): void {
+            echo "<a href='../index.php'>go back</a><br>";
+            $this->user_service->update_avatar($userDTO);
+        }
+
+        public function delete_avatar(): void {
+            echo "<a href='../index.php'>go back</a><br>";
+            $this->user_service->delete_avatar();
+        }
     }
 
     $user_controller = new UserController();
@@ -81,7 +91,9 @@
             "logout" => fn() => $user_controller->logout(),
             "delete-account" => fn() => $user_controller->delete_account($userDTO),
             "update-email" => fn() => $user_controller->update_email($userDTO),
-            "update-password" => fn() => $user_controller->update_password($userDTO)
+            "update-password" => fn() => $user_controller->update_password($userDTO),
+            "update-avatar" => fn() => $user_controller->update_avatar($userDTO),
+            "delete-avatar" => fn() => $user_controller->delete_avatar(),
         );
 
         $endpoints[$_POST["action"]]();

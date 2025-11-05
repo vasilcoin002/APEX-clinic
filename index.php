@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <form action="users/userController.php" method="post">
+    <form action="users/userController.php" method="post" enctype="multipart/form-data">
         <div><label>email:<input type="email" name="email"></label></div>
         <div><label>password:<input type="password" name="password"></label></div>
         <div>
@@ -18,6 +18,12 @@
             <input type="submit" name="action" value="delete-account">
             <input type="submit" name="action" value="update-email">
             <input type="submit" name="action" value="update-password">
+        </div>
+        <br>
+        <div><input type="file" accept="image/*" name="avatar"></div>
+        <div>
+            <input type="submit" name="action" value="update-avatar">
+            <input type="submit" name="action" value="delete-avatar">
         </div>
     </form>
 </body>

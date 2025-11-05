@@ -14,6 +14,7 @@
             $this->user_repository = new UserRepository();
         }
 
+
         private function get_user_and_verify(UserDTO $userDTO): User {
             $user = $this->user_repository->find_user_by_email($userDTO->email);
 
@@ -28,6 +29,14 @@
             return $user;
         }
 
+        private function get_user_from_session(): User {
+            $this->check_if_session_is_active();
+            $user = $this->user_repository->find_user_by_id($_SESSION["user_id"]);
+            if ($user == null) {
+                throw new UnexpectedValueException("User from session is not found");
+            }
+            return $user;
+        }
 
         // TODO finish validate_email function
         private function validate_email($email): void {
@@ -90,9 +99,7 @@
 
 
         public function update_email(UserDTO $userDTO): User {
-            $this->check_if_session_is_active();
-
-            $user = $this->user_repository->find_user_by_id($_SESSION["user_id"]);
+            $user = $this->get_user_from_session();
             if ($userDTO->email == $user->get_email()) {
                 throw new InvalidArgumentException("You provided the same email as you already have");
             }
@@ -103,15 +110,67 @@
             return $user;
         }
 
-        public function update_password(UserDTO $userDTO): void {
-            $this->check_if_session_is_active();
 
-            $user = $this->user_repository->find_user_by_id($_SESSION["user_id"]);
+        public function update_password(UserDTO $userDTO): void {
+            $user = $this->get_user_from_session();
             if (password_verify($userDTO->password, $user->get_hashed_password())) {
                 throw new InvalidArgumentException("You provided the same password as you already have");
             }
 
             $user->set_hashed_password($this->get_hashed_password($userDTO->password));
+            $this->user_repository->update_user($user);
+        }
+
+        public function delete_avatar(): void {
+            $user = $this->get_user_from_session();
+
+            if ($user->get_avatar_path() == null) {
+                throw new BadMethodCallException("You don't have avatar to delete");
+            }
+
+            unlink($user->get_avatar_path());
+            $user->set_avatar_path(null);
+            $this->user_repository->update_user($user);
+        }
+
+        public function update_avatar(UserDTO $userDTO): void {
+            
+            $user = $this->get_user_from_session();
+
+            $target_dir = "/Applications/XAMPP/xamppfiles/htdocs/website/users/avatars/";
+            $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
+            $image_file_type = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            
+            // Check if file is provided
+            if (!isset($_FILES['avatar']) || $_FILES['avatar']['error'] === UPLOAD_ERR_NO_FILE) {
+                throw new InvalidArgumentException("File is not provided. Please, provide an image");
+            }
+            // Check file format
+            $ALLOWED_IMAGE_FORMATS = ["png", "jpg", "jpeg", "gif"];
+            if (!in_array($image_file_type, $ALLOWED_IMAGE_FORMATS)) {
+                throw new InvalidArgumentException(
+                    "FIle is not an image. Please, provide an image in one of those formats: " 
+                    . implode(", ", $ALLOWED_IMAGE_FORMATS)
+                );
+            }
+            // Check if image file is a actual image or fake image
+            $image_size = getimagesize($_FILES["avatar"]["tmp_name"]);
+            if($image_size == false) {
+                throw new InvalidArgumentException("File is not an image. Please, provide a real image");
+            }
+            // Check file size
+            $MAX_SIZE_MB = 16;
+            if ($_FILES["avatar"]["size"] > $MAX_SIZE_MB*1048576 - 1) { 
+                throw new InvalidArgumentException(
+                    "File size is too big. Please, provide image with max size "
+                    . $MAX_SIZE_MB . "Mb"
+                );
+            }
+
+            $renamed_file_name = $target_dir . "{$user->get_id()}.{$image_file_type}";
+
+            move_uploaded_file($_FILES["avatar"]["tmp_name"], $renamed_file_name);
+            $user->set_avatar_path($renamed_file_name);
             $this->user_repository->update_user($user);
         }
     }

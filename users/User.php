@@ -5,6 +5,7 @@
     private string $email;
     private string $hashed_password;
     private string $role;
+    public ?string $avatar_path = null;
 
     public function __construct(?int $id, string $email, string $hashed_password, string $role) {
         $this->id = $id;
@@ -41,12 +42,21 @@
         return $this->role;
     }
 
+    public function get_avatar_path(): ?string {
+        return $this->avatar_path;
+    }
+
+    public function set_avatar_path(?string $avatar_path) {
+        $this->avatar_path = $avatar_path;
+    }
+
     public function toAssociativeArray(): array {
         return array(
             "id" => $this->get_id(),
             "email" => $this->get_email(), 
             "password" => $this->get_hashed_password(),
-            "role" => $this->get_role()
+            "role" => $this->get_role(),
+            "avatar_path" => $this->get_avatar_path(),
         );
     }
   }

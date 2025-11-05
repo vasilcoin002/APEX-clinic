@@ -36,8 +36,9 @@
                     $elem["id"],
                     $elem["email"],
                     $elem["password"],
-                    $elem["role"]
+                    $elem["role"],
                 );
+                $user->set_avatar_path($elem["avatar_path"]);
                 $users_array[] = $user;
             };
             return $users_array;
