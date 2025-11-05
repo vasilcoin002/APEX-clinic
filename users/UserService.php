@@ -16,6 +16,13 @@
 
 
         private function get_user_and_verify(UserDTO $userDTO): User {
+            if ($userDTO->email == null) {
+                throw new InvalidArgumentException("Email is not provided");
+            }
+            if ($userDTO->password == null) {
+                throw new InvalidArgumentException("Password is not provided");
+            }
+
             $user = $this->user_repository->find_user_by_email($userDTO->email);
 
             if (!isset($user)) {
@@ -172,6 +179,27 @@
             move_uploaded_file($_FILES["avatar"]["tmp_name"], $renamed_file_name);
             $user->set_avatar_path($renamed_file_name);
             $this->user_repository->update_user($user);
+        }
+
+        public function delete_user(UserDTO $userDTO): void {
+            $admin = $this->get_user_from_session();
+            if ($admin->get_role() != Roles::ADMIN) {
+                throw new BadMethodCallException("You don't have permission for this action");
+            }
+
+            $user = $this->user_repository->find_user_by_email($userDTO->email);
+            if ($user == null) {
+                throw new InvalidArgumentException("User not found. Please, provide the right email");
+            }
+            if ($user->get_id() == $admin->get_id()) {
+                throw new BadMethodCallException(
+                    "You can't delete yourself through the admin panel. Please, use user's panel"
+                );
+            }
+            if ($user->get_role() == Roles::ADMIN) {
+                throw new InvalidArgumentException("You can't delete users with role " . Roles::ADMIN);
+            }
+            $this->user_repository->delete_user($user);
         }
     }
 

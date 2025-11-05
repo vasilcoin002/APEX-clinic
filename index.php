@@ -25,6 +25,11 @@
             <input type="submit" name="action" value="update-avatar">
             <input type="submit" name="action" value="delete-avatar">
         </div>
+        <br>
+        <div>
+            <p>Admin panel</p>
+            <input type="submit" name="action" value="delete-user">
+        </div>
     </form>
 </body>
 </html>
@@ -33,13 +38,8 @@
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
 
-    // $whoami = exec('whoami');
-    // echo "This script is running as user: <strong>" . $whoami . "</strong><br>";
-
     require_once "./users/User.php";
     require_once "./users/UserDTO.php";
     require_once "./users/UserRepository.php";
     require_once "./users/Roles.php";
-
-    // session_start();
 ?>
