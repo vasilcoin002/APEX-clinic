@@ -2,7 +2,7 @@
 
     class UserRepository {
 
-        private string $db_path = "./users.json";
+        private string $db_path = "../users/users.json";
         private array|null $users = null;
 
         public function get_db_path(): string {

@@ -1,14 +1,13 @@
 <?php
 
-    require_once "./UserRepository.php";
-    require_once "./User.php";
-    require_once "./UserDTO.php";
-    require_once "./Roles.php";
+    require_once "UserRepository.php";
+    require_once "User.php";
+    require_once "UserDTO.php";
+    require_once "Roles.php";
 
     class UserService {
 
         private UserRepository $user_repository;
-
 
         public function __construct() {
             $this->user_repository = new UserRepository();
@@ -16,12 +15,7 @@
 
 
         private function get_user_and_verify(UserDTO $userDTO): User {
-            if ($userDTO->email == null) {
-                throw new InvalidArgumentException("Email is not provided");
-            }
-            if ($userDTO->password == null) {
-                throw new InvalidArgumentException("Password is not provided");
-            }
+            $this->check_if_email_and_password_is_in_user_dto($userDTO);
 
             $user = $this->user_repository->find_user_by_email($userDTO->email);
 
@@ -36,7 +30,24 @@
             return $user;
         }
 
-        private function get_user_from_session(): User {
+        public function check_if_email_is_in_user_dto(UserDTO $userDTO): void {
+            if ($userDTO->email == null) {
+                throw new InvalidArgumentException("Email is not provided");
+            }
+        }
+        
+        public function check_if_password_is_in_user_dto(UserDTO $userDTO): void {
+            if ($userDTO->password == null) {
+                throw new InvalidArgumentException("Password is not provided");
+            }
+        }
+
+        public function check_if_email_and_password_is_in_user_dto($userDTO): void {
+            $this->check_if_email_is_in_user_dto($userDTO);
+            $this->check_if_password_is_in_user_dto($userDTO);
+        }
+
+        public function get_user_from_session(): User {
             $this->check_if_session_is_active();
             $user = $this->user_repository->find_user_by_id($_SESSION["user_id"]);
             if ($user == null) {
@@ -58,12 +69,11 @@
 
 
         public function add_user(UserDTO $userDTO): ?User {
+            $this->check_if_email_and_password_is_in_user_dto($userDTO);
             $this->validate_email($userDTO->email);
             $this->validate_password($userDTO->password);
 
-            // $hashed_password = password_hash($userDTO->password, PASSWORD_DEFAULT);
             $hashed_password = $this->get_hashed_password($userDTO->password);
-
 
             $user = new User(null, $userDTO->email, $hashed_password, Roles::USER);
             return $this->user_repository->add_user($user);
@@ -81,12 +91,12 @@
         }
 
 
-        public function logout() {
+        public function logout(): void {
             session_destroy();
         }
 
 
-        public function delete_user_by_user_data(UserDTO $userDTO) {
+        public function delete_user_by_user_data(UserDTO $userDTO): void {
             $user = $this->get_user_and_verify($userDTO);
 
             $this->user_repository->delete_user($user);
@@ -94,7 +104,7 @@
         }
 
 
-        private function check_if_session_is_active(): void {
+        public function check_if_session_is_active(): void {
             if (!isset($_SESSION["user_id"])) {
                 throw new BadMethodCallException("You need to be authorized to do this action");
             }
@@ -107,6 +117,8 @@
 
         public function update_email(UserDTO $userDTO): User {
             $user = $this->get_user_from_session();
+
+            $this->check_if_email_is_in_user_dto($userDTO);
             if ($userDTO->email == $user->get_email()) {
                 throw new InvalidArgumentException("You provided the same email as you already have");
             }
@@ -120,6 +132,8 @@
 
         public function update_password(UserDTO $userDTO): void {
             $user = $this->get_user_from_session();
+
+            $this->check_if_password_is_in_user_dto($userDTO);
             if (password_verify($userDTO->password, $user->get_hashed_password())) {
                 throw new InvalidArgumentException("You provided the same password as you already have");
             }
@@ -140,11 +154,10 @@
             $this->user_repository->update_user($user);
         }
 
-        public function update_avatar(UserDTO $userDTO): void {
-            
+        public function update_avatar(): void {
             $user = $this->get_user_from_session();
 
-            $target_dir = "/Applications/XAMPP/xamppfiles/htdocs/website/users/avatars/";
+            $target_dir = "../users/avatars/";
             $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
             $image_file_type = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
             
@@ -179,27 +192,6 @@
             move_uploaded_file($_FILES["avatar"]["tmp_name"], $renamed_file_name);
             $user->set_avatar_path($renamed_file_name);
             $this->user_repository->update_user($user);
-        }
-
-        public function delete_user(UserDTO $userDTO): void {
-            $admin = $this->get_user_from_session();
-            if ($admin->get_role() != Roles::ADMIN) {
-                throw new BadMethodCallException("You don't have permission for this action");
-            }
-
-            $user = $this->user_repository->find_user_by_email($userDTO->email);
-            if ($user == null) {
-                throw new InvalidArgumentException("User not found. Please, provide the right email");
-            }
-            if ($user->get_id() == $admin->get_id()) {
-                throw new BadMethodCallException(
-                    "You can't delete yourself through the admin panel. Please, use user's panel"
-                );
-            }
-            if ($user->get_role() == Roles::ADMIN) {
-                throw new InvalidArgumentException("You can't delete users with role " . Roles::ADMIN);
-            }
-            $this->user_repository->delete_user($user);
         }
     }
 

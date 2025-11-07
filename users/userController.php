@@ -3,9 +3,9 @@
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
 
-    require_once "./UserService.php";
-    require_once "./User.php";
-    require_once "./Roles.php";
+    require_once "UserService.php";
+    require_once "User.php";
+    require_once "Roles.php";
 
     class UserController {
 
@@ -70,11 +70,6 @@
             echo "<a href='../index.php'>go back</a><br>";
             $this->user_service->delete_avatar();
         }
-
-        public function delete_user(UserDTO $userDTO): void {
-            echo "<a href='../index.php'>go back</a><br>";
-            $this->user_service->delete_user($userDTO);
-        }
     }
 
     $user_controller = new UserController();
@@ -99,7 +94,6 @@
             "update-password" => fn() => $user_controller->update_password($userDTO),
             "update-avatar" => fn() => $user_controller->update_avatar($userDTO),
             "delete-avatar" => fn() => $user_controller->delete_avatar(),
-            "delete-user" => fn() => $user_controller->delete_user($userDTO),
         );
 
         $endpoints[$_POST["action"]]();

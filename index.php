@@ -8,7 +8,7 @@
 </head>
 <body>
     <form action="users/userController.php" method="post" enctype="multipart/form-data">
-        <div><label>email:<input type="email" name="email"></label></div>
+        <div><label>email:<input type="text" name="email"></label></div>
         <div><label>password:<input type="password" name="password"></label></div>
         <div>
             <input type="submit" name="action" value="register">
@@ -26,8 +26,11 @@
             <input type="submit" name="action" value="delete-avatar">
         </div>
         <br>
+    </form>
+    <form action="admins/adminController.php" method="post" enctype="multipart/form-data">
         <div>
             <p>Admin panel</p>
+            <div><label>email: <input type="text" name="email"></label></div>
             <input type="submit" name="action" value="delete-user">
         </div>
     </form>
