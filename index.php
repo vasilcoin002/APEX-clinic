@@ -34,6 +34,34 @@
             <input type="submit" name="action" value="delete-user">
         </div>
     </form>
+    <br>
+    <form action="services/serviceController.php" method="post" enctype="multipart/form-data">
+        Service panel
+        <div>
+            <div style="display: flex; flex-direction: column;">
+                <label>from: <input type="text" name="from"></label>
+                <label>to: <input type="text" name="to"></label>
+            </div>
+            <input type="submit" name="action" value="get-services">
+        </div>
+        <br>
+        <div>
+            <div style="display: flex; flex-direction: column;">
+                <label>name: <input type="text" name="name"></label>
+                <label>category: <input type="text" name="category"></label>
+                <label>doctor: <input type="text" name="doctor"></label>
+                <label>price: <input type="text" name="price"></label>
+            </div>
+            <input type="submit" name="action" value="add-service">
+        </div>
+        <br>
+        <div>
+            <div>
+                <label>id: <input type="text" name="id"></label>
+            </div>
+            <input type="submit" name="action" value="update-service">
+        </div>
+    </form>
 </body>
 </html>
 
