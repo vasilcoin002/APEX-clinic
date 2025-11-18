@@ -1,3 +1,4 @@
-users/users.json
-users/avatars
-services/services.json
+/backend/users/users.json
+/backend/users/avatars
+/backend/services/services.json
+.vscode
