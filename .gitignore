@@ -1,4 +1,4 @@
-/backend/users/users.json
-/backend/users/avatars
-/backend/services/services.json
+users/users.json
+users/avatars
+services/services.json
 .vscode
