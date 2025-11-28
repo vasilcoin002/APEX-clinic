@@ -64,18 +64,48 @@
 
         // TODO finish validate_email function
         private function validate_email($email): void {
-            
+            if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                throw new InvalidArgumentException("Email is not valid. Please, provide the valid");
+            }
         }
-
 
         // TODO finish validate_password function
         private function validate_password($password): void {
-            
+            $failures = [];
+
+            // Minimum Length (e.g., 8 characters)
+            $minLengthPattern = '/.{8,}/';
+            if (!preg_match($minLengthPattern, $password)) {
+                $failures[] = 'It must be at least 8 characters long.';
+            }
+
+            // Uppercase Letter (A-Z)
+            $uppercasePattern = '/[A-Z]/';
+            if (!preg_match($uppercasePattern, $password)) {
+                $failures[] = 'It must contain at least one uppercase letter (A-Z).';
+            }
+
+            // Lowercase Letter (a-z)
+            $lowercasePattern = '/[a-z]/';
+            if (!preg_match($lowercasePattern, $password)) {
+                $failures[] = 'It must contain at least one lowercase letter (a-z).';
+            }
+
+            // Digit (0-9)
+            $digitPattern = '/\d/';
+            if (!preg_match($digitPattern, $password)) {
+                $failures[] = 'It must contain at least one number (0-9).';
+            }
+
+            if (!empty($failures)) {
+                $error_message = "Password is too weak. " . implode(". ", $failures);
+                throw new InvalidArgumentException($error_message);
+            }
         }
 
         private function validate_phone_number($cleaned_phone_number) : void {
             if (strlen($cleaned_phone_number) !== 9) {
-                throw new InvalidArgumentException("The Czech phone number must contain exactly 9 numbers");
+                throw new InvalidArgumentException("The phone number must contain exactly 9 numbers");
             }
         }
 

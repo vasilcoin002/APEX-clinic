@@ -141,7 +141,10 @@
             $users = $this->get_users();
             foreach ($users as $i=>$current_user) {
                 if ($current_user->get_id() == $user->get_id()) {
-                    unlink($current_user->get_avatar_path());
+                    // TODO fix it does not delete user, when avatar_path is null
+                    if (isset($current_user->avatar_path)) {
+                        unlink($current_user->get_avatar_path());
+                    }
                     unset($users[$i]);
                     $this->rewrite_db($users);
                     break;
