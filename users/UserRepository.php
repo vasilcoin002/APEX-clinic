@@ -17,8 +17,7 @@
             echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
         }
 
-
-        public function get_users(): array {
+        private function get_users(): array {
             if ($this->users != null) {
                 return $this->users;
             }
@@ -47,17 +46,16 @@
             return $users_array;
         }
 
-        public function echo_db(): void {
-            foreach ($this->get_users() as $user) {
-                $str_value = implode(', ', $user);
-                echo "{$str_value} <br>";
-            };
+        public function get_number_of_users(): int {
+            return count($this->get_users());
         }
 
-        private function var_dump_pretty($var): void {
-            echo '<pre>';
-            var_dump($var);
-            echo '</pre>';
+        public function get_range_of_users(int $from, int $to) {
+            if ($to <= $from) {
+                throw new InvalidArgumentException('Value "to" can\'t be less than or equal to "from"');
+            }
+            $users = $this->get_users();
+            return array_slice($users, $from, $to-$from);
         }
 
         // here goes array with Users, but not with associative array representation of user
@@ -74,17 +72,25 @@
             $this->users = $new_users;
         }
 
-        public function add_user(User $user): User {
-            $users = $this->get_users();
-
-            $user_with_same_email = $this->find_user_by_email($user->get_email());
-            if (isset($user_with_same_email)) {
+        private function check_if_email_is_taken(string $email, ?int $user_id): void {
+            $user_with_same_email = $this->find_user_by_email($email);
+            if (isset($user_with_same_email) && $user_with_same_email->get_id() !== $user_id) {
                 throw new InvalidArgumentException("This email is already taken. Please, provide another one");
             }
-            $user_with_same_phone_number = $this->find_user_by_phone_number($user->get_phone_number());
-            if (isset($user_with_same_phone_number)) {
+        }
+
+        private function check_if_phone_number_is_taken(int $phone_number, ?int $user_id): void {
+            $user_with_same_phone_number = $this->find_user_by_phone_number($phone_number);
+            if (isset($user_with_same_phone_number) && $user_with_same_phone_number->get_id() !== $user_id) {
                 throw new InvalidArgumentException("This phone number is already taken. Please, provide another one");
             }
+        }
+
+        public function add_user(User $user): User {
+            $this->check_if_email_is_taken($user->get_email(), null);
+            $this->check_if_phone_number_is_taken($user->get_phone_number(), null);
+
+            $users = $this->get_users();
 
             # cheking if db is not empty
             if (count($users) > 0) {
@@ -135,6 +141,7 @@
             $users = $this->get_users();
             foreach ($users as $i=>$current_user) {
                 if ($current_user->get_id() == $user->get_id()) {
+                    unlink($current_user->get_avatar_path());
                     unset($users[$i]);
                     $this->rewrite_db($users);
                     break;
@@ -143,21 +150,13 @@
         }
 
         public function update_user(User $user) {
-
             $user_id = $user->get_id();
             if (!isset($user_id)) {
                 throw new InvalidArgumentException("User does not have id. Please, provide user with id");
             }
 
-            $user_with_same_email = $this->find_user_by_email($user->get_email());
-            if (isset($user_with_same_email) && $user->get_id() != $user_with_same_email->get_id()) {
-                throw new InvalidArgumentException("This email is already taken. Please, provide another one");
-            }
-
-            $user_with_same_phone_number = $this->find_user_by_phone_number($user->get_phone_number());
-            if (isset($user_with_same_phone_number) && $user->get_id() != $user_with_same_phone_number->get_id()) {
-                throw new InvalidArgumentException("This phone number is already taken. Please, provide another one");
-            }
+            $this->check_if_email_is_taken($user->get_email(), $user_id);
+            $this->check_if_phone_number_is_taken($user->get_phone_number(), $user_id);
 
             $users = $this->get_users();
             foreach ($users as $i=>$current_user) {

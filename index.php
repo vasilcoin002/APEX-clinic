@@ -33,39 +33,23 @@
         </div>
         <br>
     </form>
+    <p>Admin panel</p>
     <form action="admins/adminController.php" method="post" enctype="multipart/form-data">
         <div>
-            <p>Admin panel</p>
-            <div><label>email: <input type="text" name="email"></label></div>
+            <div>
+                <label>email: <input type="text" name="email"></label>
+            </div>
             <input type="submit" name="action" value="delete-user">
+            <input type="submit" name="action" value="get-number-of-users">
         </div>
     </form>
-    <br>
-    <form action="services/serviceController.php" method="post" enctype="multipart/form-data">
-        Service panel
+    <form action="admins/adminController.php" method="get" enctype="multipart/form-data">
         <div>
-            <div style="display: flex; flex-direction: column;">
+            <div>
                 <label>from: <input type="text" name="from"></label>
                 <label>to: <input type="text" name="to"></label>
             </div>
-            <input type="submit" name="action" value="get-services">
-        </div>
-        <br>
-        <div>
-            <div style="display: flex; flex-direction: column;">
-                <label>name: <input type="text" name="name"></label>
-                <label>category: <input type="text" name="category"></label>
-                <label>doctor: <input type="text" name="doctor"></label>
-                <label>price: <input type="text" name="price"></label>
-            </div>
-            <input type="submit" name="action" value="add-service">
-        </div>
-        <br>
-        <div>
-            <div>
-                <label>id: <input type="text" name="id"></label>
-            </div>
-            <input type="submit" name="action" value="update-service">
+            <input type="submit" name="action" value="get-range-of-users">
         </div>
     </form>
 </body>
@@ -75,8 +59,8 @@
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
 
-    require_once "./users/User.php";
-    require_once "./users/UserDTO.php";
-    require_once "./users/UserRepository.php";
-    require_once "./users/Roles.php";
+    // require_once "./users/User.php";
+    // require_once "./users/UserDTO.php";
+    // require_once "./users/UserRepository.php";
+    // require_once "./users/Roles.php";
 ?>

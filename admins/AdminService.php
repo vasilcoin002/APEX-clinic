@@ -50,6 +50,15 @@
             $this->user_repository->delete_user($user);
         }
 
+        public function get_number_of_users() {
+            $this->get_admin_from_session();
+            return $this->user_repository->get_number_of_users();
+        }
+
+        public function get_range_of_users(int $from, int $to) {
+            $this->get_admin_from_session();
+            return $this->user_repository->get_range_of_users($from, $to);
+        }
     }
 
 ?>
