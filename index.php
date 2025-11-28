@@ -10,6 +10,9 @@
     <form action="users/userController.php" method="post" enctype="multipart/form-data">
         <div><label>email:<input type="text" name="email"></label></div>
         <div><label>password:<input type="password" name="password"></label></div>
+        <div><label>name: <input type="text" name="name"></label></div>
+        <div><label>surname: <input type="text" name="surname"></label></div>
+        <div><label>phone number: <input type="tel" name="phone_number"></label></div>
         <div>
             <input type="submit" name="action" value="register">
             <input type="submit" name="action" value="login">
@@ -18,6 +21,7 @@
             <input type="submit" name="action" value="delete-account">
             <input type="submit" name="action" value="update-email">
             <input type="submit" name="action" value="update-password">
+            <input type="submit" name="action" value="check-phone-number">
         </div>
         <br>
         <div><input type="file" accept="image/*" name="avatar"></div>

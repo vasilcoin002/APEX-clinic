@@ -16,17 +16,14 @@
         }
 
         public function add_user(UserDTO $userDTO) {
-            echo "<a href='../index.php'>go back</a><br>";
             return $this->user_service->add_user($userDTO);
         }
 
         public function login(UserDTO $userDTO) {
-            echo "<a href='../index.php'>go back</a><br>";
             return $this->user_service->login($userDTO);
         }
 
         public function check_if_logined() {
-            echo "<a href='../index.php'>go back</a><br>";
             if (isset($_SESSION["user_id"])) {
                 $user_id = htmlspecialchars($_SESSION['user_id']);
                 echo $user_id . "<br>";
@@ -42,32 +39,26 @@
         }
 
         public function logout() {
-            echo "<a href='../index.php'>go back</a><br>";
             $this->user_service->logout();
         }
 
         public function delete_account(UserDTO $userDTO) {
-            echo "<a href='../index.php'>go back</a><br>";
             $this->user_service->delete_user_by_user_data($userDTO);
         }
 
         public function update_email(UserDTO $userDTO): User {
-            echo "<a href='../index.php'>go back</a><br>";
             return $this->user_service->update_email($userDTO);
         }
 
         public function update_password(UserDTO $userDTO): void {
-            echo "<a href='../index.php'>go back</a><br>";
             $this->user_service->update_password($userDTO);
         }
 
         public function update_avatar(UserDTO $userDTO): void {
-            echo "<a href='../index.php'>go back</a><br>";
             $this->user_service->update_avatar($userDTO);
         }
 
         public function delete_avatar(): void {
-            echo "<a href='../index.php'>go back</a><br>";
             $this->user_service->delete_avatar();
         }
     }
@@ -83,6 +74,17 @@
         if (isset($_POST["password"])) {
             $userDTO->password = $_POST["password"];
         }
+        if (isset($_POST["name"])) {
+            $userDTO->name = $_POST["name"];
+        }
+        if (isset($_POST["surname"])) {
+            $userDTO->surname = $_POST["surname"];
+        }
+        if (isset($_POST["phone_number"])) {
+            $userDTO->phone_number = $_POST["phone_number"];
+        }
+
+        echo "<a href='../index.php'>go back</a><br>";
 
         $endpoints = array(
             "register" => fn() => $user_controller->add_user($userDTO),

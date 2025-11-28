@@ -63,19 +63,53 @@
 
 
         // TODO finish validate_password function
-        private function validate_password($email): void {
+        private function validate_password($password): void {
             
         }
 
+        private function validate_phone_number($cleaned_phone_number) : void {
+            if (strlen($cleaned_phone_number) !== 9) {
+                throw new InvalidArgumentException("The Czech phone number must contain exactly 9 numbers");
+            }
+        }
+
+        private function validate_name($name): void {
+            if (strlen($name) === 0) {
+                throw new InvalidArgumentException("Name must be filled");
+            }
+        }
+
+        private function validate_surname($surname): void {
+            if (strlen($surname) === 0) {
+                throw new InvalidArgumentException("Surname must be filled");
+            }
+        }
+        
+        private function get_cleaned_phone_number(string $phone_number) {
+            return preg_replace('/[^0-9]/', '', $phone_number);
+        }
 
         public function add_user(UserDTO $userDTO): ?User {
             $this->check_if_email_and_password_is_in_user_dto($userDTO);
             $this->validate_email($userDTO->email);
             $this->validate_password($userDTO->password);
+            $this->validate_name($userDTO->name);
+            $this->validate_surname($userDTO->surname);
 
+            $cleaned_phone_number = $this->get_cleaned_phone_number($userDTO->phone_number);
+            $this->validate_phone_number($cleaned_phone_number);
+            $userDTO->phone_number = intval($cleaned_phone_number);
             $hashed_password = $this->get_hashed_password($userDTO->password);
 
-            $user = new User(null, $userDTO->email, $hashed_password, Roles::USER);
+            $user = new User(
+                null, 
+                $userDTO->email, 
+                $userDTO->name,
+                $userDTO->surname,
+                $userDTO->phone_number,
+                $hashed_password, 
+                Roles::USER
+            );
             return $this->user_repository->add_user($user);
         }
 
@@ -103,7 +137,6 @@
             $this->logout();
         }
 
-
         public function check_if_session_is_active(): void {
             if (!isset($_SESSION["user_id"])) {
                 throw new BadMethodCallException("You need to be authorized to do this action");
@@ -128,7 +161,6 @@
             $_SESSION["user_email"] = $user->get_email();
             return $user;
         }
-
 
         public function update_password(UserDTO $userDTO): void {
             $user = $this->get_user_from_session();

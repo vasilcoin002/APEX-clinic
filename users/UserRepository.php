@@ -35,6 +35,9 @@
                 $user = new User(
                     $elem["id"],
                     $elem["email"],
+                    $elem["name"],
+                    $elem["surname"],
+                    $elem["phone_number"],
                     $elem["password"],
                     $elem["role"],
                 );
@@ -78,6 +81,10 @@
             if (isset($user_with_same_email)) {
                 throw new InvalidArgumentException("This email is already taken. Please, provide another one");
             }
+            $user_with_same_phone_number = $this->find_user_by_phone_number($user->get_phone_number());
+            if (isset($user_with_same_phone_number)) {
+                throw new InvalidArgumentException("This phone number is already taken. Please, provide another one");
+            }
 
             # cheking if db is not empty
             if (count($users) > 0) {
@@ -104,6 +111,15 @@
         public function find_user_by_id(int $id): ?User {
             foreach ($this->get_users() as $user) {
                 if ($id == $user->get_id()) {
+                    return $user;
+                }
+            }
+            return null;
+        }
+
+        public function find_user_by_phone_number(int $phone_number): ?User {
+            foreach ($this->get_users() as $user) {
+                if ($phone_number == $user->get_phone_number()) {
                     return $user;
                 }
             }
