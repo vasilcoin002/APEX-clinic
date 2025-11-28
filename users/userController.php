@@ -50,6 +50,18 @@
             return $this->user_service->update_email($userDTO);
         }
 
+        public function update_name(UserDTO $userDTO): User {
+            return $this->user_service->update_name($userDTO);
+        }
+
+        public function update_surname(UserDTO $userDTO): User {
+            return $this->user_service->update_surname($userDTO);
+        }
+
+        public function update_phone_number(UserDTO $userDTO): User {
+            return $this->user_service->update_phone_number($userDTO);
+        }
+
         public function update_password(UserDTO $userDTO): void {
             $this->user_service->update_password($userDTO);
         }
@@ -93,6 +105,9 @@
             "logout" => fn() => $user_controller->logout(),
             "delete-account" => fn() => $user_controller->delete_account($userDTO),
             "update-email" => fn() => $user_controller->update_email($userDTO),
+            "update-phone-number" => fn() => $user_controller->update_phone_number($userDTO),
+            "update-name" => fn() => $user_controller->update_name($userDTO),
+            "update-surname" => fn() => $user_controller->update_surname($userDTO),
             "update-password" => fn() => $user_controller->update_password($userDTO),
             "update-avatar" => fn() => $user_controller->update_avatar($userDTO),
             "delete-avatar" => fn() => $user_controller->delete_avatar(),

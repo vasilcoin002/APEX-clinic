@@ -154,6 +154,11 @@
                 throw new InvalidArgumentException("This email is already taken. Please, provide another one");
             }
 
+            $user_with_same_phone_number = $this->find_user_by_phone_number($user->get_phone_number());
+            if (isset($user_with_same_phone_number) && $user->get_id() != $user_with_same_phone_number->get_id()) {
+                throw new InvalidArgumentException("This phone number is already taken. Please, provide another one");
+            }
+
             $users = $this->get_users();
             foreach ($users as $i=>$current_user) {
                 if ($current_user->get_id() == $user->get_id()) {

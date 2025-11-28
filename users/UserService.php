@@ -35,6 +35,12 @@
                 throw new InvalidArgumentException("Email is not provided");
             }
         }
+
+        public function check_if_phone_is_in_user_dto(UserDTO $userDTO): void {
+            if ($userDTO->phone_number == null) {
+                throw new InvalidArgumentException("Phone number is not provided");
+            }
+        }
         
         public function check_if_password_is_in_user_dto(UserDTO $userDTO): void {
             if ($userDTO->password == null) {
@@ -149,9 +155,9 @@
 
 
         public function update_email(UserDTO $userDTO): User {
-            $user = $this->get_user_from_session();
-
             $this->check_if_email_is_in_user_dto($userDTO);
+
+            $user = $this->get_user_from_session();
             if ($userDTO->email == $user->get_email()) {
                 throw new InvalidArgumentException("You provided the same email as you already have");
             }
@@ -159,6 +165,49 @@
             $user->set_email($userDTO->email);
             $user = $this->user_repository->update_user($user);
             $_SESSION["user_email"] = $user->get_email();
+            return $user;
+        }
+
+        public function update_name($userDTO): User {
+            if ($userDTO->name == null) {
+                throw new InvalidArgumentException("Name is not provided");
+            }
+
+            $user = $this->get_user_from_session();
+            if ($userDTO->name == $user->get_name()) {
+                throw new InvalidArgumentException("You provided the same name as you already have");
+            }
+
+            $user->set_name($userDTO->name);
+            $user = $this->user_repository->update_user($user);
+            return $user;
+        }
+
+        public function update_surname($userDTO): User {
+            if ($userDTO->surname == null) {
+                throw new InvalidArgumentException("Surname is not provided");
+            }
+
+            $user = $this->get_user_from_session();
+            if ($userDTO->surname == $user->get_surname()) {
+                throw new InvalidArgumentException("You provided the same surname as you already have");
+            }
+
+            $user->set_surname($userDTO->surname);
+            $user = $this->user_repository->update_user($user);
+            return $user;
+        }
+
+        public function update_phone_number(UserDTO $userDTO): User {
+            $this->check_if_phone_is_in_user_dto($userDTO);
+
+            $user = $this->get_user_from_session();
+            if ($userDTO->phone_number == $user->get_phone_number()) {
+                throw new InvalidArgumentException("You provided the same phone number as you already have");
+            }
+
+            $user->set_phone_number($userDTO->phone_number);
+            $user = $this->user_repository->update_user($user);
             return $user;
         }
 

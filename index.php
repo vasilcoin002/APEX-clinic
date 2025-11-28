@@ -20,8 +20,10 @@
             <input type="submit" name="action" value="logout">
             <input type="submit" name="action" value="delete-account">
             <input type="submit" name="action" value="update-email">
+            <input type="submit" name="action" value="update-name">
+            <input type="submit" name="action" value="update-surname">
+            <input type="submit" name="action" value="update-phone-number">
             <input type="submit" name="action" value="update-password">
-            <input type="submit" name="action" value="check-phone-number">
         </div>
         <br>
         <div><input type="file" accept="image/*" name="avatar"></div>
