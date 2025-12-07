@@ -8,6 +8,7 @@
     require_once "../users/Roles.php";
     require_once "AdminService.php";
 
+    // TODO create function make_admin_from_user
     class AdminController {
 
         private AdminService $admin_service;

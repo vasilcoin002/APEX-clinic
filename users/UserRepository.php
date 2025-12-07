@@ -79,16 +79,16 @@
             }
         }
 
-        private function check_if_phone_number_is_taken(int $phone_number, ?int $user_id): void {
-            $user_with_same_phone_number = $this->find_user_by_phone_number($phone_number);
-            if (isset($user_with_same_phone_number) && $user_with_same_phone_number->get_id() !== $user_id) {
-                throw new InvalidArgumentException("This phone number is already taken. Please, provide another one");
-            }
-        }
+        // private function check_if_phone_number_is_taken(int $phone_number, ?int $user_id): void {
+        //     $user_with_same_phone_number = $this->find_user_by_phone_number($phone_number);
+        //     if (isset($user_with_same_phone_number) && $user_with_same_phone_number->get_id() !== $user_id) {
+        //         throw new InvalidArgumentException("This phone number is already taken. Please, provide another one");
+        //     }
+        // }
 
         public function add_user(User $user): User {
             $this->check_if_email_is_taken($user->get_email(), null);
-            $this->check_if_phone_number_is_taken($user->get_phone_number(), null);
+            // $this->check_if_phone_number_is_taken($user->get_phone_number(), null);
 
             $users = $this->get_users();
 
@@ -159,7 +159,7 @@
             }
 
             $this->check_if_email_is_taken($user->get_email(), $user_id);
-            $this->check_if_phone_number_is_taken($user->get_phone_number(), $user_id);
+            // $this->check_if_phone_number_is_taken($user->get_phone_number(), $user_id);
 
             $users = $this->get_users();
             foreach ($users as $i=>$current_user) {

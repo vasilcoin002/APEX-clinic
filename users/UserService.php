@@ -103,9 +103,13 @@
             }
         }
 
-        private function validate_phone_number($cleaned_phone_number) : void {
-            if (strlen($cleaned_phone_number) !== 9) {
-                throw new InvalidArgumentException("The phone number must contain exactly 9 numbers");
+        private function validate_phone_number($phone_number) : void {
+            $sanitized_number = preg_replace('/[\s\-\(\)]+/', '', $phone_number);
+            if (empty($sanitized_number)) {
+                throw new InvalidArgumentException("Phone number can't be empty or without digits");
+            }
+            if (!preg_match('/^(\+|0)?\d{1,20}$/', $sanitized_number)) {
+                throw new InvalidArgumentException("Phone number is invalid. It must be up to 20 digits (and optional + sign)");
             }
         }
 
@@ -120,9 +124,9 @@
                 throw new InvalidArgumentException("Surname must be filled");
             }
         }
-        
-        private function get_cleaned_phone_number(string $phone_number) {
-            return preg_replace('/[^0-9]/', '', $phone_number);
+
+        public function check_if_logined(): bool {
+            return isset($_SESSION["user_id"]);
         }
 
         public function add_user(UserDTO $userDTO): ?User {
@@ -132,9 +136,9 @@
             $this->validate_name($userDTO->name);
             $this->validate_surname($userDTO->surname);
 
-            $cleaned_phone_number = $this->get_cleaned_phone_number($userDTO->phone_number);
-            $this->validate_phone_number($cleaned_phone_number);
-            $userDTO->phone_number = intval($cleaned_phone_number);
+            // $cleaned_phone_number = $this->get_cleaned_phone_number($userDTO->phone_number);
+            $this->validate_phone_number($userDTO->phone_number);
+            $userDTO->phone_number = intval($userDTO->phone_number);
             $hashed_password = $this->get_hashed_password($userDTO->password);
 
             $user = new User(
@@ -174,7 +178,7 @@
         }
 
         public function check_if_session_is_active(): void {
-            if (!isset($_SESSION["user_id"])) {
+            if (!$this->check_if_logined()) {
                 throw new BadMethodCallException("You need to be authorized to do this action");
             }
         }

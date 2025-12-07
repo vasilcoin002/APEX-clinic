@@ -7,6 +7,8 @@
     require_once "User.php";
     require_once "Roles.php";
 
+    // TODO change check-if-logined function to give true or false
+    // TODO add get-user-info function
     class UserController {
 
         private UserService $user_service;
@@ -24,18 +26,7 @@
         }
 
         public function check_if_logined() {
-            if (isset($_SESSION["user_id"])) {
-                $user_id = htmlspecialchars($_SESSION['user_id']);
-                echo $user_id . "<br>";
-            }
-            if (isset($_SESSION["user_email"])) {
-                $user_email = htmlspecialchars($_SESSION['user_email']);
-                echo $user_email . "<br>";
-            }
-            if (isset($_SESSION["user_role"])) {
-                $user_role = htmlspecialchars($_SESSION['user_role']);
-                echo $user_role . "<br>";
-            }
+            return $this->user_service->check_if_logined();
         }
 
         public function logout() {
@@ -81,19 +72,20 @@
 
         $userDTO = new UserDTO;
         if (isset($_POST["email"])) {
-            $userDTO->email = $_POST["email"];
+            $userDTO->email = trim($_POST["email"]);
         }
+        // without trimming
         if (isset($_POST["password"])) {
             $userDTO->password = $_POST["password"];
         }
         if (isset($_POST["name"])) {
-            $userDTO->name = $_POST["name"];
+            $userDTO->name = trim($_POST["name"]);
         }
         if (isset($_POST["surname"])) {
-            $userDTO->surname = $_POST["surname"];
+            $userDTO->surname = trim($_POST["surname"]);
         }
         if (isset($_POST["phone_number"])) {
-            $userDTO->phone_number = $_POST["phone_number"];
+            $userDTO->phone_number = trim($_POST["phone_number"]);
         }
 
         echo "<a href='../index.php'>go back</a><br>";

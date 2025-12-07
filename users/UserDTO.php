@@ -7,7 +7,7 @@
         public string $password;
         public string $name;
         public string $surname;
-        public string|int $phone_number;
+        public string $phone_number;
         public string $role;
         public string $avatar_path;
 

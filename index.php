@@ -58,9 +58,4 @@
 <?php
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
-
-    // require_once "./users/User.php";
-    // require_once "./users/UserDTO.php";
-    // require_once "./users/UserRepository.php";
-    // require_once "./users/Roles.php";
 ?>

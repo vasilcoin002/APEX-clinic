@@ -5,14 +5,14 @@
         private string $email;
         private string $name;
         private string $surname;
-        private int $phone_number;
+        private string $phone_number;
         private string $hashed_password;
         private string $role;
         public ?string $avatar_path = null;
 
         public function __construct(
             ?int $id, string $email, string $name, string $surname,
-            int $phone_number, string $hashed_password, string $role,
+            string $phone_number, string $hashed_password, string $role,
         ) {
             $this->id = $id;
             $this->email = $email;
@@ -55,11 +55,11 @@
             $this->surname = $surname;
         }
 
-        public function get_phone_number(): int {
+        public function get_phone_number(): string {
             return $this->phone_number;
         }
 
-        public function set_phone_number(int $phone_number) {
+        public function set_phone_number(string $phone_number) {
             $this->phone_number = $phone_number;
         }
 
