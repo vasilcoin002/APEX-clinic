@@ -7,7 +7,6 @@
     require_once "User.php";
     require_once "Roles.php";
 
-    // TODO change check-if-logined function to give true or false
     // TODO add get-user-info function
     class UserController {
 
@@ -63,6 +62,10 @@
 
         public function delete_avatar(): void {
             $this->user_service->delete_avatar();
+        }
+
+        public function get_user_info() {
+            
         }
     }
 

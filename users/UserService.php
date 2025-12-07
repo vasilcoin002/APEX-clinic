@@ -62,43 +62,41 @@
             return $user;
         }
 
-        // TODO finish validate_email function
         private function validate_email($email): void {
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
                 throw new InvalidArgumentException("Email is not valid. Please, provide the valid");
             }
         }
 
-        // TODO finish validate_password function
         private function validate_password($password): void {
             $failures = [];
 
             // Minimum Length (e.g., 8 characters)
             $minLengthPattern = '/.{8,}/';
             if (!preg_match($minLengthPattern, $password)) {
-                $failures[] = 'It must be at least 8 characters long.';
+                $failures[] = 'it must be at least 8 characters long';
             }
 
             // Uppercase Letter (A-Z)
             $uppercasePattern = '/[A-Z]/';
             if (!preg_match($uppercasePattern, $password)) {
-                $failures[] = 'It must contain at least one uppercase letter (A-Z).';
+                $failures[] = 'it must contain at least one uppercase letter (A-Z)';
             }
 
             // Lowercase Letter (a-z)
             $lowercasePattern = '/[a-z]/';
             if (!preg_match($lowercasePattern, $password)) {
-                $failures[] = 'It must contain at least one lowercase letter (a-z).';
+                $failures[] = 'it must contain at least one lowercase letter (a-z)';
             }
 
             // Digit (0-9)
             $digitPattern = '/\d/';
             if (!preg_match($digitPattern, $password)) {
-                $failures[] = 'It must contain at least one number (0-9).';
+                $failures[] = 'it must contain at least one number (0-9)';
             }
 
             if (!empty($failures)) {
-                $error_message = "Password is too weak. " . implode(". ", $failures);
+                $error_message = "Password is too weak: " . implode(", ", $failures);
                 throw new InvalidArgumentException($error_message);
             }
         }
@@ -189,12 +187,13 @@
 
 
         public function update_email(UserDTO $userDTO): User {
+            $user = $this->get_user_from_session();
             $this->check_if_email_is_in_user_dto($userDTO);
 
-            $user = $this->get_user_from_session();
             if ($userDTO->email == $user->get_email()) {
                 throw new InvalidArgumentException("You provided the same email as you already have");
             }
+            $this->validate_email($userDTO->email);
 
             $user->set_email($userDTO->email);
             $user = $this->user_repository->update_user($user);
@@ -203,29 +202,31 @@
         }
 
         public function update_name($userDTO): User {
+            $user = $this->get_user_from_session();
+
             if ($userDTO->name == null) {
                 throw new InvalidArgumentException("Name is not provided");
             }
-
-            $user = $this->get_user_from_session();
             if ($userDTO->name == $user->get_name()) {
                 throw new InvalidArgumentException("You provided the same name as you already have");
             }
+            $this->validate_name($userDTO->name);
 
             $user->set_name($userDTO->name);
             $user = $this->user_repository->update_user($user);
             return $user;
         }
 
-        public function update_surname($userDTO): User {
+        public function update_surname(UserDTO $userDTO): User {
+            $user = $this->get_user_from_session();
+
             if ($userDTO->surname == null) {
                 throw new InvalidArgumentException("Surname is not provided");
             }
-
-            $user = $this->get_user_from_session();
             if ($userDTO->surname == $user->get_surname()) {
                 throw new InvalidArgumentException("You provided the same surname as you already have");
             }
+            $this->validate_surname($userDTO->surname);
 
             $user->set_surname($userDTO->surname);
             $user = $this->user_repository->update_user($user);
@@ -233,12 +234,13 @@
         }
 
         public function update_phone_number(UserDTO $userDTO): User {
-            $this->check_if_phone_is_in_user_dto($userDTO);
-
             $user = $this->get_user_from_session();
+
+            $this->check_if_phone_is_in_user_dto($userDTO);
             if ($userDTO->phone_number == $user->get_phone_number()) {
                 throw new InvalidArgumentException("You provided the same phone number as you already have");
             }
+            $this->validate_phone_number($userDTO->phone_number);
 
             $user->set_phone_number($userDTO->phone_number);
             $user = $this->user_repository->update_user($user);
@@ -252,6 +254,7 @@
             if (password_verify($userDTO->password, $user->get_hashed_password())) {
                 throw new InvalidArgumentException("You provided the same password as you already have");
             }
+            $this->validate_password($userDTO->password);
 
             $user->set_hashed_password($this->get_hashed_password($userDTO->password));
             $this->user_repository->update_user($user);
