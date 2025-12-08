@@ -45,9 +45,29 @@
                 );
             }
             if ($user->get_role() == Roles::ADMIN) {
-                throw new BadMethodCallException("You can't delete users with role " . Roles::ADMIN);
+                throw new BadMethodCallException("You can't delete admins");
             }
             $this->user_repository->delete_user($user);
+        }
+
+        public function promote_user(UserDTO $userDTO): void {
+            $admin = $this->get_admin_from_session();
+
+            $this->user_service->check_if_email_is_in_user_dto($userDTO);
+
+            $user = $this->user_repository->find_user_by_email($userDTO->email);
+            if ($user == null) {
+                throw new InvalidArgumentException("User not found. Please, provide the right email");
+            }
+            if ($user->get_id() == $admin->get_id()) {
+                throw new BadMethodCallException("You can't promote yourself");
+            }
+            if ($user->get_role() == Roles::ADMIN) {
+                throw new BadMethodCallException("You can't promote admins");
+            }
+
+            $user->set_role(Roles::ADMIN);
+            $this->user_repository->update_user($user);
         }
 
         public function get_number_of_users() {
@@ -57,7 +77,12 @@
 
         public function get_range_of_users(int $from, int $to) {
             $this->get_admin_from_session();
-            return $this->user_repository->get_range_of_users($from, $to);
+            $users = $this->user_repository->get_range_of_users($from, $to);
+            $associative_users = [];
+            foreach ($users as $user) {
+                $associative_users[] = $this->user_service->get_user_info($user);
+            }
+            return $associative_users;
         }
     }
 

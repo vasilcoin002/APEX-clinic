@@ -62,6 +62,25 @@
             return $user;
         }
 
+        public function get_user_info(User $user): array {
+            return array(
+                "id" => $user->get_id(),
+                "email" => $user->get_email(), 
+                "name" => $user->get_name(),
+                "surname" => $user->get_surname(),
+                "phone_number" => $user->get_phone_number(),
+                "role" => $user->get_role(),
+                "avatar_path" => $user->get_avatar_path(),
+                "comment" => $user->get_comment(),
+            );
+        }
+
+        public function get_session_user_info(): array {
+            $user = $this->get_user_from_session();
+
+            return $this->get_user_info($user);
+        }
+
         private function validate_email($email): void {
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
                 throw new InvalidArgumentException("Email is not valid. Please, provide the valid");

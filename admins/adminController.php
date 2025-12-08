@@ -8,7 +8,6 @@
     require_once "../users/Roles.php";
     require_once "AdminService.php";
 
-    // TODO create function make_admin_from_user
     class AdminController {
 
         private AdminService $admin_service;
@@ -21,27 +20,46 @@
             $this->admin_service->delete_user($userDTO);
         }
 
+        public function promote_user(UserDTO $userDTO): void {
+            $this->admin_service->promote_user($userDTO);
+        }
+
         public function get_number_of_users(): int {
             $number = $this->admin_service->get_number_of_users();
-            print_r($number);
+            echo json_encode($number);
             return $number;
         }
 
         public function get_range_of_users(int $from, int $to): array {
-            $users = $this->admin_service->get_range_of_users($from, $to);
-            print_r($users);
-            return $users;
+            $associative_users = $this->admin_service->get_range_of_users($from, $to);
+            echo json_encode($associative_users);
+            return $associative_users;
         }
     }
 
+    // TODO fix get_number_of_users is not working
     $admin_controller = new AdminController();
-    if (isset($_REQUEST["action"])) {
+    if (isset($_POST["action"])) {
         session_start();
 
         $userDTO = new UserDTO;
-        if (isset($_GET["email"])) {
+        if (isset($_POST["email"])) {
             $userDTO->email = $_POST["email"];
         }
+
+        echo "<a href='../index.php'>go back</a><br>";
+
+        $endpoints = array(
+            "delete-user" => fn() => $admin_controller->delete_user($userDTO),
+            "promote-user" => fn() => $admin_controller->promote_user($userDTO),
+        );
+
+        $endpoints[$_POST["action"]]();
+    }
+    if (isset($_GET["action"])) {
+        session_start();
+
+        $userDTO = new UserDTO;
         if (isset($_GET["from"])) {
             $from = intval($_GET["from"]);
         }
@@ -52,7 +70,6 @@
         echo "<a href='../index.php'>go back</a><br>";
 
         $endpoints = array(
-            "delete-user" => fn() => $admin_controller->delete_user($userDTO),
             "get-number-of-users" => fn() => $admin_controller->get_number_of_users(),
             "get-range-of-users" => fn() => $admin_controller->get_range_of_users($from, $to),
         );

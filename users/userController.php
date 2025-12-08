@@ -7,7 +7,6 @@
     require_once "User.php";
     require_once "Roles.php";
 
-    // TODO add get-user-info function
     class UserController {
 
         private UserService $user_service;
@@ -16,40 +15,36 @@
             $this->user_service = new UserService();
         }
 
-        public function add_user(UserDTO $userDTO) {
-            return $this->user_service->add_user($userDTO);
+        public function add_user(UserDTO $userDTO): void {
+            $this->user_service->add_user($userDTO);
         }
 
-        public function login(UserDTO $userDTO) {
-            return $this->user_service->login($userDTO);
+        public function login(UserDTO $userDTO): void {
+            $this->user_service->login($userDTO);
         }
 
-        public function check_if_logined() {
-            return $this->user_service->check_if_logined();
-        }
-
-        public function logout() {
+        public function logout(): void {
             $this->user_service->logout();
         }
 
-        public function delete_account(UserDTO $userDTO) {
+        public function delete_account(UserDTO $userDTO): void {
             $this->user_service->delete_user_by_user_data($userDTO);
         }
 
-        public function update_email(UserDTO $userDTO): User {
-            return $this->user_service->update_email($userDTO);
+        public function update_email(UserDTO $userDTO): void {
+            $this->user_service->update_email($userDTO);
         }
 
-        public function update_name(UserDTO $userDTO): User {
-            return $this->user_service->update_name($userDTO);
+        public function update_name(UserDTO $userDTO): void {
+            $this->user_service->update_name($userDTO);
         }
 
-        public function update_surname(UserDTO $userDTO): User {
-            return $this->user_service->update_surname($userDTO);
+        public function update_surname(UserDTO $userDTO): void {
+            $this->user_service->update_surname($userDTO);
         }
 
-        public function update_phone_number(UserDTO $userDTO): User {
-            return $this->user_service->update_phone_number($userDTO);
+        public function update_phone_number(UserDTO $userDTO): void {
+            $this->user_service->update_phone_number($userDTO);
         }
 
         public function update_password(UserDTO $userDTO): void {
@@ -64,8 +59,16 @@
             $this->user_service->delete_avatar();
         }
 
-        public function get_user_info() {
-            
+        public function update_comment(UserDTO $userDTO): void {
+
+        }
+
+        public function check_if_logined(): void {
+            echo json_encode($this->user_service->check_if_logined());
+        }
+
+        public function get_session_user_info(): void {
+            echo json_encode($this->user_service->get_session_user_info());
         }
     }
 
@@ -90,13 +93,15 @@
         if (isset($_POST["phone_number"])) {
             $userDTO->phone_number = trim($_POST["phone_number"]);
         }
+        if (isset($_POST["comment"])) {
+            $userDTO->comment = trim($_POST["comment"]);
+        }
 
         echo "<a href='../index.php'>go back</a><br>";
 
         $endpoints = array(
             "register" => fn() => $user_controller->add_user($userDTO),
             "login" => fn() => $user_controller->login($userDTO),
-            "check-if-logined" => fn() => $user_controller->check_if_logined(),
             "logout" => fn() => $user_controller->logout(),
             "delete-account" => fn() => $user_controller->delete_account($userDTO),
             "update-email" => fn() => $user_controller->update_email($userDTO),
@@ -106,8 +111,22 @@
             "update-password" => fn() => $user_controller->update_password($userDTO),
             "update-avatar" => fn() => $user_controller->update_avatar($userDTO),
             "delete-avatar" => fn() => $user_controller->delete_avatar(),
+            "update-comment" => fn() => $user_controller->update_comment($userDTO),
         );
 
         $endpoints[$_POST["action"]]();
+    }
+
+    elseif (isset($_GET["action"])) {
+        session_start();
+
+        echo "<a href='../index.php'>go back</a><br>";
+
+        $endpoints = array(
+            "check-if-logined" => fn() => $user_controller->check_if_logined(),
+            "get-session-user-info" => fn() => $user_controller->get_session_user_info(),
+        );
+
+        $endpoints[$_GET["action"]]();
     }
 ?>

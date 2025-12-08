@@ -9,13 +9,13 @@
             return $this->db_path;
         }
 
-        public function debug_to_console($data) {
-            $output = $data;
-            if (is_array($output))
-                $output = implode(',', $output);
+        // public function debug_to_console($data) {
+        //     $output = $data;
+        //     if (is_array($output))
+        //         $output = implode(',', $output);
 
-            echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-        }
+        //     echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+        // }
 
         private function get_users(): array {
             if ($this->users != null) {
@@ -50,7 +50,7 @@
             return count($this->get_users());
         }
 
-        public function get_range_of_users(int $from, int $to) {
+        public function get_range_of_users(int $from, int $to): array {
             if ($to <= $from) {
                 throw new InvalidArgumentException('Value "to" can\'t be less than or equal to "from"');
             }
@@ -141,7 +141,6 @@
             $users = $this->get_users();
             foreach ($users as $i=>$current_user) {
                 if ($current_user->get_id() == $user->get_id()) {
-                    // TODO fix it does not delete user, when avatar_path is null
                     if (isset($current_user->avatar_path)) {
                         unlink($current_user->get_avatar_path());
                     }
@@ -152,7 +151,7 @@
             }
         }
 
-        public function update_user(User $user) {
+        public function update_user(User $user): User {
             $user_id = $user->get_id();
             if (!isset($user_id)) {
                 throw new InvalidArgumentException("User does not have id. Please, provide user with id");
