@@ -60,7 +60,7 @@
         }
 
         public function update_comment(UserDTO $userDTO): void {
-
+            $this->user_service->update_comment($userDTO);
         }
 
         public function check_if_logined(): void {

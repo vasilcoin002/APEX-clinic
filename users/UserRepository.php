@@ -41,6 +41,7 @@
                     $elem["role"],
                 );
                 $user->set_avatar_path($elem["avatar_path"]);
+                $user->set_comment($elem["comment"]);
                 $users_array[] = $user;
             };
             return $users_array;
@@ -123,14 +124,14 @@
             return null;
         }
 
-        public function find_user_by_phone_number(int $phone_number): ?User {
-            foreach ($this->get_users() as $user) {
-                if ($phone_number == $user->get_phone_number()) {
-                    return $user;
-                }
-            }
-            return null;
-        }
+        // public function find_user_by_phone_number(int $phone_number): ?User {
+        //     foreach ($this->get_users() as $user) {
+        //         if ($phone_number == $user->get_phone_number()) {
+        //             return $user;
+        //         }
+        //     }
+        //     return null;
+        // }
 
         public function delete_user(User $user): void {
             $user_id = $user->get_id();

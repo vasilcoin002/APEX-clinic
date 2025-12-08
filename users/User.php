@@ -1,5 +1,4 @@
 <?php
-    // TODO add field string $comment, because semesrtal project requires some action from user
     class User {
 
         private ?int $id;

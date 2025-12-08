@@ -48,10 +48,16 @@
             }
         }
 
-        public function check_if_email_and_password_is_in_user_dto($userDTO): void {
+        public function check_if_email_and_password_is_in_user_dto(UserDTO $userDTO): void {
             $this->check_if_email_is_in_user_dto($userDTO);
             $this->check_if_password_is_in_user_dto($userDTO);
         }
+
+        // public function check_if_comment_is_in_user_dto(UserDTO $userDTO): void {
+        //     if ($userDTO->comment == null) {
+        //         throw new InvalidArgumentException("Comment is not provided");
+        //     }
+        // }
 
         public function get_user_from_session(): User {
             $this->check_if_session_is_active();
@@ -139,6 +145,12 @@
         private function validate_surname($surname): void {
             if (strlen($surname) === 0) {
                 throw new InvalidArgumentException("Surname must be filled");
+            }
+        }
+
+        private function validate_comment($comment): void {
+            if (strlen($comment) > 1000) {
+                throw new InvalidArgumentException("Comment is too long. Please, write it in 1000 symbols");
             }
         }
 
@@ -328,6 +340,19 @@
 
             move_uploaded_file($_FILES["avatar"]["tmp_name"], $renamed_file_name);
             $user->set_avatar_path($renamed_file_name);
+            $this->user_repository->update_user($user);
+        }
+
+        public function update_comment(UserDTO $userDTO): void {
+            $user = $this->get_user_from_session();
+
+            // $this->check_if_comment_is_in_user_dto($userDTO);
+            if ($userDTO->comment == $user->get_comment()) {
+                throw new InvalidArgumentException("You provided the same comment as you already have");
+            }
+            $this->validate_comment($userDTO->comment);
+
+            $user->set_comment($userDTO->comment);
             $this->user_repository->update_user($user);
         }
     }

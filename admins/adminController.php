@@ -36,8 +36,7 @@
             return $associative_users;
         }
     }
-
-    // TODO fix get_number_of_users is not working
+    
     $admin_controller = new AdminController();
     if (isset($_POST["action"])) {
         session_start();

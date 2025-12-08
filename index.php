@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+    <!-- TODO make errors occure not sequenly but at one response -->
     <h2>UserController</h2>
     <p>Post methods</p>
     <form action="users/userController.php" method="post" enctype="multipart/form-data">
@@ -33,6 +34,12 @@
             <input type="submit" name="action" value="delete-avatar">
         </div>
         <br>
+        <div>
+            <label>comment: <input type="textarea" name="comment"></label>
+        </div>
+        <div>
+            <input type="submit" name="action" value="update-comment">
+        </div>
     </form>
     <p>Get methods</p>
     <form action="users/userController.php" method="get" enctype="multipart/form-data">
