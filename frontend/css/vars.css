@@ -1,0 +1,79 @@
+:root{
+    /* ПЕРЕМЕННЫЕ ЦВЕТОВ */
+    --color-bg: #cce2f7;
+    --color-site-bg: #cce2f7;
+
+    --color-blue-card: #0056cc;
+    --color-blue-card-hover: #1f79f7;
+
+    --color-lightblue: #a6c7f3;
+        
+    --color-green: #28a745;
+    --color-golden-rod: #b8860B;
+    --color-white: whitesmoke;
+    
+    --color-gray: gray;
+    --color-lightgray: #f0f0f0;
+
+    --color-black: #272323;             /* Основной текст */
+    --color-text-light: #666;        /* Вспомогательный текст */
+
+
+    --color-red: #ff0000;
+    --color-menu-a: #333;
+
+    
+    --color-blue-frm: #67aef5; /* Цвет фона форм Login, Register */
+    --color-btn_blue: #0070ff; /* Чистый синий для кнопок/акцентов */
+    /* --color-btn_blue: #0d80fa; - как вариант */
+    --color-btn_blue-hover: #1f9ffd;
+    --color-btn_blue-hover: #0056cc; /* Темно-синий при наведении */
+
+    /* БАЗОВЫЙ РАЗМЕР ШРИФТА */
+    --font-sz-base: 12px;    
+}
+
+/* РАЗМЕРЫ */
+.sz12 {
+font-size: 12px;
+font-weight: 700;
+}
+.sz14 {
+font-size: 14px;
+font-weight: 700;
+}
+.sz15 {
+font-size: 15px;
+font-weight: normal;
+}
+.sz16 {
+font-size: 16px;
+font-weight: 700;
+}
+.sz18 {
+font-size: 18px;
+font-weight: 700;
+}
+.sz20 {
+font-size: 20px;
+font-weight: 700;
+}
+.sz22 {
+font-size: 22px;
+font-weight: 700;
+}
+.sz24 {
+font-size: 24px;
+font-weight: 700;
+}
+
+/* ЦВЕТА */
+.clwhite {
+    color: lightgray;
+}
+.clblue {
+    color: #0080ff;
+}
+.clGoldenRod {
+    color: #b8860B;
+}

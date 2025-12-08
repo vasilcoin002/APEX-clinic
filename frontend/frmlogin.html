@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='images/favicon.png' rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" href="css/vars.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/header-footer.css">
+    <link rel="stylesheet" href="css/responsive/header-footer.css">
+    <link rel="stylesheet" href="css/frmlogin.css"> 
+    <title>APEX Medical - Přihlášení</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header_top">
+                <div class="container">
+                    <div class="header_top-inner">
+                        <a class="header-logo" href="index.html">
+                            <div>
+                                <img class="company_logo" src="images/logo.png" alt="logo">
+                            </div>
+                            <div class="header_logo-text">
+                                <div class="logo-title sz20">APEX</div>
+                                <div class="logo-title sz16">Medical</div>
+                            </div>
+                        </a>
+                        <nav class="menu">
+                            <a href="index.html">Domů</a>
+                        </nav>
+                        <div class="user-tooltip-container">
+                            <a class="active" href="frmLogin.html">
+                                <img class="user-login" src="./images/avatar.png" alt="Log in">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="container center-form-container">
+                
+                <div class="frmCommon">
+                    <h2>Přihlášení</h2>
+                    
+                    
+
+                    <!-- ФОРМА LOGIN -->
+                    <form name="Login" action="clientaccount.html" method="post">
+                        
+                        <div class="form-group">
+                            <label for="email">E-mail:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Heslo:</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        
+                        <div>
+                            <button class="submitBtn" type="submit">Přihlásit se</button>
+                        </div>
+                    </form>
+
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <a href="frmRegister.html">Nemáte účet? Zaregistrujte se</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        
+        <div class="copyright sz12">&copy; 2024 APEX Medical Center. Všechna práva vyhrazena.</div>
+    </div>
+
+
+</body>
+</html>

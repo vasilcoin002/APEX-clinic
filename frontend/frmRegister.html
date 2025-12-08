@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='images/favicon.png' rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" href="css/vars.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/header-footer.css">
+    <link rel="stylesheet" href="css/responsive/header-footer.css">
+    <link rel="stylesheet" href="css/frmRegister.css"> 
+    <title>APEX Medical - Registrace</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header_top">
+                <div class="container">
+                    <div class="header_top-inner">
+                        <a class="header-logo" href="index.html">
+                            <div>
+                                <img class="company_logo" src="images/logo.png" alt="logo">
+                            </div> 
+                            <div class="header_logo-text">
+                                <div class="logo-title sz20">APEX</div>
+                                <div class="logo-title sz16">Medical</div>
+                            </div>
+                        </a>
+                        <nav class="menu">
+                            <a href="index.html">Domů</a> 
+                        </nav>
+                        <div class="user-tooltip-container"> 
+                            <a href="frmLogin.html"> 
+                                <img class="user-login" src="./images/avatar.png" alt="Log in">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="container center-form-container"> 
+                
+                <div class="frmCommon">
+                    <h2>Registrace</h2>
+                    <form name="Registration" action="register_handler.html" method="post" enctype="multipart/form-data">
+                        
+                        <div class="form-group">
+                            <label for="surname">Zadejte své příjmení:</label>
+                            <input type="text" id="surname" name="surname" placeholder="Příjmení"  required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Zadejte své jméno:</label>
+                            <input type="text" id="name" name="name" placeholder="Jméno"  required>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="login">Zadejte svůj login:</label>
+                            <input type="text" id="login" name="login" placeholder="login" required>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="email">Zadejte svůj E-mail:</label>
+                            <input type="email" id="email" name="email" placeholder="E-mail"  required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Zadejte telefonní číslo:</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+420 ___-___-___"  required>
+                        </div>    
+
+                        <div class="form-group">
+                            <label for="password">Zadejte heslo:</label>
+                            <input type="password" id="password" name="password" placeholder="*******" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password">Potvrďте heslo:</label>
+                            <input type="password" id="confirm_password" name="confirm_password" placeholder="*******" required>
+                        </div>
+                        
+                        <div>
+                            <button class="submitBtn" type="submit">Registrovat se</button>
+                        </div>
+                    </form>
+
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <a href="frmLogin.html">Máte účet? Přihlaste se</a>
+                    </div>
+                </div>
+            </div> 
+        </main>
+
+        <div class="container">
+            <footer class="footer">
+                <div class="footer-container">
+                    <div class="footer-logo">
+                        <p class="footer_subtitle">Moderní zdravotní<br> péče pro celou rodinu.</p>
+                        <span class="blue_bold sz16"> Jsme tu pro vás 24/7</span>
+                    </div>
+                    <div> <h4>Rychlé odkazy</h4>
+                        <div class="footer_links">
+                            <a href="sluzby.html">Naše služby</a><br>
+                            <a href="lekari.html">Naši lékaři</a><br>
+                            <a href="about.html" >О nás</a><br>
+                            <a href="contacts.html">Kontakty</a><br>
+                            <a href="admin_login.html">Administrační panel</a>
+                        </div>
+                    </div>
+                    <div><h4>Kontakt</h4>
+                        <div>
+                        <img src="images/icon_phone.png" width=17 alt="phone">420 123 456 000<br>
+                        <img src="images/icon_email.png" width=17 alt="email"> <span class="email">info@apex-medical.cz</span><br>
+                        <img src="images/icon_address.png" width=17 alt="address">Hlavní třída 123, Praha-1, 110 00<br>
+                        </div>
+                    </div>
+                    <div><h4>Otevírací doba</h4>
+                        <div>
+                        Po-Pá: 7:00 - 20:00<br>
+                        So: 8:00 - 16:00<br>
+                        Ne: 9:00 - 14:00<br>
+                        <span class="green_bold sz14">Pohotovost: 24/7</span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div> 
+        <div class="copyright sz12">&copy; 2024 APEX Medical Center. Všechna práva vyhrazena.</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,337 @@
+html, body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+}
+
+h1 {
+    text-align: center;
+    font-size: 18pt;    
+}
+
+.info_text {
+    margin: 0pt;
+    font-weight: 500;
+    margin-left: 15pt;
+    margin-right: 15pt;
+    text-align: justify;
+}
+
+.txt_style1_uppercase{
+    font-weight: bolder;
+    color: #1f2933;  
+    margin: 10pt 0; 
+    font-weight: bold; 
+    text-transform: uppercase;
+}
+.txt_style2 {
+    font-weight: 600;
+    text-align: center;
+}
+
+
+.container_btn-rezervoat{
+    display: flex;
+    gap: 20pt;
+    margin-top: 0pt;
+    justify-content: center;
+}
+
+.banner {
+    height: 200pt;
+}
+
+
+
+
+/* РАЗДЕЛ ГЛАВНОЙ СТРАНИЦЫ "FEATURES" */
+.features {
+    display: flex;
+    justify-content: space-around;
+}
+.feature-box {
+    text-align: center;
+}
+.feature-box h3{
+    color: black;
+    margin-bottom: 5pt;
+    font-size: 13pt;
+}
+
+
+.feature-icon {
+    width: 20pt;
+    height: 20pt;
+    margin-top: 10pt;
+    margin-bottom: 0pt;
+}
+/* ------------------ */
+
+
+
+.content_list-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 3fr);
+    gap: 10pt;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0pt 0pt;
+}
+
+
+
+
+/* СТИЛИ РАЗДЕЛА "ABOUT_CONTENT" */
+.about_content{
+    max-width: 1000pt;
+    margin: 0 auto 30pt auto;
+    padding: 0 10pt;
+}
+
+.about_content-item {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 10%;
+    border: 1px solid gray;
+    min-height: 80pt;
+}
+
+
+.about_content-item h3 {
+    margin-top: 0;
+    margin-bottom: 3pt;
+    font-size: 12pt;
+   
+}
+.about_content-item p {
+    margin: 0;
+    font-size: 10pt;
+   
+}
+
+/* Изменение стиля иконок: сделаем их больше и синими */
+.about_content-item > .icon {
+    width: 25pt;
+    height: 25pt;
+    margin: 10pt auto 0; /* Центрируем иконку */
+}
+
+
+
+
+
+
+.gray_box1, .gray_box2 {
+    height: auto;
+    max-height: 655pt;
+    border-radius: 10pt;
+    background-color: #f0f0f0;
+    margin: 10pt 10pt 5pt 10pt;
+}
+.gray_box1 {
+    padding: 10pt;
+
+}
+
+.gray_box2 .img_style  {
+    margin-top: -4pt;
+}
+
+.inline {
+    display: flex;
+    justify-content: space-between;
+    padding: 5pt 15pt;
+    align-items: flex-end; 
+    margin-top: 15pt;
+    margin-bottom: 3pt;
+}
+
+.gray_box2 div span  {
+    color: blue;
+    font-weight: 700;
+}
+
+
+
+.blue_bold {
+    color: #0070ff;
+    font-weight: 900;
+}
+
+
+.block_show_all_services{
+    display: flex;
+    gap: 20pt;
+    margin-top: 12pt;
+    justify-content: center;
+} 
+    
+
+/* СЕКЦИЯ "HERO" */
+.hero-section {
+    width: auto;
+    background: linear-gradient(#0080ff, #4e9af1);
+    color: #fff;
+    padding: 40pt 20pt;
+    text-align: center;
+    border-radius: 10pt;
+}
+
+
+.hero-title {
+    font-size: 20pt;
+    font-weight: 700;
+    margin-bottom: 20pt;
+}
+
+
+
+.doctors-photos {
+    width: 30%;
+    height: auto;
+    border-radius: 10pt;
+}
+
+
+
+.di-flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* color: #ebb217; */
+}
+
+.left_side, .right_side {
+    display: block;
+    margin-top: 20pt;
+}
+
+
+
+.hr{
+    height: 2pt;
+    margin: 30pt 0pt 10pt;
+}
+
+
+
+.content_list_grid{
+    display: grid;
+    grid-template-columns: repeat(3, 3fr);
+    gap: 10pt;
+    align-items: center;
+    justify-content: center;
+    max-width:1000pt; 
+    margin: 0 auto;
+    padding: 0pt 0pt;
+    /* margin-top: 5pt;  */
+}
+
+
+
+.section_top h1 {
+    font-size: 16pt;
+    text-align: center;
+}
+/* -------------------------- */
+
+
+.body_top {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10pt;
+    align-items: center;
+    margin-bottom: 40pt;
+}
+
+
+
+
+
+.text_rem {
+    margin-top: 15pt;
+}
+.text_center {
+    text-align: center;
+}
+
+.text_bold_blue {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    color: blue;
+}
+
+
+
+.visibility{
+    display: none;
+    /* font-size: 30pt; */
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+/* 2. Стиль для контейнера кнопки (Sluzby) */
+.show-more-button-container {
+    margin: 15pt auto 15pt;
+    text-align: center;
+}
+
+footer .footer-container {
+    font-size: 8pt;
+}
+
+/* ==================================== */
+/* 1. СТИЛИ ДЛЯ ПЕЧАТИ (@media print) */
+/* ==================================== */
+
+    /* 1. Скрытие ненужных элементов (Навигация, кнопки, реклама) */
+    /* Важно: Добавьте сюда все классы и ID, которые не нужны на бумаге */
+    nav,
+    aside, 
+    /* footer,  */
+    .header, 
+    .sidebar, 
+    .ad-banner, 
+    .btn_common-blue,
+    .block_show_all_services,
+    .copyright,
+    .no-print, /* Скрываем любой элемент с этим классом */
+    button, 
+    form {
+        display: none !important;
+    }
+
+    /* 2. Общие правила для экономии чернил и читаемости */
+    * {
+        /* Принудительное удаление фоновых цветов/изображений */
+        background: transparent !important;
+        color: #000 !important; /* Убеждаемся, что текст черный */
+        box-shadow: none !important; /* Удаляем тени */
+        text-shadow: none !important; /* Удаляем тени текста */
+    }
+
+    /* 3. Оформление тела документа */
+    body {
+        font-family: serif; /* Более традиционный шрифт для печати */
+        margin: 0; /* Удаляем внешние отступы, чтобы использовать больше места */
+        padding: 0; 
+    }
+
+    /* 4. Настройки для изображений */
+    img {
+        max-width: 100% !important; /* Гарантируем, что изображения не вылезут за пределы страницы */
+        page-break-inside: avoid; /* Не разрывать изображение между страницами */
+    }
+    
+    /* 5. Управление заголовками и блоками */
+    h1, h2, h3 {
+        page-break-after: avoid; /* Заголовок не должен оставаться в конце страницы без текста */
+    }

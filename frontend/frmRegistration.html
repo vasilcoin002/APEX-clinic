@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='images/favicon.png' rel="shortcut icon" type="image/x-icon">
+  <link rel="stylesheet" href="css/style_frmRegistration.css">
+  <link rel="stylesheet" href="css/sizes.css">
+  <link rel="stylesheet" href="css/vars.css">
+  <title>APEX</title>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container_scale">
+        <h1>
+          APEX Medical <br>
+          Registrace
+        </h1>
+          
+      <div class="section_top d-flex"> 
+        <div class="left_side">
+          <div class="header_title">
+            Vyplňte své údaje pro registraci
+          </div>
+          <div class="txt1">
+            Povinná pole jsou označena&nbsp;<span class="red_asterisk">*</span>
+          </div>
+          <div class="container_header_btns sz16">
+            <a href="index.html" class="btn_common-blue">Domu</a>
+          </div>        
+        </div> <!--left_side-->
+
+
+        <div class="right_side">
+          <div class= "login-wrap">
+            <div class="frmCommon">
+
+                <form name="Registration"  action="#" method="post">
+                    <div>
+                      <label for="name">Zadejte své příjmení:</label>
+                      <input type="text" id="name" name="name" placeholder="Příjmení" required>
+                    </div>
+                    <div>
+                      <label for="login">Zadejte svůj login:</label>
+                      <input type="text" id="login" name="login" placeholder="login" required>
+                    </div>
+                    <div>
+                      <label for="email">Zadejte svůj E-mail:</label>
+                      <input type="email" id="email" name="email" placeholder="E-mail" required>
+                    </div>
+                    <div>
+                      <label for="phone">Zadejte telefonní číslo:</label>
+                      <input type="tel" id="phone" name="phone" placeholder="+420 ___-___-___" required>
+                    </div>    
+
+                    <div>
+                      <label for="password">Zadejte heslo:</label>
+                      <input type="password" id="password" name="password" placeholder="*******" required>
+                    </div>
+                    <div>
+                      <label for="confirm_password">Potvrďte heslo:</label>
+                      <input type="password" id="confirm_password" name="confirm_password" placeholder="*******" required>
+                    </div>
+
+                    <p></p>
+                    <div>
+                        <label>Nahrajte fotku pro svůj avatar</label>
+                        <br>
+                        <label for="avatar" class="custom-file-upload">Vyberte soubor</label>
+                        <input type="file" id="avatar" name="avatar" style="display: none;">
+                    </div>
+
+                    <p></p>
+                    <p></p>
+                    <div>
+                        <input type="checkbox" name="rules">
+                        <label>Přečetl(a) jsem si pravidla</label>
+                    </div>
+
+                    <div>
+                      <button class="submitBtn" type="submit">Registrovat se</button>
+                    </div>
+                </form>
+
+            </div> <!--frmCommon-->
+          </div> <!--login-wrap-->
+        </div> <!--right-side-->
+          
+      </div> <!--section_top d-flex-->
+
+    </div> <!--container_scale-->
+  </div> <!--wrapper-->
+
+
+</body>
+</html>

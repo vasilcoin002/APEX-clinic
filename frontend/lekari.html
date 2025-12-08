@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href='images/favicon.png' rel="shortcut icon" type="image/x-icon">
+   <link rel="stylesheet" href="css/vars.css" media="screen">
+   <link rel="stylesheet" href="css/vars_print.css" media="print">
+   <link rel="stylesheet" href="css/common.css">
+   <link rel="stylesheet" href="css/header-footer.css">
+   <link rel="stylesheet" href="css/lekari.css" media="screen">
+   <link rel="stylesheet" href="css/lekari_print.css" media="print">
+   <title>Lékaři|APEX Medical</title>
+</head>
+
+<body>
+<!-- NÁZEV STRÁNKY s MENU a TLAČÍTKY -->
+   <div class="wrapper"> 
+      <header class="header">
+         <div class="header_top">
+         <div class="container">
+            <div class="header_top-inner">
+               <a class="header-logo" href="index.html">
+               <div>
+                  <img class="company_logo" src="images/logo.png" alt="logo">
+               </div> 
+               <div class="header_logo-text">
+                  <div class="sz20">APEX</div>
+                  <div class="sz16">Medical</div>
+               </div>
+            </a>
+
+            <nav class="menu">
+               <a href="index.html" >Domů</a> 
+               <a href="lekari.html" class="active" >Lékaři</a> 
+               <a href="sluzby.html">Naše služby</a> 
+               <a href="about.html">О nás</a> 
+               <a href="contacts.html">Kontakty</a> 
+            </nav>
+            
+            <!-- АВАТАРКА LOGIN -->
+            <div id="user_avatar" class="header_btn-box"> 
+               <div class="header_user"> 
+                  <a href="frmLogin.html">
+                  <img class="header_user-avatar" src="./images/avatar.png" height="21" alt="avatar">
+                  </a>
+               </div>
+            </div> <!--header_btn-box-->
+            <!-- -->
+
+            </div>   <!-- header_top-inner -->
+         </div>   <!-- container -->
+      </div> <!-- header_top -->
+      </header>
+
+
+
+      <div class="container">
+
+         <div class="section_top"> 
+            <div class="header_title">
+               <h1>Naši lékaři</h1>
+               <div class="section_top_title-text">Seznamte se s našim týmem zkušených a certifikovaných odborníků</div>
+            </div>
+         </div>  <!--section_top-->
+
+
+         <!-- ГАЛЕРЕЯ ВРАЧЕЙ - 1-й РЯД ВИДЕН, А 2-ОЙ СКРЫТ-->
+         <div class="grid_3x3">
+            <!-- 1-й ряд * бокс #1 -->
+            <div class="bx1">
+               <img src="images/Lekari/Lekar1.jpg" class="doctor-photo" alt="Doctor photo">
+               <div class="sz20">Dr. Anna Veselá</div>
+               <div class="sz16">Neurolog</div>
+               <div class="txt_rem sz15">
+                  11 let praxe
+                  <p> Neurolog se zaměřením na diagnostiku a léčbu nervových onemocnění.</p>
+               </div>
+               <div class="blok_contact sz14">
+                  <img src="images/icon_email.png" width=20 alt="email:"> 
+                  <span>anna.vesela@apex.cz</span>
+               </div>
+               <div>
+                  <img src="images/icon_phone.png" width=20 alt="phone:">
+                  <span>+420 123 456 794</span>
+               </div>
+            </div>
+
+            <!-- 1-й ряд * бокс #2 -->
+            <div class="bx1">
+               <img src="images/Lekari/lekar5.jpg" class="doctor-photo" alt="Doctor photo">
+               <div class="sz20">Dr. Eva Svobodová</div>
+               <div class="sz16">Kardiolog</div>
+               <div class="txt_rem sz15">
+                  12 let praxe
+                  <p>Kardiolog se zaměřením na preventivní kardiologii a diagnostiku srdečních onemocnění.</p>
+               </div>
+               <div class="blok_contact sz14">
+                  <img src="images/icon_email.png" width=20 alt="email:"> 
+                  <span>eva.svobodova@apex.cz</span>
+               </div>
+               <div>
+                  <img src="images/icon_phone.png" width=20 alt="phone:">
+                  <span>+420 123 456 790</span>
+               </div>
+
+            </div>
+
+            <!-- 1-й ряд * бокс #3 -->
+            <div class="bx1">
+               <img src="images/Lekari/Lekar3.jpg" class="doctor-photo" alt="Doctor photo">
+               <div class="sz20">Dr. Jan Novák</div>
+               <div class="sz16">Praktický lékař</div>
+               <div class="txt_rem sz15">
+                  15 let praxe
+                  <p>Zkušený praktický lékař s více než 15 lety praxe. Specializace na prevenci a komplexní péči.</p>
+               </div>
+               <div class="blok_contact sz14">
+                  <img src="images/icon_email.png" width=20 alt="email:"> 
+                  <span>jan.novak@apex.cz</span>
+               </div>
+               <div>
+                  <img src="images/icon_phone.png" width=20 alt="phone:">
+                  <span>+420 123 456 015</span>
+               </div>
+            </div>
+
+
+            <!-- 2-й ряд - ZPOČÁTKU BUDE SKRYTÉ  -->
+            <!-- * бокс #1 -->
+            <div id="hidden-doctors" class="doctors-hidden-row">
+               <div class="bx1">
+                  <img src="images/Lekari/lekar9.jpg" class="doctor-photo" alt="Doctor photo">
+                  <div class="sz20">Dr. Marie Černá</div>
+                  <div class="sz16">Dermatolog</div>
+                  <div class="txt_rem sz15">
+                     8 let praxe
+                     <p> Dermatolog specializující se na léčbu kožních onemocnění a estetickou dermatologii.</p>
+                  </div>
+                  <div class="blok_contact sz14">
+                     <img src="images/icon_email.png" width=20 alt="email:"> 
+                     <span>marie.cerna@apex.cz</span>
+                  </div>
+                  <div>
+                     <img src="images/icon_phone.png" width=20 alt="phone:">
+                     <span>+420 123 456 792</span>
+                  </div>
+               </div>
+
+            
+               <!-- 2-й ряд * бокс #2 -->
+               <div class="bx1">
+                  <img src="images/Lekari/lekar8.jpg" class="doctor-photo" alt="Doctor photo">
+                  <div class="sz20">Dr. Petr Dvořák</div>
+                  <div class="sz16">Pediatr</div>
+                  <div class="txt_rem sz15">
+                     10 let praxe
+                     <p>Dětský lékař s láskou k dětem. Zaměření na prevenci a léčbu běžných dětských onemocnění.</p>
+                  </div>
+                  <div class="blok_contact sz14">
+                     <img src="images/icon_email.png" width=20 alt="email:"> 
+                     <span>petr.dvorak@apex.cz</span>
+                  </div>
+                  <div>
+                     <img src="images/icon_phone.png" width=20 alt="phone:">
+                     <span>+420 123 456 791</span>
+                  </div>
+               </div>
+               
+
+               <!-- 2-й ряд * бокс #3 -->
+               <div class="bx1">
+                  <img src="images/Lekari/Lekar4.jpg" class="doctor-photo" alt="Doctor photo">
+                  <div class="sz20">Dr. Tomáš Procházka</div>
+                  <div class="sz16">Ortoped</div>
+                  <div class="txt_rem sz15">
+                     14 let praxe
+                     <p>Ortoped s expertízou v léčbě pohybového aparátu a sportovních úrazů.</p>
+                  </div>
+                  <div class="blok_contact sz14">
+                     <img src="images/icon_email.png" width=20 alt="email:"> 
+                     <span>tomas.prochazka@apex.cz</span>
+                  </div>
+                  <div>
+                     <img src="images/icon_phone.png" width=20 alt="phone:">
+                     <span>+420 123 456 777</span>
+                  </div>
+               </div>
+            </div> <!-- 2-ой ряд ГАЛЕРЕИ ВРАЧЕЙ -->
+
+         </div> <!-- ГАЛЕРЕЯ ВРАЧЕЙ - grid_3x3  -->
+         
+         <!-- КНОПКА "показать больше врачей" -->
+         <div class="show-more-button-container">
+            <button id="show-more-btn" class="btn_common-blue">
+               Zobrazit více lékařů <span class="arrow-icon">▼</span>
+            </button>
+         </div>
+         <!-- КНОПКА "показать больше врачей" -->
+
+
+      <!-- FOOTER -->
+      <div class="container">
+         <footer class="footer">
+            <div class="footer-container">
+            <div class="footer-logo">
+               <p class="footer_subtitle">Moderní zdravotní<br> péče pro celou rodinu.</p>
+               <span class="blue_bold sz16"> Jsme tu pro vás 24/7</span>
+               </div> <!--footer-logo-->
+
+            <div> <h4>Rychlé odkazy</h4>
+               <div class="footer_links">
+                  <a href="sluzby.html">Naše služby</a><br>
+                  <a href="lekari.html">Naši lékaři</a><br>
+                  <a href="about.html" >О nás</a><br>
+                  <a href="contacts.html">Kontakty</a><br>
+                  <a href="admin_login.html">Administrační panel</a>
+               </div>
+            </div>
+
+            <div><h4>Kontakt</h4>
+                  <div>
+                  <img src="images/icon_phone.png" width=17 alt="phone">  +420 123 456 000<br>
+                  <img src="images/icon_email.png" width=17 alt="email"> <span class="email"> info@apex-medical.cz</span><br>
+                  <img src="images/icon_address.png" width=17 alt="address"> Hlavní třída 123, Praha-1, 110 00<br>
+                  </div>
+            </div>
+
+            <div><h4>Otevírací doba</h4>
+               <div>
+                  Po-Pá: 7:00 - 20:00<br>
+                  So: 8:00 - 16:00<br>
+                  Ne: 9:00 - 14:00<br>
+                  <span class="green_bold sz14">Pohotovost: 24/7</span>
+               </div>
+            </div>
+            </div> <!--footer-container-->
+         </footer>        
+         <!-- FOOTER -->
+
+      </div> <!--container-->
+
+      </div> <!--container-->
+   </div> <!-- wrapper -->  
+
+   <div class="copyright sz12">&copy; 2024 APEX Medical Center. Všechna práva vyhrazena.</div>
+
+
+  <!-- Подключение файлов *.js -->
+   <script src="js/script_Lekari.js"></script>
+   <!-- <script src="js/script_load_footer.js"></script> -->
+</body> 
+</html>

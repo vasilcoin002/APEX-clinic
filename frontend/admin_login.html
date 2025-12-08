@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='images/favicon.png' rel="shortcut icon" type="image/x-icon">
+  <link rel="stylesheet" href="css/style_frmAdminPanelLogin.css">
+  <link rel="stylesheet" href="css/sizes.css">
+  <title>Povolení</title>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="container_scale">
+
+        <h1>
+          Login to the control panel
+          <a href="php/index.php" class="testbtn">
+          <br>Показать админ-панель без логина <br>(убрать после тестирования)
+          </a>
+        </h1>
+
+          <div class= "login-wrap">
+            <div class="frmCommon">
+              <div class="login-form">
+
+                <!-- ФОРМА Login to the control panel-->
+                <form name="login" method="post" action="#">
+
+                  <div class="group">
+                    <label for="username" class="label">Username</label>
+                    <input id="username" type="text" name="username" placeholder="Enter username" class="input">
+                  </div>
+
+                  <div class="group">
+                    <label for="password" class= "label">Password</label>
+                    <input type="password" id="password" name="password" placeholder="*******" class="input">
+                  </div>
+
+                  <div class="group"> 
+                    <input type="submit" class="button" value="Log in">
+                  </div>
+
+                </form>
+                <!-- КОНЕЦ ФОРМЫ  -->
+
+              </div>  <!--login-form-->
+            </div> <!--frmCommon-->
+          </div> <!--login-wrap-->
+          
+    </div>  <!--container_scale-->
+
+  </div> <!--WRAPPER-->
+
+  <!-- Подключение файла script.js -->
+  <script src="js/script_frmLogin.js"></script>
+
+</body>
+</html>

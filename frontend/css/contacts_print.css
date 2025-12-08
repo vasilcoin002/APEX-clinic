@@ -1,0 +1,178 @@
+html, body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+}
+
+h2 {
+    font-size: 15px;
+}
+
+.section_top h1 {
+   font-size: 16px;
+}
+.section_top_title-text {
+   font-size: 14px;
+}
+.emergency-phone {
+   font-size: 20px;
+}
+
+
+/* ================================================= */
+/* 1. СТИЛИ КОНТАКТНОЙ ИНФОРМАЦИИ (contact_info) */
+/* ================================================= */
+.contact_info img {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.contact_info { 
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 50px;
+}
+
+.email, .phone, .address {
+    color: var(--color-black);
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.email {  /* Переопределение цвета для email */
+    color: var(--color-blue);
+}
+
+.email-footer {
+    font-size: 16px;
+    color: var(--color-blue);
+}
+
+/* для номера телефона экстренной службы */
+.emergency-phone {
+    display: block;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--color-red);
+    margin-top: 5px;
+}
+
+
+/* 2. СТИЛИ РАСПИСАНИЯ И ЧАСОВ (section_hours) */
+.section_hours {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.hours-grid {
+    display: flex;
+    flex-direction: column;
+}
+.hours-grid ul {
+    list-style: none;
+    padding-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.hours-grid li {
+    font-size: 14px;
+    line-height: 1.4;
+    padding-left: 30px;
+}
+.emergency {
+    border-left: 3px solid var(--color-golden-rod);
+    padding-left: 15px;
+    margin-top: 16px;
+}
+.emergency p {
+    margin: 5px 0;
+}
+
+
+
+/* --- ВТОРОСТЕПЕННЫЕ СТИЛИ --- */
+.blue_bold {
+    color: var(--color-blue);
+    font-weight: 900;
+}
+
+.green_bold {
+    color: var(--color-green);
+    font-weight: 900;
+}
+.red_bold {
+    color: var(--color-red);
+    font-weight: 900;
+}
+
+
+   /* 1. Скрытие ненужных элементов (Навигация, кнопки, реклама) */
+    /* Важно: Добавьте сюда все классы и ID, которые не нужны на бумаге */
+    nav, 
+    aside, 
+    footer, 
+    .header, 
+    .sidebar, 
+    .ad-banner, 
+    .no-print, /* Скрываем любой элемент с этим классом */
+    .copyright,
+   /* .about_image-box, */
+    button, 
+    form {
+        display: none !important;
+    }
+
+    /* 2. Общие правила для экономии чернил и читаемости */
+    * {
+        /* Принудительное удаление фоновых цветов/изображений */
+        background: transparent !important;
+        color: #000 !important; /* Убеждаемся, что текст черный */
+        box-shadow: none !important; /* Удаляем тени */
+        text-shadow: none !important; /* Удаляем тени текста */
+    }
+
+    /* 3. Оформление тела документа */
+    body {
+        font-family: serif; /* Более традиционный шрифт для печати */
+        margin: 0; /* Удаляем внешние отступы, чтобы использовать больше места */
+        padding: 0; 
+    }
+
+    /* 4. Настройки для изображений */
+    img {
+        max-width: 100% !important; /* Гарантируем, что изображения не вылезут за пределы страницы */
+        page-break-inside: avoid; /* Не разрывать изображение между страницами */
+    }
+    
+    /* 5. Управление заголовками и блоками */
+    h1, h2, h3 {
+        page-break-after: avoid; /* Заголовок не должен оставаться в конце страницы без текста */
+    }
+    
+    pre, blockquote {
+        border: 1pt solid #999;
+        page-break-inside: avoid; /* Не разрывать блок кода или цитату между страницами */
+    }
+
+    /* 6. Отображение ссылок (полезно, чтобы пользователь видел URL) */
+    a {
+        text-decoration: underline; /* Подчеркиваем ссылки, если они не были подчеркнуты */
+    }
+    a[href]:after {
+        /* Добавляем URL ссылки после текста (кроме ссылок на якоря) */
+        content: " (" attr(href) ")";
+        font-size: 80%;
+        color: #555;
+    }
+    /* Скрываем отображение URL для ссылок, которые ведут на якоря (#) */
+    a[href^="#"]:after {
+        content: ""; 
+    }
+
+
+ 
+.section_top {
+    margin: 0;
+}
+

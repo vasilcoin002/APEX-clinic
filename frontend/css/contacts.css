@@ -1,0 +1,130 @@
+h2 {
+    font-size: 22px;
+}
+
+
+/* ================================================= */
+/* 1. СТИЛИ КОНТАКТНОЙ ИНФОРМАЦИИ (contact_info) */
+/* ================================================= */
+.contact_info img {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.contact_info { 
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 50px;
+}
+
+.email, .phone, .address {
+    color: var(--color-black);
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.email {  /* Переопределение цвета для email */
+    color: var(--color-blue);
+}
+
+.email-footer {
+    font-size: 16px;
+    color: var(--color-blue);
+}
+
+/* для номера телефона экстренной службы */
+.emergency-phone {
+    display: block;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--color-red);
+    margin-top: 5px;
+}
+
+
+/* 2. СТИЛИ РАСПИСАНИЯ И ЧАСОВ (section_hours) */
+.section_hours {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid gray;
+}
+
+.hours-grid {
+    display: flex;
+    flex-direction: column;
+}
+.hours-grid ul {
+    list-style: none;
+    padding-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.hours-grid li {
+    font-size: 14px;
+    line-height: 1.4;
+    padding-left: 30px;
+}
+.emergency {
+    border-left: 3px solid var(--color-golden-rod);
+    padding-left: 15px;
+    margin-top: 16px;
+}
+.emergency p {
+    margin: 5px 0;
+}
+
+
+
+/* ================================================= */
+/* 4. СТИЛИ СЕТКИ (grid)*/
+/* ================================================= */
+.grid {
+    display: grid;
+    max-width: 1200px;
+    margin: 15px auto;
+    grid-template-columns: 2fr 2fr;
+    grid-template-areas: 
+        "info form"
+        "map map";
+    gap: 29px;
+    align-items: baseline;
+    padding: 0 20px;
+}
+
+/* Назначаем области Grid Area: */
+.contact_info {
+    grid-area: info; 
+    text-align: left;
+    padding: 0 20px;
+    color: var(--color-black);
+}
+
+.contact_form {
+    grid-area: form;
+    /* Оставляем только назначение области, все остальные стили удалены */
+}
+
+.section_map {
+    grid-area: map; /* Карта занимает обе колонки в нижнем ряду */
+    padding: 5px;
+    margin-top: 15px;
+}
+
+
+
+
+/* --- ВТОРОСТЕПЕННЫЕ СТИЛИ --- */
+.blue_bold {
+    color: var(--color-blue);
+    font-weight: 900;
+}
+
+.green_bold {
+    color: var(--color-green);
+    font-weight: 900;
+}
+.red_bold {
+    color: var(--color-red);
+    font-weight: 900;
+}
