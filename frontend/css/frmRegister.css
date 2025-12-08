@@ -1,0 +1,207 @@
+/* ================================================= */
+/* 1. БАЗОВЫЕ СТИЛИ СТРАНИЦЫ И КОНТЕЙНЕР */
+/* ================================================= */
+
+html, body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5; /* Светло-серый фон страницы */
+    color: var(--color-black);
+}
+
+/* Контейнер для вертикального центрирования, как в frmLogin.css */
+.container.center-form-container { 
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Обеспечиваем, что контейнер занимает всю высоту между шапкой и подвалом */
+    /* Значение 120px - это примерная высота шапки и подвала в сумме */
+    min-height: calc(100vh - 120px); 
+    
+    padding: 10px 20px; /* Уменьшили вертикальный padding */
+    box-sizing: border-box;
+}
+
+/* Элементы старого макета, которые нужно скрыть или игнорировать */
+.wrapper, .section_top.d-flex, .left_side, .right_side {
+    margin: 0 auto;
+    max-width: unset;
+    padding: 0;
+    width: 100%;
+}
+.header_title, .txt1, h1 {
+    display: INLINE; /* Эти элементы будут теперь внутри .frmCommon */
+}
+
+/* ================================================= */
+/* 2. СТИЛИ ФОРМЫ (frmCommon) - КОМПАКТНОСТЬ */
+/* ================================================= */
+
+.frmCommon {
+    min-width: 415px;
+    position: relative;
+    padding: 10px 25px 25px; 
+    
+    /* Визуальный стиль, как в frmLogin.css */
+    background: #ffffff; 
+    border: 1px solid rgba(0, 112, 255, 0.2); 
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+    color: var(--color-black); 
+    text-align: center;
+}
+
+.frmCommon h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: var(--color-black); 
+    font-weight: 700;
+}
+
+/* Контейнеры полей - ключевой момент для компактности */
+.form-group {
+    margin-bottom: 5px; /* Уменьшенный отступ между группами полей */
+    text-align: left;
+}
+.frmCommon form div {
+    padding: 5px 0; /* Минимальный вертикальный отступ для каждого поля */
+    text-align: left;
+}
+
+
+/* ================================================= */
+/* 3. СТИЛИ ПОЛЕЙ И МЕТОК */
+/* ================================================= */
+
+.frmCommon label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 3px;
+    font-size: 14px;
+}
+
+.frmCommon input[type="text"],
+.frmCommon input[type="email"],
+.frmCommon input[type="tel"],
+.frmCommon input[type="password"] {
+    width: 100%; 
+    box-sizing: border-box;
+    padding: 8px 12px; /* Сделали поле чуть менее высоким */
+    border: 1px solid #ccc;
+    border-radius: 8px; 
+    background: #f9f9f9; 
+    color: var(--color-black);
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.frmCommon input:focus {
+    background: #ffffff;
+    border-color: var(--color-btn_blue); 
+    box-shadow: 0 0 0 3px rgba(0, 112, 255, 0.2); 
+}
+
+/* Стили для звездочки обязательных полей */
+div label:has(+ input:required)::after {
+    content: " *";
+    color: #dc3545; 
+    font-size: 15px;
+    font-weight: bold;
+    vertical-align: top;
+}
+.red_asterisk {
+    color: #dc3545;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* Стили для чекбокса */
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    vertical-align: middle;
+    accent-color: var(--color-btn_blue);
+}
+
+/* ================================================= */
+/* 4. СТИЛИ КНОПОК И ССЫЛОК */
+/* ================================================= */
+
+.submitBtn {
+    width: 100%;
+    margin-top: 15px; /* Уменьшили отступ */
+    background-color: var(--color-btn_blue); 
+    color: #ffffff;
+    padding: 10px 28px; /* Чуть меньший padding */
+    border: none;
+    border-radius: 8px; 
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 112, 255, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.submitBtn:hover {
+    transform: translateY(-2px);
+    background-color: var(--color-btn_blue-hover);
+    box-shadow: 0 8px 20px rgba(0, 112, 255, 0.3);
+}
+
+.foot-lnk {
+    text-align: center;
+    margin-top: 5px; /* Уменьшили отступ */
+}
+.foot-lnk a {
+    color: var(--color-btn_blue);
+    font-size: 15px;
+    display: inline-block;
+    margin: 3px 0;
+    text-decoration: none; 
+    font-weight: 600; 
+}
+.foot-lnk a:hover {
+    text-decoration: underline; 
+    color: var(--color-btn_blue-hover);
+}
+
+/* Стили для загрузки файла (Avatar) */
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px; /* Уменьшили padding */
+    cursor: pointer;
+    background-color: var(--color-btn_blue);
+    color: #ffffff;
+    border-radius: 6px;
+    font-size: 13px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+.custom-file-upload:hover {
+    background-color: var(--color-btn_blue-hover);
+}
+
+
+/* ================================================= */
+/* НОВЫЕ СТИЛИ ДЛЯ АВАТАРА В ОДНОЙ СТРОКЕ */
+/* ================================================= */
+
+/* Контейнер, который выравнивает текст и кнопку в один ряд */
+.avatar-inline-wrapper {
+    display: flex;
+    align-items: center; /* Центрирует элементы по вертикали */
+    gap: 10px; /* Добавляет небольшой отступ между текстом и кнопкой */
+}
+
+/* Убеждаемся, что текстовая метка в этом блоке не использует свойства блочного элемента */
+.avatar-inline-wrapper label:not(.custom-file-upload) {
+    display: inline-block;
+    margin-bottom: 0; /* Убираем лишний вертикальный отступ */
+    white-space: nowrap; /* Запрещаем перенос текста на новую строку */
+}
+
+
+

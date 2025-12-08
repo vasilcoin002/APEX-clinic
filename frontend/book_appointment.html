@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='images/favicon.png' rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" href="css/vars.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/header-footer.css">
+    <link rel="stylesheet" href="css/responsive/header-footer.css">
+    <link rel="stylesheet" href="css/style_appointment.css"> 
+    <title>APEX Medical - Přihlášení</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header_top">
+                <div class="container">
+                    <div class="header_top-inner">
+                        <a class="header-logo" href="index.html">
+                            <div>
+                                <img class="company_logo" src="images/logo.png" alt="logo">
+                            </div>
+                            <div class="header_logo-text">
+                                <div class="logo-title sz20">APEX</div>
+                                <div class="logo-title sz16">Medical</div>
+                            </div>
+                        </a>
+                        <nav class="menu">
+                             <a href="index.html">Domů</a>
+                        </nav>
+                        <div class="user-tooltip-container">
+                            <a href="frmLogin.html">
+                                <img class="user-login" src="./images/avatar.png" alt="Log in">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+        <main class="main">
+            <div class="container center-form-container">
+
+                <div class="frmCommon">
+                <h1>Rezervujte si schůzku online</h1>
+                <div class="txt_info">** *Zašlete nám své údaje a my se vám ozveme zpět, <br>abychom si s vámi domluvili schůzku.</div>
+                    
+
+
+                <!-- ФОРМА "НАЗНАЧИТЬ ПРИЕМ - ПЕРЕЗВОНИТЕ МНЕ" -->
+                <form id="book_appointment" name="book_appointment" action="#" method="post">
+                    <div class="form-group">
+                        <label for="fullName">Celé jméno:</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service">Vyberte službu:</label>
+                        <select id="service" name="service" required>
+                            <option value="">-- Vyberte službu --</option>
+                            <option value="consultation">Konzultace se specialistou</option>
+                            <option value="diagnostics">Diagnostika</option>
+                            <option value="treatment">Zacházení</option>
+                            <option value="treatment">Ostatní</option>
+                            
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Datum přijetí:</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">Čas recepce:</label>
+                        <input type="time" id="time" name="time" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Telefonní číslo:</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+420 ___-___-___" pattern="^\+420 [0-9]{3}-[0-9]{3}-[0-9]{3}$" required oninput="validatePhoneInput(event)">
+                    </div>
+
+                    <button class="btn_common-blue" type="submit">Odeslat požadavek</button>
+                </form>
+
+                </div>
+            </div>
+        </main>
+    </div>
+                
+
+    <!-- <script src="js/script.js"></script> -->
+</body>
+</html>

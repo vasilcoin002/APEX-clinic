@@ -1,0 +1,116 @@
+.center-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Уменьшил margin-top, чтобы форма была более центрирована */
+    margin-top: 50px; 
+    min-height: calc(100vh - 120px);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+.frmCommon {
+    min-width: 400px;
+    position: relative;
+    padding: 18px 30px;
+    /* color: var(--color-gray); */
+    text-align: center;
+    background: #f0f0f0;
+    border: 2px solid rgba(0, 112, 255, 0.2); /* легкая синяя рамка */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.14);/* Более мягкая тень */
+}
+
+.frmCommon h2 {
+    font-size: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--color-black); /* Заголовок теперь черный */
+    font-weight: 700;
+}
+
+
+/* ================================================= */
+/*  СТИЛИ ПОЛЕЙ ВВОДА */
+/* ================================================= */
+
+.frmCommon .form-group {
+    margin-bottom: 20px;
+    color: var(--color-gray);
+} 
+
+.frmCommon .form-group input[type="email"],
+.frmCommon .form-group input[type="password"] {
+    width: calc(100% - 36px); 
+    padding: 12px 18px;
+    border: 1px solid #ccc; /* Четкая, видимая граница */
+    border-radius: 8px; /* более строгий радиус */
+    
+    font-size: 18px;
+    color: var(--color-gray);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.frmCommon .form-group input[type="email"]::placeholder,
+.frmCommon .form-group input[type="password"]::placeholder {
+    font-size: 16px;
+    color: var(--color-lightgray);
+}
+
+.frmCommon .form-group input[type="email"]:focus,
+.frmCommon .form-group input[type="password"]:focus {
+    background: #ffffff;
+    border-color: var(--color-blue-frm);
+    box-shadow: 0 0 0 2px rgba(0, 112, 255, 0.2); /* Мягкая синяя тень */
+}
+
+.frmCommon .form-group label {
+    display: block;
+    color: var(--color-black);
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: left;
+}
+
+
+/* ================================================= */
+/* 4. СТИЛИ КНОПКИ                           */
+/* ================================================= */
+
+.submitBtn{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 0 0;
+    width: 100%;
+    
+    background-color: var(--color-btn_blue); 
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 112, 255, 0.2); /* Синяя тень для акцента */
+    transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.submitBtn {
+    transform: translateY(-2px); /* Эффект при наведении из style.css */
+    background-color: var(--color-btn_blue-hover);
+    box-shadow: 0 8px 20px rgba(0, 112, 255, 0.3);
+}
+
+
+
+
+.menu .div a.active {
+    color: #dfa52b;
+    padding-bottom: 5px;
+    border-bottom: 3px solid #ebb217;
+}
+

@@ -1,0 +1,82 @@
+.section_top {
+   margin-top: 80px;
+}
+
+
+.section_top h1 {
+    color: var(--color-black);
+    font-size: 35px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 7px;
+    padding-top: 15px;
+}
+
+.about_text {
+   width: 80%;
+   margin: 0 auto;
+   font-size: 20px;
+   line-height: 1.5;
+   color: var(--color-black);
+   margin-bottom: 20px;
+}
+.about_text h2 {
+    color: var(--color-blue);
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+}
+
+.about_text ul {
+    list-style-type: none; /* Удаляем стандартные маркеры */
+    padding-left: 65px;
+}
+.about_text ul li:before {
+    content: "•"; /* Используем собственный маркер */
+    color: var(--color-green); /* или var(--color-blue) */
+    font-weight: bolder;
+    /* font-size: 24px; */
+    display: inline-block; 
+    width: 3em;
+    margin-left: -3em;
+}
+
+
+/* Контейнер для изображений */
+.about_image-box {
+    display: flex;
+    gap: 10px;
+    margin: 10px auto;
+    width: 90%;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+
+/* Стиль для самих изображений */
+.about_image-box img {
+    width: 33.3%; /* Каждое изображение занимает половину ширины контейнера */
+    height: auto;
+    object-fit: cover; /* Изображение будет покрывать область */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    transition: transform 0.3s ease;
+}
+
+/* Эффект при наведении - красиво! */
+.about_image-box img:hover {
+    transform: scale(1.02);
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(1, 3fr 1fr);
+    gap: 20px;  
+}
+
+.logo-box{
+    width: 150px;
+    padding: 50px 400px 0 0;
+}

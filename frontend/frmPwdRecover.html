@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href='images/favicon.png' rel="shortcut icon" type="image/x-icon">
+   <link rel="stylesheet" href="css/style_frmPwdRecover.css">
+   <link rel="stylesheet" href="css/sizes.css">
+   <link rel="stylesheet" href="css/vars.css">
+
+   <title>APEX</title>
+</head>
+<body>
+   <div class="wrapper">
+      <div class="container_scale">
+         <h1>
+            APEX Medical <br>
+            Obnovení přístupu k vašemu osobnímu účtu
+         </h1>
+
+         <div class="section_top d-flex"> 
+            <div class="left_side">
+               <div id="Domu" class="container_header_btns sz16">
+                  <a href="index.html" class="btn_common-blue">Domu</a>
+               </div>
+
+               <div class="header_title" >
+                  Obnovte přístup k vašemu účtu
+               </div>
+
+
+               <div class="txt_style2 clblack sz18">
+                  Zadejte uživatelské jméno a e-mailovou adresu, kterou jste použili při registraci, 
+                  a my vám na vámi uvedenou adresu zašleme nové heslo.
+               </div>
+            </div> <!--left_side-->
+
+
+         
+            <div class="right_side">
+                     <div class= "recover-wrap">
+                        <div class="frmCommon">
+                           <div class="recover-form">
+                           <!-- ФОРМА  RECOVERY PASSWORD-->
+                           <form name="recovery" method="post" action="#">
+
+                              <div class="group">
+                              <label for="username" class= "label">Uživatelské jméno</label>
+                              <input id="username" type="text" name="username" autocomplete="name" class="input">
+                              </div>
+                              <div class="group">
+                                    <label for="email" class="label">E-mailová adresa</label>
+                                    <input id="email" type="text" name="email" autocomplete="email" placeholder="E-mailová adresa" class="input">
+                                 </div>
+                           
+                              <hr>
+
+                              <div class="group"> 
+                                 <input type="submit" class="button" value="Poslat">
+                              </div>
+                           </form>
+
+                            <!-- КОНЕЦ ФОРМЫ  -->
+
+                        </div>  <!--recover-form-->
+
+                        </div> <!--frmCommon-->
+                     </div> <!--recover-wrap-->
+            </div> <!--right_side-->
+            
+
+         </div> <!--section_top d-flex-->
+      </div>  <!--container_scale-->
+   </div> <!--WRAPPER-->
+
+
+
+  <!-- Подключение внешнего файла script.js -->
+  <script src="js/script_frmPwdRecover.js"></script>
+
+</body>
+</html>

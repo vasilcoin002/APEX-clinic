@@ -1,0 +1,129 @@
+/* === style.css === */
+
+/* Основные настройки страницы */
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Современный шрифт */
+    background-color: #f4f6f9; /* Светло-серый фон */
+    color: #333; /* Цвет текста */
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2 { 
+    color: #2c3e50; /* Темно-синий цвет заголовков */
+}
+
+/* --- Стили таблицы --- */
+table { 
+    width: 100%; 
+    border-collapse: collapse; /* Убираем двойные границы */
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Легкая тень */
+    border-radius: 8px; /* Закругленные углы */
+    overflow: hidden; /* Чтобы углы не обрезались */
+    margin-bottom: 20px;
+}
+
+th { 
+    background-color: #34495e; /* Темная шапка таблицы */
+    color: white; 
+    padding: 12px 15px; 
+    text-align: left; 
+}
+
+td { 
+    border-bottom: 1px solid #ddd; /* Линия между строками */
+    padding: 10px 15px; 
+    vertical-align: middle;
+}
+
+/* Чередование цветов строк (зебра) */
+tr:nth-child(even) { 
+    background-color: #f9f9f9; 
+}
+
+/* Эффект при наведении мышки на строку */
+tr:hover { 
+    background-color: #f1f1f1; 
+}
+
+/* --- Кнопки --- */
+form { 
+    display: inline-block; /* Чтобы формы стояли в ряд */
+    margin-right: 5px; 
+}
+
+button {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    color: white;
+    transition: opacity 0.2s; /* Плавное затемнение */
+}
+
+button:hover { 
+    opacity: 0.8; /* Кнопка становится чуть прозрачной при наведении */
+}
+
+/* Цвета кнопок */
+.btn-edit { background-color: #3498db; }   /* Синий */
+.btn-del { background-color: #e74c3c; }    /* Красный */
+.btn-admin { 
+    background-color: #f1c40f;             /* Желтый */
+    color: #333; 
+    font-weight: bold; 
+} 
+.btn-save { 
+    background-color: #27ae60;             /* Зеленый */
+    margin-top: 10px; 
+}
+
+/* --- Формы (Добавление/Редактирование) --- */
+.user-form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    max-width: 500px; /* Ограничение ширины формы */
+}
+
+.user-form label { 
+    display: block; 
+    margin-top: 10px; 
+    font-weight: bold; 
+}
+
+.user-form input { 
+    width: 100%; 
+    padding: 8px; 
+    margin-top: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+}
+
+/* --- Пагинация (Страницы 1, 2, 3...) --- */
+.pagination { 
+    text-align: center; 
+    margin-top: 20px; 
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 4px;
+    background: white;
+    color: #333;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+/* Активная страница (на которой мы сейчас) */
+.pagination a.active {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}

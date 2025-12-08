@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='images/favicon.png' rel="shortcut icon" type="image/x-icon">
+  <link rel="stylesheet" href="css/header-footer.css">
+  <link rel="stylesheet" href="css/vars.css" media="screen">
+  <link rel="stylesheet" href="css/vars_print.css" media="print">
+  <link rel="stylesheet" href="css/clientaccount.css">
+  <link rel="stylesheet" href="css/vars.css">
+
+  <title>APEX Medical</title>
+</head>
+
+<body>
+  <!-- ЗАГОЛОВОК САЙТА с МЕНЮ и КНОПКАМИ -->
+  <div class="wrapper"> 
+    <header class="header">
+      <div class="header_top">
+        <div class="container">
+          <div class="header_top-inner">
+            <a class="header-logo" href="index.html">
+              <div>
+                <img class="company_logo" src="images/logo.png" alt="logo">
+              </div> 
+              <div class="header_logo-text">
+                <div class="sz20">APEX</div>
+                <div class="sz16">Medical</div>
+              </div>
+            </a>
+
+            <!--  МЕНЮ! -->
+            <nav class="menu">
+              <a href="index.html" >Domů</a> 
+              <a href="lekari.html">Lékaři</a> 
+              <a href="sluzby.html">Naše služby</a> 
+              <a href="about.html" >О nás</a> 
+              <a href="contacts.html">Kontakty</a> 
+              <a class="visibility active" href="#" id="accountLink">Osobní účet</a> 
+            </nav>
+            
+          </div> <!-- header_top-inner -->
+        </div> <!-- container -->
+      </div> <!-- header_top -->
+    </header>
+
+    
+   <div class="PageContent">
+    <div class="section_top"> 
+      <h1>Osobní účet | APEX Medical</h1>
+    <div class="body_top">
+
+      
+      <!-- КАРТОЧКИ С ССЫЛКАМИ НА РАЗНЫЕ РАЗДЕЛЫ ЛИЧНОГО КАБИНЕТА -->
+      <div class="left_side">
+            <div class="cards-grid"> 
+              <div class="card card-link active" data-target="my_notes">
+                <h3 class="card-title">Moje poznámky</h3>
+                <p class="card-text">Harmonogram nadcházejících schůzek a historie návštěv lékařů.</p>
+              </div>
+
+              <div class="card card-link" data-target="personal_data">
+                <h3 class="card-title">Moje údaje</h3>
+                <p class="card-text">Zde si můžete prohlédnout a v případě potřeby změnit své osobní údaje a nastavení profilu..</p>
+              </div>
+              
+              <div class="card card-link" data-target="admin_panel">
+                <h3 class="card-title">Administrační panel</h3>
+                <p class="card-text">Správa rezervací, kalendář lékařů, přehled pacientů a nástroje pro správu obsahu webu.</p>
+              </div>
+            </div> <!--cards-grid-->        
+        </div> <!--left_side-->
+        <!-- END: КАРТОЧКИ ... -->
+
+
+        <div class="right_side">  <!-- ПРАВАЯ ПАНЕЛЬ С ИНФОРМАЦИЕЙ -->
+          
+          <div id="welcome-txt" class="info_content card-content"> 
+            <h2>Vítejte, [Jméno pacienta]!</h2>
+            <p>Jsme rádi, že používáte svůj osobní účet. <br>
+              Zde můžete snadno spravovat své zdravotní záznamy a plánovat návštěvy lékařů.</p>
+            <hr>
+            <h3>Jaké sekce zde najdete?</h3>
+            <ul class="welcome-list">
+                <li>
+                    [Moje poznámky] : Rychlý přehled vašich nadcházejících schůzek a kompletní historie všech návštěv u lékařů na naší klinice.
+                </li>
+                <li>
+                    [Moje údaje] : Zde si můžete zkontrolovat, aktualizovat nebo změnit své osobní údaje a kontaktní informace, stejně jako heslo k účtu.
+                </li>
+                <li>
+                    [Administrační panel] : Tato sekce je určena pro interní správu. Získáte přístup k rezervačnímu kalendáři lékařů a přehledu pacientů (pouze pro oprávněné uživatele).
+                </li>
+            </ul>
+            <p>Pro zobrazení informací klikněte na jednu z karet v levém menu.</p>
+          </div>         
+ 
+
+
+          <!-- =============================================
+           РАЗДЕЛ ИСТОРИИ ПОСЕЩЕНИЙ И БУДУЩИХ НАЗНАЧЕНИЙ] 
+           ================================================ -->
+          <div id="my_notes" class="info_content card-content active">
+            
+            <!-- SPINNER ВРЕМЕННО - ТЕСТИРУЮ
+            <div class="loading-indicator-wrapper">
+              <div class="spinner"></div>
+              <p>Načítání dat, prosím čekejte...</p>
+            </div> -->
+            
+            
+              <h2>Moje poznámky</h2>
+
+              <!-- =========================================== -->
+              <!-- ======== будущие назначения приемов ======= -->
+              <div class="appointment-card upcoming-appointment">
+                  <h3>🗓️ Vaše nejbližší schůzka</h3>
+                  <div class="appointment-detail">
+                      <span class="detail-label">Datum a čas:</span>
+                      <span class="detail-value">**Úterý, 25. února 2026, 14:30**</span>
+                  </div>
+                  <div class="appointment-detail">
+                      <span class="detail-label">Lékař:</span>
+                      <span class="detail-value">MUDr. Klára Nováková (Kardiologie)</span>
+                  </div>
+                  <div class="appointment-detail">
+                      <span class="detail-label">Důvod návštěvy:</span>
+                      <span class="detail-value">Kontrolní echokardiografie</span>
+                  </div>
+                  <button class="btn-cancel">Zrušit schůzku</button>
+              </div>
+              
+              <hr>
+              
+              <!-- =========================================== -->
+              <!-- ===========  история приемов   ============ -->
+              <h3>📜 Historie návštěv</h3>
+              <table class="visit-history-table">
+                  <thead>
+                      <tr>
+                          <th>Datum</th>
+                          <th>Lékař</th>
+                          <th>Specializace</th>
+                          <th>Důvod návštěvy/Závěr</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td data-label="Datum">15. 11. 2025</td>
+                          <td data-label="Lékař">MUDr. Jan Svoboda</td>
+                          <td data-label="Specializace">Praktický lékař</td>
+                          <td data-label="Závěr">Roční preventivní prohlídka, doporučeno kontrolní vyšetření krve.</td>
+                      </tr>
+                      <tr>
+                          <td data-label="Datum">03. 10. 2025</td>
+                          <td data-label="Lékař">MUDr. Petra Veselá</td>
+                          <td data-label="Specializace">Oftalmologie</td>
+                          <td data-label="Závěr">Kontrola zraku, předpis nových kontaktních čoček.</td>
+                      </tr>
+                      <tr>
+                          <td data-label="Datum">20. 08. 2025</td>
+                          <td data-label="Lékař">MUDr. Klára Nováková</td>
+                          <td data-label="Specializace">Kardiologie</td>
+                          <td data-label="Závěr">Úvodní konzultace a základní EKG. Objednání na kontrolu.</td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div id="personal_data" class="info_content card-content">
+                <h2>Nastavení profilu a údaje</h2>
+                <p>Zde si můžete prohlédnout, aktualizovat nebo změnit své osobní a kontaktní údaje a také heslo k účtu.</p>
+                
+                <div class="data-form-wrap">
+                    <form name="profile_data" class="profile-form" action="#">
+                        
+                        <h3>Osobní údaje</h3>
+                        <div class="group-data">
+                            <label for="name" class="label-data">Jméno a příjmení:</label>
+                            <input id="name" type="text" value="Josef Novák" class="input-data" disabled>
+                        </div>
+
+                        <div class="group-data">
+                            <label for="birthdate" class="label-data">Datum narození:</label>
+                            <input id="birthdate" type="text" value="01.01.1985" class="input-data" disabled>
+                        </div>
+                        
+                        <div class="group-data">
+                            <label for="insurance" class="label-data">Číslo pojištěnce (rodné číslo):</label>
+                            <input id="insurance" type="text" value="850101/1234" class="input-data" disabled>
+                        </div>
+
+                        <h3>Kontaktní údaje</h3>
+                        <div class="group-data">
+                            <label for="email" class="label-data">E-mail (pro notifikace):</label>
+                            <input id="email" type="email" value="josef.novak@example.com" class="input-data">
+                        </div>
+
+                        <div class="group-data">
+                            <label for="phone" class="label-data">Telefonní číslo:</label>
+                            <input id="phone" type="tel" value="+420 777 123 456" class="input-data">
+                        </div>
+
+                        <div class="group-data">
+                            <label for="address" class="label-data">Adresa:</label>
+                            <input id="address" type="text" value="Dlouhá 22, 110 00 Praha 1" class="input-data">
+                        </div>
+                        
+                        <hr>
+                        
+                        <h3>Změna hesla</h3>
+                        <div class="group-data">
+                            <label for="current_password" class="label-data">Aktuální heslo:</label>
+                            <input id="current_password" type="password" placeholder="Zadejte současné heslo" class="input-data">
+                        </div>
+                        <div class="group-data">
+                            <label for="new_password" class="label-data">Nové heslo:</label>
+                            <input id="new_password" type="password" placeholder="Nové heslo" class="input-data">
+                        </div>
+                        <div class="group-data">
+                            <label for="confirm_password" class="label-data">Potvrzení nového hesla:</label>
+                            <input id="confirm_password" type="password" placeholder="Znovu zadejte nové heslo" class="input-data">
+                        </div>
+                        
+                        <div class="group-data-submit">
+                            <button type="submit" class="button btn-save-data">Uložit změny</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>        
+
+
+            <!-- ======================== -->
+            <!-- АДМИНИСТРАЦИОННАЯ ПАНЕЛЬ -->
+
+            <div id="admin_panel" class="info_content card-content">
+              <h2>Administrační panel</h2>
+                        <div class= "login-wrap">
+            <div class="frmCommon">
+              <p>Vítejte v interním systému správy. Pouze pro oprávněné uživatele.</p>
+              <div class="login-form">
+
+                <!-- ФОРМА Login to the Admin Panel-->
+                <form name="login" method="post" action="#" onsubmit="validateDataAdmin()">
+
+                  <div class="group">
+                    <label for="username" class="label">Username</label>
+                    <input id="username" type="text" name="username" placeholder="Enter username" class="input">
+                  </div>
+
+                  <div class="group">
+                    <label for="password" class= "label">Password</label>
+                    <input type="password" id="password" name="password" placeholder="*******" class="input">
+                  </div>
+
+                  <div class="group"> 
+                    <input type="submit" class="button" value="Log in">
+                  </div>
+
+                </form>
+                <!-- КОНЕЦ ФОРМЫ  -->
+
+              </div>  <!--login-form-->
+            </div> <!--frmCommon-->
+          </div> <!--login-wrap-->
+
+            </div>
+        </div> <!--right_side-->
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <script src="js/clientaccount.js"></script> -->
+
+</body>
+</html>

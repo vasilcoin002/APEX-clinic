@@ -1,0 +1,269 @@
+:root{
+    --color-bg: #cce2f7;
+    --color-site-bg: #cce2f7;
+    --color-golden-rod: #b8860B;
+    --color-site-black: #333;
+}
+html, body {
+    font-family: 'arial' , sans-serif;
+    background-color: #f5f5f5;
+}
+.wrapper {
+    max-width: 900px;
+    margin: auto;
+    overflow: hidden;
+    background: rgba(0,128,255,0.17);
+    border: 5px solid var(--color-golden-rod);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+}
+
+.header_title {
+    color: black;
+    font-size: 26px;
+    margin: 30px 0 40px 0;
+    text-align: center;
+}
+h1 {
+    text-align: center;
+    font-size: 26px; 
+    margin-top: 50px;   
+}
+
+
+.left_side, .right_side {
+    display: block;
+    margin: 20px 10px;
+}
+.right_side {
+    min-width: 50%;
+}
+
+.txt_style2 {
+    margin: 5px 0;
+    font-weight: 600;
+    text-align: center;
+}
+
+
+.container_header_btns{
+    margin-top: 30px;
+    text-align: center;
+}
+
+
+.frmCommon {
+    min-width: 410px;
+    background: #2f7fcf;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 7px 15px 0 rgba(0,0,0,.14);
+}
+
+
+
+/* .PwdRecovery-form{ */
+.recover-form {
+        width: auto;
+        max-width: auto;
+        padding: 15px 15px;
+}
+.recover-form div, .recover-form div {
+    font-weight: 500;
+}
+.recover-form .align_right {
+    text-align: right;
+}
+
+.sipka {
+    margin-top: 5px;
+}
+
+
+.info_text_frmrecover {
+    font-weight: 500;
+    margin: 20px 30px 30px 20px;
+    text-align: justify;
+}
+
+
+.recover-form{
+    position: relative;
+}
+
+
+/* 05.11.2025 - добавлены стили для форм recover, Forgotrecover и REGISTRATION */
+
+.recover-wrap, .forgot_recover-wrap{
+    width: 100%;
+    margin: 30px auto 15px auto;
+    max-width: 450px;
+    position: relative;
+    border-radius: 20px;
+    box-shadow: 0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+.forgot_recover-wrap{
+    min-height: 470px;
+}
+
+
+
+
+/* это от старой коричневой формы перешло сюда */
+.recover-form .group{
+    margin-bottom: 12px;
+}
+.recover-form .group .label{
+   font-size: 20px;
+    color: lightgray;
+   text-align: left; 
+   margin: 35px 0px 5px 5px;
+   font-weight: 500;
+   display: block;
+   width: 100%;
+}
+
+.recover-form .group .input, .recover-form .group .button{
+    width: 95%;
+    color: #ffffff;
+    padding: 10px;
+    /* position: fixed; */
+    border: none;
+    border-radius: 35px;
+    background: rgba(255,255,255,.25);
+    font-size: 18px;
+     outline: none;
+    transition: all 0.3s ease-in-out;
+}
+.recover-form .group .input:focus{
+    background: rgba(177, 200, 233, 0.7);
+    box-shadow: 0 0 9px #b8860b;
+    color: white;
+}
+
+.recover-form .group .button{
+    background: #b8860b;
+    cursor: pointer;
+    font-weight: 700;
+    margin-top: 30px;
+    width: 100%;
+}
+.recover-form .group .button:hover{
+    background: #c49b63;
+}
+
+.recover-form .group .check {
+    display: none;
+    font-size: 12px;
+    text-align: center;
+}
+
+.recover-form .group label .icon{
+    width: 15px;
+    height: 15px;
+    font-weight: 500;
+    border-radius: 2px;
+    position: relative;
+    display: inline-block;
+    background: rgba(255,255,255,.1);
+    margin-right: 8px;
+}
+.recover-form .group .check + label {
+    font-size: 18px;
+    color: #a0a0a0;
+    text-align: center;
+}
+.recover-form .group .check:checked + label {
+    color: #ffffff;
+}
+.recover-form .group .check:checked + label .icon{
+    background: gray;
+}
+.recover-form .group label .icon:before, 
+.recover-form .group label .icon:after{
+    content: '';
+    background: #fff;
+    position: absolute;
+    transform: all .2s ease-in-out;
+}
+.recover-form .group label .icon:before{
+    width: 5px;
+    height: 2px;
+    left: 3px;
+    top: 6px;
+    transform: scale(0) rotate(0);
+}
+.recover-form .group label .icon:after{
+    width: 10px;
+    height: 2px;
+    right: 0px;
+    top: 6px;
+    transform: scale(0) rotate(0);
+}
+.recover-form .group .check:checked + label .icon:before{
+    transform: scale(1) rotate(45deg);
+}
+.recover-form .group .check:checked + label .icon:after{
+    transform: scale(1) rotate(-45deg);
+}
+
+
+.foot-link-frmrecover{
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 500;
+}
+.foot-link-frmrecover a, .foot-link-frmrecover label{
+    color: #e0e0e0;
+    font-size: 18px;
+    font-weight: normal;
+    display: inline-block;
+    margin: 5px 0;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.foot-link-frmrecover a:hover {
+    color: white;
+    font-size: 19px;
+}
+
+
+
+
+.recover_left_side, .recover_right_side {
+    display: block;
+    margin-top: 100px;
+    border-color: 2px single red;
+}
+
+.recover_left_side {
+    text-align: top;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: top;
+    width: 100%;
+    color: black;
+}
+
+.btn_common-blue{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0080ff;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 10px 28px;
+    border: 1px solid lightgray;
+    border-radius: 7px;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.btn_common-blue:hover {
+    background-color: #b8860B;
+}

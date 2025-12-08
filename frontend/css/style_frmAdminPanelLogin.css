@@ -1,0 +1,188 @@
+:root{
+    --color-bg: #white;
+    --color-site-bg: #cce2f7;
+    --color-golden-rod: #b8860B;
+    --color-site-black: #333;
+}
+html, body {
+    font-family: 'arial' , sans-serif;
+    background-color: #f5f5f5;
+}
+.wrapper {
+    max-width: 500px;
+    margin: auto;
+    overflow: hidden;
+    /* background: rgba(0,128,255,0.17);
+    border: 5px solid var(--color-golden-rod); */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.header_title {
+    color: var(--color-site-black);
+    font-size: 26px;
+    margin: 30px 0 40px 0;
+    text-align: center;
+}
+h1 {
+    text-align: center;
+    font-size: 26px; 
+    margin-top: 50px;   
+}
+
+
+.left_side, .right_side {
+    display: block;
+    margin: 20px 10px;
+}
+.right_side {
+    min-width: 50%;
+}
+
+.txt {
+    margin: 5px 0;
+    width: 90%;
+    font-weight: 600;
+    text-align: center;
+    padding: 30px;
+    color: var(--color-site-black);
+}
+
+
+.container_header_btns{
+    margin-top: 30px;
+    text-align: center;
+}
+
+
+.frmCommon {
+    min-width: 410px;
+    /* background: #97c4f2; */
+    /* border-radius: 15px; */
+    /* position: relative; */
+    /* box-shadow: 0 7px 15px 0 rgba(0,0,0,.14); */
+}
+
+
+
+/* .login-form{ */
+.login-form{
+    min-height: 280px;
+    /* width: auto; */
+    /* max-width: auto; */
+    padding: 0px 15px;
+}
+.login-form div {
+    font-weight: 500;
+}
+.login-form .align_right {
+    text-align: right;
+}
+.login-form .group{
+    margin-bottom: 12px;
+}
+.login-form .group .label{
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+   text-align: left; 
+   margin: 35px 0px 5px 5px;
+   display: block;
+   width: 100%;
+}
+
+.login-form .group .input, .login-form .group .button{
+    width: 95%;
+    color: whitesmoke;
+    padding: 10px;
+    border: 1px solid var(--color-site-black);
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    outline: none;
+}
+.login-form .group .input:focus{
+    /* background: rgba(177, 200, 233, 0.7); */
+    /* box-shadow: 0 0 9px var(--color-golden-rod); */
+    color: black;
+}
+
+.login-form .group .button{
+    background: var(--color-golden-rod);
+    cursor: pointer;
+    font-weight: 700;
+    margin-top: 30px;
+    width: 100%;
+
+}
+.login-form .group .button:hover{
+    background: #c49b63;
+}
+
+.login-form .group .check {
+    display: none;
+    font-size: 12px;
+    text-align: center;
+}
+
+.login-form .group label .icon{
+    width: 15px;
+    height: 15px;
+    font-weight: 500;
+    border-radius: 2px;
+    position: relative;
+    display: inline-block;
+    background: rgba(255,255,255,.1);
+    margin-right: 8px;
+    margin-top: 10px;
+}
+.login-form .group .check + label {
+    font-size: 18px;
+    color: whitesmoke;
+    justify-content: left;
+    text-align: center;
+}
+.login-form .group .check:checked + label {
+    color: whitesmoke;
+}
+.login-form .group .check:checked + label .icon{
+    background: gray;
+}
+.login-form .group label .icon:before, 
+.login-form .group label .icon:after{
+    content: '';
+    background: whitesmoke;
+    position: absolute;
+    transform: all .2s ease-in-out;
+}
+.login-form .group label .icon:before{
+    width: 5px;
+    height: 2px;
+    left: 3px;
+    top: 6px;
+    transform: scale(0) rotate(0);
+}
+.login-form .group label .icon:after{
+    width: 10px;
+    height: 2px;
+    right: 0px;
+    top: 6px;
+    transform: scale(0) rotate(0);
+}
+.login-form .group .check:checked + label .icon:before{
+    transform: scale(1) rotate(45deg);
+}
+.login-form .group .check:checked + label .icon:after{
+    transform: scale(1) rotate(-45deg);
+}
+
+
+
+.d-flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: top;
+    width: 100%;
+    color: #ffd700
+}
+
