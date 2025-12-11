@@ -16,35 +16,10 @@
 <body>
   <!-- ЗАГОЛОВОК САЙТА с МЕНЮ и КНОПКАМИ -->
   <div class="wrapper"> 
-    <header class="header">
-      <div class="header_top">
-        <div class="container">
-          <div class="header_top-inner">
-            <a class="header-logo" href="index.html">
-              <div>
-                <img class="company_logo" src="images/logo.png" alt="logo">
-              </div> 
-              <div class="header_logo-text">
-                <div class="sz20">APEX</div>
-                <div class="sz16">Medical</div>
-              </div>
-            </a>
-
-            <!--  МЕНЮ! -->
-            <nav class="menu">
-              <a href="index.html" >Domů</a> 
-              <a href="lekari.html">Lékaři</a> 
-              <a href="sluzby.html">Naše služby</a> 
-              <a href="about.html" >О nás</a> 
-              <a href="contacts.html">Kontakty</a> 
-              <a class="visibility active" href="#" id="accountLink">Osobní účet</a> 
-            </nav>
-            
-          </div> <!-- header_top-inner -->
-        </div> <!-- container -->
-      </div> <!-- header_top -->
-    </header>
-
+    <?php
+        $page_name = "clientaccount";
+        require_once "header.php";
+    ?>
     
    <div class="PageContent">
     <div class="section_top"> 

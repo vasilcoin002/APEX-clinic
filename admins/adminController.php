@@ -46,8 +46,6 @@
             $userDTO->email = $_POST["email"];
         }
 
-        echo "<a href='../index.php'>go back</a><br>";
-
         $endpoints = array(
             "delete-user" => fn() => $admin_controller->delete_user($userDTO),
             "promote-user" => fn() => $admin_controller->promote_user($userDTO),
@@ -65,8 +63,6 @@
         if (isset($_GET["to"])) {
             $to = intval($_GET["to"]);
         }
-
-        echo "<a href='../index.php'>go back</a><br>";
 
         $endpoints = array(
             "get-number-of-users" => fn() => $admin_controller->get_number_of_users(),

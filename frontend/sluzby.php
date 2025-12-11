@@ -19,45 +19,11 @@
 <body>
   <!-- ЗАГОЛОВОК САЙТА с МЕНЮ и КНОПКАМИ -->
   <div class="wrapper"> 
-    <header class="header">
-      <div class="header_top">
-        <div class="container">
-          <div class="header_top-inner">
-            <a class="header-logo" href="index.html">
-              <div>
-                <img class="company_logo" src="images/logo.png" alt="logo">
-              </div> 
-              <div class="header_logo-text">
-                <div class="sz20">APEX</div>
-                <div class="sz16">Medical</div>
-              </div>
-            </a>
-
-
-            <!--  МЕНЮ! -->
-            <nav class="menu">
-              <a href="index.html" >Domů</a> 
-              <a href="lekari.html">Lékaři</a> 
-              <a class="active" href="#">Naše služby</a> 
-              <a href="about.html" >О nás</a> 
-              <a href="contacts.html">Kontakty</a> 
-            </nav>
-
-            <!-- АВАТАРКА LOGIN -->
-            <div id="user_avatar" class="header_btn-box"> 
-              <div class="header_user"> 
-                <a href="frmLogin.html">
-                  <img class="header_user-avatar" src="./images/avatar.png" height="21" alt="avatar">
-                </a>
-              </div>
-            </div> <!--header_btn-box-->
-            <!-- -->
-
-          </div> <!-- header_top-inner -->
-        </div> <!-- container -->
-      </div> <!-- header_top -->
-    </header>
     
+    <?php 
+        $page_name = "sluzby";
+        require_once "header.php";
+    ?>
 
     <div class="container">
 
@@ -173,49 +139,7 @@
 
 
         <!-- FOOTER -->
-        <footer class="footer">
-          <div class="footer-container">
-            <div class="footer-logo">
-            <!--   <a class="logo" href="index.html">
-                <div class="footer-logo-image"><img src="images/hospital.png" width="40" alt="logo">
-                </div> 
-                <div class="logo-text">
-                  <span class="logo-title">APEX</span>
-                  <span>Medical</span>
-                </div>
-              </a> -->
-
-              <p class="footer_subtitle">Moderní zdravotní<br> péče pro celou rodinu.</p>
-              <span class="blue_bold sz16"> Jsme tu pro vás 24/7</span>
-            </div> <!--footer-logo-->
-
-            <div> <h4>Rychlé odkazy</h4>
-              <div class="footer_links">
-                <a href="sluzby.html">Naše služby</a><br>
-                <a href="lekari.html">Naši lékaři</a><br>
-                <a href="about.html" >О nás</a><br>
-                <a href="contacts.html">Kontakty</a><br>
-              </div>
-            </div>
-
-            <div><h4>Kontakt</h4>
-                <div>
-                <img src="images/icon_phone.png" width=17 alt="phone">  +420 123 456 000<br>
-                <img src="images/icon_email.png" width=17 alt="email"> <span class="email"> info@apex-medical.cz</span><br>
-                <img src="images/icon_address.png" width=17 alt="address"> Hlavní třída 123, Praha-1, 110 00<br>
-                </div>
-            </div>
-
-            <div><h4>Otevírací doba</h4>
-              <div>
-                Po-Pá: 7:00 - 20:00<br>
-                So: 8:00 - 16:00<br>
-                Ne: 9:00 - 14:00<br>
-                <span class="green_bold sz14">Pohotovost: 24/7</span>
-              </div>
-            </div>
-          </div> <!--footer-container-->
-        </footer>        
+         <?php require_once "footer.php" ?>   
         <!-- FOOTER -->
 
 
