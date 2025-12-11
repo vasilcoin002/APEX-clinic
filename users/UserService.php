@@ -5,6 +5,8 @@
     require_once "UserDTO.php";
     require_once "Roles.php";
 
+    // TODO rewrite validations to return bool and make error throwing in methods directly
+    // TODO add max limits to string values
     class UserService {
 
         private UserRepository $user_repository;
@@ -20,50 +22,63 @@
             $user = $this->user_repository->find_user_by_email($userDTO->email);
 
             if (!isset($user)) {
-                throw new InvalidArgumentException("User not found. Please, provide the rigth email");
+                $GLOBALS["errors"]["email"] = "User not found. Please, provide the rigth email";
+                throw new InvalidArgumentException();
             }
 
             if (!password_verify($userDTO->password, $user->get_hashed_password())) {
-                throw new InvalidArgumentException("Password is incorrect. Please, provide the right one");
+                $GLOBALS["errors"]["password"] = "Password is incorrect. Please, provide the right one";
+                throw new InvalidArgumentException();
             }
 
             return $user;
         }
 
         public function check_if_email_is_in_user_dto(UserDTO $userDTO): void {
-            if ($userDTO->email == null) {
-                throw new InvalidArgumentException("Email is not provided");
+            if (empty($userDTO->email)) {
+                $GLOBALS["errors"]["email"] = "Email is not provided";
+                throw new InvalidArgumentException();
             }
         }
 
         public function check_if_phone_is_in_user_dto(UserDTO $userDTO): void {
-            if ($userDTO->phone_number == null) {
-                throw new InvalidArgumentException("Phone number is not provided");
+            if (empty($userDTO->phone_number)) {
+                $GLOBALS["errors"]["phone_number"] = "Phone number is not provided";
+                throw new InvalidArgumentException();
             }
         }
-        
+
         public function check_if_password_is_in_user_dto(UserDTO $userDTO): void {
-            if ($userDTO->password == null) {
-                throw new InvalidArgumentException("Password is not provided");
+            if (empty($userDTO->password)) {
+                $GLOBALS["errors"]["password"] = "Password is not provided";
+                throw new InvalidArgumentException();
             }
         }
 
         public function check_if_email_and_password_is_in_user_dto(UserDTO $userDTO): void {
-            $this->check_if_email_is_in_user_dto($userDTO);
-            $this->check_if_password_is_in_user_dto($userDTO);
-        }
+            $hasError = false;
 
-        // public function check_if_comment_is_in_user_dto(UserDTO $userDTO): void {
-        //     if ($userDTO->comment == null) {
-        //         throw new InvalidArgumentException("Comment is not provided");
-        //     }
-        // }
+            if (empty($userDTO->email)) {
+                $GLOBALS["errors"]["email"] = "Email is required";
+                $hasError = true;
+            }
+
+            if (empty($userDTO->password)) {
+                $GLOBALS["errors"]["password"] = "Password is required";
+                $hasError = true;
+            }
+
+            if ($hasError) {
+                throw new InvalidArgumentException();
+            }
+        }
 
         public function get_user_from_session(): User {
             $this->check_if_session_is_active();
             $user = $this->user_repository->find_user_by_id($_SESSION["user_id"]);
             if ($user == null) {
-                throw new UnexpectedValueException("User from session is not found");
+                $GLOBALS["errors"]["session"] = "User from session is not found";
+                throw new UnexpectedValueException();
             }
             return $user;
         }
@@ -89,68 +104,70 @@
 
         private function validate_email($email): void {
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-                throw new InvalidArgumentException("Email is not valid. Please, provide the valid");
+                $GLOBALS["errors"]["email"] = "Email is not valid. Please, provide the valid";
+                throw new InvalidArgumentException();
             }
         }
 
         private function validate_password($password): void {
             $failures = [];
 
-            // Minimum Length (e.g., 8 characters)
             $minLengthPattern = '/.{8,}/';
             if (!preg_match($minLengthPattern, $password)) {
                 $failures[] = 'it must be at least 8 characters long';
             }
 
-            // Uppercase Letter (A-Z)
             $uppercasePattern = '/[A-Z]/';
             if (!preg_match($uppercasePattern, $password)) {
                 $failures[] = 'it must contain at least one uppercase letter (A-Z)';
             }
 
-            // Lowercase Letter (a-z)
             $lowercasePattern = '/[a-z]/';
             if (!preg_match($lowercasePattern, $password)) {
                 $failures[] = 'it must contain at least one lowercase letter (a-z)';
             }
 
-            // Digit (0-9)
             $digitPattern = '/\d/';
             if (!preg_match($digitPattern, $password)) {
                 $failures[] = 'it must contain at least one number (0-9)';
             }
 
             if (!empty($failures)) {
-                $error_message = "Password is too weak: " . implode(", ", $failures);
-                throw new InvalidArgumentException($error_message);
+                $GLOBALS["errors"]["password"] = "Password is too weak: " . implode(", ", $failures);
+                throw new InvalidArgumentException();
             }
         }
 
         private function validate_phone_number($phone_number) : void {
             $sanitized_number = preg_replace('/[\s\-\(\)]+/', '', $phone_number);
             if (empty($sanitized_number)) {
-                throw new InvalidArgumentException("Phone number can't be empty or without digits");
+                $GLOBALS["errors"]["phone_number"] = "Phone number can't be empty or without digits";
+                throw new InvalidArgumentException();
             }
             if (!preg_match('/^(\+|0)?\d{1,20}$/', $sanitized_number)) {
-                throw new InvalidArgumentException("Phone number is invalid. It must be up to 20 digits (and optional + sign)");
+                $GLOBALS["errors"]["phone_number"] = "Phone number is invalid. It must be up to 20 digits (and optional + sign)";
+                throw new InvalidArgumentException();
             }
         }
 
         private function validate_name($name): void {
             if (strlen($name) === 0) {
-                throw new InvalidArgumentException("Name must be filled");
+                $GLOBALS["errors"]["name"] = "Name must be filled";
+                throw new InvalidArgumentException();
             }
         }
 
         private function validate_surname($surname): void {
             if (strlen($surname) === 0) {
-                throw new InvalidArgumentException("Surname must be filled");
+                $GLOBALS["errors"]["surname"] = "Surname must be filled";
+                throw new InvalidArgumentException();
             }
         }
 
         private function validate_comment($comment): void {
             if (strlen($comment) > 1000) {
-                throw new InvalidArgumentException("Comment is too long. Please, write it in 1000 symbols");
+                $GLOBALS["errors"]["comment"] = "Comment is too long. Please, write it in 1000 symbols";
+                throw new InvalidArgumentException();
             }
         }
 
@@ -165,7 +182,6 @@
             $this->validate_name($userDTO->name);
             $this->validate_surname($userDTO->surname);
 
-            // $cleaned_phone_number = $this->get_cleaned_phone_number($userDTO->phone_number);
             $this->validate_phone_number($userDTO->phone_number);
             $userDTO->phone_number = intval($userDTO->phone_number);
             $hashed_password = $this->get_hashed_password($userDTO->password);
@@ -222,7 +238,8 @@
             $this->check_if_email_is_in_user_dto($userDTO);
 
             if ($userDTO->email == $user->get_email()) {
-                throw new InvalidArgumentException("You provided the same email as you already have");
+                $GLOBALS["errors"]["email"] = "You provided the same email as you already have";
+                throw new InvalidArgumentException();
             }
             $this->validate_email($userDTO->email);
 
@@ -232,49 +249,43 @@
             return $user;
         }
 
-        public function update_name($userDTO): User {
+        public function update_profile(UserDTO $userDTO): User {
             $user = $this->get_user_from_session();
+            $isUpdated = false;
 
-            if ($userDTO->name == null) {
-                throw new InvalidArgumentException("Name is not provided");
+            // Check if provided AND if it is actually different
+            // Handle Name
+            if ($userDTO->name !== null && $userDTO->name !== $user->get_name()) {
+                $this->validate_name($userDTO->name);
+                $user->set_name($userDTO->name);
+                $isUpdated = true;
             }
-            if ($userDTO->name == $user->get_name()) {
-                throw new InvalidArgumentException("You provided the same name as you already have");
+
+            // Handle Surname
+            if ($userDTO->surname !== null && $userDTO->surname !== $user->get_surname()) {
+                $this->validate_surname($userDTO->surname);
+                $user->set_surname($userDTO->surname);
+                $isUpdated = true;
             }
-            $this->validate_name($userDTO->name);
 
-            $user->set_name($userDTO->name);
-            $user = $this->user_repository->update_user($user);
-            return $user;
-        }
-
-        public function update_surname(UserDTO $userDTO): User {
-            $user = $this->get_user_from_session();
-
-            if ($userDTO->surname == null) {
-                throw new InvalidArgumentException("Surname is not provided");
+            // Handle Phone Number
+            if ($userDTO->phone_number !== null && $userDTO->phone_number !== $user->get_phone_number()) {
+                $this->validate_phone_number($userDTO->phone_number);
+                $user->set_phone_number($userDTO->phone_number);
+                $isUpdated = true;
             }
-            if ($userDTO->surname == $user->get_surname()) {
-                throw new InvalidArgumentException("You provided the same surname as you already have");
+
+            // Handle Comment
+            if ($userDTO->comment !== null && $userDTO->comment !== $user->get_comment()) {
+                $this->validate_comment($userDTO->comment);
+                $user->set_comment($userDTO->comment);
+                $isUpdated = true;
             }
-            $this->validate_surname($userDTO->surname);
 
-            $user->set_surname($userDTO->surname);
-            $user = $this->user_repository->update_user($user);
-            return $user;
-        }
-
-        public function update_phone_number(UserDTO $userDTO): User {
-            $user = $this->get_user_from_session();
-
-            $this->check_if_phone_is_in_user_dto($userDTO);
-            if ($userDTO->phone_number == $user->get_phone_number()) {
-                throw new InvalidArgumentException("You provided the same phone number as you already have");
+            if ($isUpdated) {
+                return $this->user_repository->update_user($user);
             }
-            $this->validate_phone_number($userDTO->phone_number);
 
-            $user->set_phone_number($userDTO->phone_number);
-            $user = $this->user_repository->update_user($user);
             return $user;
         }
 
@@ -283,7 +294,8 @@
 
             $this->check_if_password_is_in_user_dto($userDTO);
             if (password_verify($userDTO->password, $user->get_hashed_password())) {
-                throw new InvalidArgumentException("You provided the same password as you already have");
+                $GLOBALS["errors"]["password"] = "You provided the same password as you already have";
+                throw new InvalidArgumentException();
             }
             $this->validate_password($userDTO->password);
 
@@ -306,53 +318,37 @@
         public function update_avatar(): void {
             $user = $this->get_user_from_session();
 
+            if (!isset($_FILES['avatar']) || $_FILES['avatar']['error'] === UPLOAD_ERR_NO_FILE) {
+                $GLOBALS["errors"]["avatar"] = "File is not provided. Please, provide an image";
+                throw new InvalidArgumentException();
+            }
+
             $target_dir = "../users/avatars/";
             $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
-            $image_file_type = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-            
-            // Check if file is provided
-            if (!isset($_FILES['avatar']) || $_FILES['avatar']['error'] === UPLOAD_ERR_NO_FILE) {
-                throw new InvalidArgumentException("File is not provided. Please, provide an image");
-            }
-            // Check file format
+            $image_file_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
             $ALLOWED_IMAGE_FORMATS = ["png", "jpg", "jpeg", "gif"];
             if (!in_array($image_file_type, $ALLOWED_IMAGE_FORMATS)) {
-                throw new InvalidArgumentException(
-                    "FIle is not an image. Please, provide an image in one of those formats: " 
-                    . implode(", ", $ALLOWED_IMAGE_FORMATS)
-                );
+                $GLOBALS["errors"]["avatar"] = "File is not an image. Please, provide an image in one of those formats: " . implode(", ", $ALLOWED_IMAGE_FORMATS);
+                throw new InvalidArgumentException();
             }
-            // Check if image file is a actual image or fake image
+            
             $image_size = getimagesize($_FILES["avatar"]["tmp_name"]);
-            if($image_size == false) {
-                throw new InvalidArgumentException("File is not an image. Please, provide a real image");
+            if ($image_size == false) {
+                $GLOBALS["errors"]["avatar"] = "File is not an image. Please, provide a real image";
+                throw new InvalidArgumentException();
             }
-            // Check file size
+
             $MAX_SIZE_MB = 16;
-            if ($_FILES["avatar"]["size"] > $MAX_SIZE_MB*1048576 - 1) { 
-                throw new InvalidArgumentException(
-                    "File size is too big. Please, provide image with max size "
-                    . $MAX_SIZE_MB . "Mb"
-                );
+            if ($_FILES["avatar"]["size"] > $MAX_SIZE_MB * 1048576 - 1) {
+                $GLOBALS["errors"]["avatar"] = "File size is too big. Please, provide image with max size " . $MAX_SIZE_MB . "Mb";
+                throw new InvalidArgumentException();
             }
 
             $renamed_file_name = $target_dir . "{$user->get_id()}.{$image_file_type}";
 
             move_uploaded_file($_FILES["avatar"]["tmp_name"], $renamed_file_name);
             $user->set_avatar_path($renamed_file_name);
-            $this->user_repository->update_user($user);
-        }
-
-        public function update_comment(UserDTO $userDTO): void {
-            $user = $this->get_user_from_session();
-
-            // $this->check_if_comment_is_in_user_dto($userDTO);
-            if ($userDTO->comment == $user->get_comment()) {
-                throw new InvalidArgumentException("You provided the same comment as you already have");
-            }
-            $this->validate_comment($userDTO->comment);
-
-            $user->set_comment($userDTO->comment);
             $this->user_repository->update_user($user);
         }
     }

@@ -22,9 +22,7 @@
             <input type="submit" name="action" value="logout">
             <input type="submit" name="action" value="delete-account">
             <input type="submit" name="action" value="update-email">
-            <input type="submit" name="action" value="update-name">
-            <input type="submit" name="action" value="update-surname">
-            <input type="submit" name="action" value="update-phone-number">
+            <input type="submit" name="action" value="update-profile">
             <input type="submit" name="action" value="update-password">
         </div>
         <br>
@@ -38,7 +36,6 @@
             <label>comment: <input type="textarea" name="comment"></label>
         </div>
         <div>
-            <input type="submit" name="action" value="update-comment">
         </div>
     </form>
     <p>Get methods</p>
