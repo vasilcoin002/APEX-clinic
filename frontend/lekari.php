@@ -17,8 +17,8 @@
 <!-- NÁZEV STRÁNKY s MENU a TLAČÍTKY -->
    <div class="wrapper"> 
       <?php
-        $page_name = "lekari";
-        require_once "header.php";
+         $page_name = "lekari";
+         require_once "header.php";
       ?>
       <div class="container">
 
@@ -166,7 +166,7 @@
 
       <!-- FOOTER -->
       <div class="container">
-        <?php require_once "footer.php" ?>
+         <?php require_once "footer.php" ?>
          <!-- FOOTER -->
 
       </div> <!--container-->
