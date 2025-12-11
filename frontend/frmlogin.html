@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/responsive/header-footer.css">
     <link rel="stylesheet" href="css/frmlogin.css"> 
     <title>APEX Medical - Přihlášení</title>
+    <script src="./js/login.js" defer></script>
 </head>
 <body>
     <div class="wrapper">
@@ -17,7 +18,7 @@
             <div class="header_top">
                 <div class="container">
                     <div class="header_top-inner">
-                        <a class="header-logo" href="index.html">
+                        <a class="header-logo" href="index.php">
                             <div>
                                 <img class="company_logo" src="images/logo.png" alt="logo">
                             </div>
@@ -27,7 +28,7 @@
                             </div>
                         </a>
                         <nav class="menu">
-                            <a href="index.html">Domů</a>
+                            <a href="index.php">Domů</a>
                         </nav>
                         <div class="user-tooltip-container">
                             <a class="active" href="frmLogin.html">
@@ -48,7 +49,7 @@
                     
 
                     <!-- ФОРМА LOGIN -->
-                    <form name="Login" action="clientaccount.html" method="post">
+                    <form action="../users/userController.php" method="post">
                         
                         <div class="form-group">
                             <label for="email">E-mail:</label>
@@ -61,7 +62,7 @@
                         </div>
                         
                         <div>
-                            <button class="submitBtn" type="submit">Přihlásit se</button>
+                            <button class="submitBtn" name="action" value="login">Přihlásit se</button>
                         </div>
                     </form>
 

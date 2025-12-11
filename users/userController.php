@@ -85,8 +85,6 @@
             $userDTO->comment = trim($_POST["comment"]);
         }
 
-        echo "<a href='../index.php'>go back</a><br>";
-
         $endpoints = array(
             "register" => fn() => $user_controller->add_user($userDTO),
             "login" => fn() => $user_controller->login($userDTO),
@@ -105,8 +103,6 @@
     // TODO make check_if_is_admin function
     elseif (isset($_GET["action"])) {
         session_start();
-
-        echo "<a href='../index.php'>go back</a><br>";
 
         $endpoints = array(
             "check-if-logined" => fn() => $user_controller->check_if_logined(),
