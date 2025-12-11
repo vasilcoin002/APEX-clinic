@@ -1,27 +1,22 @@
-/* 1. Скрытие второго ряда по умолчанию */
 .doctors-hidden-row {
-    display: none; /* 2-й ряд не показывать изначально */
+    display: none;
 }
 
-/* 2. Стиль для контейнера кнопки */
 .show-more-button-container {
-    margin: 15px auto 15px; /* Отступы сверху и снизу */
+    margin: 15px auto 15px;
     text-align: center;
 }
 
-/* 3. Стиль для иконки стрелки (чтобы она поворачивалась) */
 .arrow-icon {
     margin-left: 10px;
     display: inline-block;
     transition: transform 0.3s ease;
 }
 
-/* Класс, который JS будет добавлять для показа контента */
 .visible-doctors {
-    display: contents; /* Показывает содержимое контейнера, не создавая дополнительного Flex/Grid-контекста */
+    display: contents;
 }
 
-/* Класс для поворота стрелки, когда контент показан */
 .arrow-icon.rotated {
     transform: rotate(180deg);
 }
