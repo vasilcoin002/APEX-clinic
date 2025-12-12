@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/vars.css" media="screen">
     <link rel="stylesheet" href="css/header-footer.css">
     <title>Chyba | Přístup zakázán - APEX Medical</title>
+    <!-- TODO refactor styles into separated file -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -92,7 +93,7 @@
 <body>
 
     <?php
-        $page_name = "lekari";
+        $page_name = "chyba";
         require_once "header.php";
     ?>
 
@@ -105,24 +106,9 @@
             Tato akce byla z bezpečnostních důvodů zaznamenána.
         </p>
 
-        <a href="#" class="home-link">
+        <a href="index.php" class="home-link">
             Zpět na hlavní stránku
         </a>
-
-        <div class="icon-bar">
-            <div class="icon-item">
-                <p>🔒 Oprávnění</p>
-                <p>Pouze pro administrátory</p>
-            </div>
-            <div class="icon-item">
-                <p>⚠️ Důvod</p>
-                <p>Nedostatečná uživatelská role</p>
-            </div>
-            <div class="icon-item">
-                <p>🛡️ Bezpečnost</p>
-                <p>Systém je chráněn</p>
-            </div>
-        </div>
     </div>
 
 </body>
