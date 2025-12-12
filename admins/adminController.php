@@ -1,12 +1,15 @@
 <?php
 
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
+    // ini_set('display_errors', 1);
+    // error_reporting(E_ALL);
 
     require_once "../users/UserService.php";
     require_once "../users/User.php";
     require_once "../users/Roles.php";
     require_once "AdminService.php";
+    require_once "../exceptionHandler.php";
+
+    set_exception_handler("exception_handler");
 
     // TODO add try/catch in controllers
     class AdminController {
