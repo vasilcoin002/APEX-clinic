@@ -7,6 +7,7 @@
     require_once "User.php";
     require_once "Roles.php";
 
+    // TODO add try/catch in controllers
     class UserController {
 
         private UserService $user_service;

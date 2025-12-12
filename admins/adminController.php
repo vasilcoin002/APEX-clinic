@@ -8,6 +8,7 @@
     require_once "../users/Roles.php";
     require_once "AdminService.php";
 
+    // TODO add try/catch in controllers
     class AdminController {
 
         private AdminService $admin_service;
