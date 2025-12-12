@@ -5,7 +5,7 @@
     require_once "UserDTO.php";
     require_once "Roles.php";
 
-    // TODO rewrite validations to return bool and make error throwing in methods directly
+    // TODO rewrite validations and checks to return bool and make error throwing in methods directly
     // TODO add max limits to string values
     class UserService {
 
@@ -23,11 +23,13 @@
 
             if (!isset($user)) {
                 $GLOBALS["errors"]["email"] = "User not found. Please, provide the rigth email";
+                http_response_code(404);
                 throw new InvalidArgumentException();
             }
 
             if (!password_verify($userDTO->password, $user->get_hashed_password())) {
                 $GLOBALS["errors"]["password"] = "Password is incorrect. Please, provide the right one";
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
 
@@ -36,21 +38,24 @@
 
         public function check_if_email_is_in_user_dto(UserDTO $userDTO): void {
             if (empty($userDTO->email)) {
-                $GLOBALS["errors"]["email"] = "Email is not provided";
+                $GLOBALS["errors"]["email"] = "Email is is required";
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
         }
 
         public function check_if_phone_is_in_user_dto(UserDTO $userDTO): void {
             if (empty($userDTO->phone_number)) {
-                $GLOBALS["errors"]["phone_number"] = "Phone number is not provided";
+                $GLOBALS["errors"]["phone_number"] = "Phone number is required";
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
         }
 
         public function check_if_password_is_in_user_dto(UserDTO $userDTO): void {
             if (empty($userDTO->password)) {
-                $GLOBALS["errors"]["password"] = "Password is not provided";
+                $GLOBALS["errors"]["password"] = "Password is required";
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
         }
@@ -60,11 +65,13 @@
 
             if (empty($userDTO->email)) {
                 $GLOBALS["errors"]["email"] = "Email is required";
+                http_response_code(400);
                 $hasError = true;
             }
 
             if (empty($userDTO->password)) {
                 $GLOBALS["errors"]["password"] = "Password is required";
+                http_response_code(400);
                 $hasError = true;
             }
 
@@ -78,6 +85,7 @@
             $user = $this->user_repository->find_user_by_id($_SESSION["user_id"]);
             if ($user == null) {
                 $GLOBALS["errors"]["session"] = "User from session is not found";
+                http_response_code(404);
                 throw new UnexpectedValueException();
             }
             return $user;
@@ -105,6 +113,7 @@
         private function validate_email($email): void {
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
                 $GLOBALS["errors"]["email"] = "Email is not valid. Please, provide the valid";
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
         }
@@ -134,6 +143,7 @@
 
             if (!empty($failures)) {
                 $GLOBALS["errors"]["password"] = "Password is too weak: " . implode(", ", $failures);
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
         }
@@ -142,17 +152,20 @@
             $sanitized_number = preg_replace('/[\s\-\(\)]+/', '', $phone_number);
             if (empty($sanitized_number)) {
                 $GLOBALS["errors"]["phone_number"] = "Phone number can't be empty or without digits";
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
             if (!preg_match('/^(\+|0)?\d{1,20}$/', $sanitized_number)) {
                 $GLOBALS["errors"]["phone_number"] = "Phone number is invalid. It must be up to 20 digits (and optional + sign)";
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
         }
 
         private function validate_name($name): void {
             if (strlen($name) === 0) {
-                $GLOBALS["errors"]["name"] = "Name must be filled";
+                $GLOBALS["errors"]["name"] = "Name is required";
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
         }
@@ -160,6 +173,7 @@
         private function validate_surname($surname): void {
             if (strlen($surname) === 0) {
                 $GLOBALS["errors"]["surname"] = "Surname must be filled";
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
         }
@@ -167,6 +181,7 @@
         private function validate_comment($comment): void {
             if (strlen($comment) > 1000) {
                 $GLOBALS["errors"]["comment"] = "Comment is too long. Please, write it in 1000 symbols";
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
         }
@@ -224,7 +239,9 @@
 
         public function check_if_session_is_active(): void {
             if (!$this->check_if_logined()) {
-                throw new BadMethodCallException("You need to be authorized to do this action");
+                $GLOBALS["errors"]["session"] = "You need to be authorized to do this action";
+                http_response_code(401);
+                throw new BadMethodCallException();
             }
         }
 
@@ -239,6 +256,7 @@
 
             if ($userDTO->email == $user->get_email()) {
                 $GLOBALS["errors"]["email"] = "You provided the same email as you already have";
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
             $this->validate_email($userDTO->email);
@@ -295,6 +313,7 @@
             $this->check_if_password_is_in_user_dto($userDTO);
             if (password_verify($userDTO->password, $user->get_hashed_password())) {
                 $GLOBALS["errors"]["password"] = "You provided the same password as you already have";
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
             $this->validate_password($userDTO->password);
@@ -307,7 +326,9 @@
             $user = $this->get_user_from_session();
 
             if ($user->get_avatar_path() == null) {
-                throw new BadMethodCallException("You don't have avatar to delete");
+                $GLOBALS["errors"]["avatar"] = "You don't have avatar to delete";
+                http_response_code(400);
+                throw new BadMethodCallException();
             }
 
             unlink($user->get_avatar_path());
@@ -320,6 +341,7 @@
 
             if (!isset($_FILES['avatar']) || $_FILES['avatar']['error'] === UPLOAD_ERR_NO_FILE) {
                 $GLOBALS["errors"]["avatar"] = "File is not provided. Please, provide an image";
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
 
@@ -330,18 +352,21 @@
             $ALLOWED_IMAGE_FORMATS = ["png", "jpg", "jpeg", "gif"];
             if (!in_array($image_file_type, $ALLOWED_IMAGE_FORMATS)) {
                 $GLOBALS["errors"]["avatar"] = "File is not an image. Please, provide an image in one of those formats: " . implode(", ", $ALLOWED_IMAGE_FORMATS);
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
             
             $image_size = getimagesize($_FILES["avatar"]["tmp_name"]);
             if ($image_size == false) {
                 $GLOBALS["errors"]["avatar"] = "File is not an image. Please, provide a real image";
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
 
             $MAX_SIZE_MB = 16;
             if ($_FILES["avatar"]["size"] > $MAX_SIZE_MB * 1048576 - 1) {
                 $GLOBALS["errors"]["avatar"] = "File size is too big. Please, provide image with max size " . $MAX_SIZE_MB . "Mb";
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
 

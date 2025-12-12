@@ -9,14 +9,6 @@
             return $this->db_path;
         }
 
-        // public function debug_to_console($data) {
-        //     $output = $data;
-        //     if (is_array($output))
-        //         $output = implode(',', $output);
-
-        //     echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-        // }
-
         private function get_users(): array {
             if ($this->users != null) {
                 return $this->users;
@@ -53,10 +45,12 @@
 
         public function get_range_of_users(int $from, int $to): array {
             if ($to <= $from) {
-                throw new InvalidArgumentException('Value "to" can\'t be less than or equal to "from"');
+                $GLOBALS["errors"]["to"] = 'Value "to" can\'t be less than or equal to "from"';
+                http_response_code(400);
+                throw new InvalidArgumentException();
             }
             $users = $this->get_users();
-            return array_slice($users, $from, $to-$from);
+            return array_slice($users, $from, $to - $from);
         }
 
         // here goes array with Users, but not with associative array representation of user
@@ -76,20 +70,14 @@
         private function check_if_email_is_taken(string $email, ?int $user_id): void {
             $user_with_same_email = $this->find_user_by_email($email);
             if (isset($user_with_same_email) && $user_with_same_email->get_id() !== $user_id) {
-                throw new InvalidArgumentException("This email is already taken. Please, provide another one");
+                $GLOBALS["errors"]["email"] = "This email is already taken. Please, provide another one";
+                http_response_code(400);
+                throw new InvalidArgumentException();
             }
         }
 
-        // private function check_if_phone_number_is_taken(int $phone_number, ?int $user_id): void {
-        //     $user_with_same_phone_number = $this->find_user_by_phone_number($phone_number);
-        //     if (isset($user_with_same_phone_number) && $user_with_same_phone_number->get_id() !== $user_id) {
-        //         throw new InvalidArgumentException("This phone number is already taken. Please, provide another one");
-        //     }
-        // }
-
         public function add_user(User $user): User {
             $this->check_if_email_is_taken($user->get_email(), null);
-            // $this->check_if_phone_number_is_taken($user->get_phone_number(), null);
 
             $users = $this->get_users();
 
@@ -124,23 +112,16 @@
             return null;
         }
 
-        // public function find_user_by_phone_number(int $phone_number): ?User {
-        //     foreach ($this->get_users() as $user) {
-        //         if ($phone_number == $user->get_phone_number()) {
-        //             return $user;
-        //         }
-        //     }
-        //     return null;
-        // }
-
         public function delete_user(User $user): void {
             $user_id = $user->get_id();
             if (!isset($user_id)) {
-                throw new InvalidArgumentException("User does not have id. Please, provide user with id");
+                $GLOBALS["errors"]["id"] = "User does not have id. Please, provide user with id";
+                http_response_code(400);
+                throw new InvalidArgumentException();
             }
 
             $users = $this->get_users();
-            foreach ($users as $i=>$current_user) {
+            foreach ($users as $i => $current_user) {
                 if ($current_user->get_id() == $user->get_id()) {
                     if (isset($current_user->avatar_path)) {
                         unlink($current_user->get_avatar_path());
@@ -155,14 +136,15 @@
         public function update_user(User $user): User {
             $user_id = $user->get_id();
             if (!isset($user_id)) {
-                throw new InvalidArgumentException("User does not have id. Please, provide user with id");
+                $GLOBALS["errors"]["id"] = "User does not have id. Please, provide user with id";
+                http_response_code(400);
+                throw new InvalidArgumentException();
             }
 
             $this->check_if_email_is_taken($user->get_email(), $user_id);
-            // $this->check_if_phone_number_is_taken($user->get_phone_number(), $user_id);
 
             $users = $this->get_users();
-            foreach ($users as $i=>$current_user) {
+            foreach ($users as $i => $current_user) {
                 if ($current_user->get_id() == $user->get_id()) {
                     $users[$i] = $user;
                     $this->rewrite_db($users);
