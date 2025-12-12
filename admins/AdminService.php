@@ -21,10 +21,9 @@
             $admin = $this->user_service->get_user_from_session();
 
             if ($admin->get_role() != Roles::ADMIN) {
-                throw new BadMethodCallException(
-                    "You can't access AdminService. " .
-                    "This service is accessible for users with role ".Roles::ADMIN." only"
-                );
+                $GLOBALS["errors"]["role"] = "You can't access AdminService. This service is accessible for users with role " . Roles::ADMIN . " only";
+                http_response_code(403);
+                throw new BadMethodCallException();
             }
 
             return $admin;
@@ -37,15 +36,19 @@
 
             $user = $this->user_repository->find_user_by_email($userDTO->email);
             if ($user == null) {
-                throw new InvalidArgumentException("User not found. Please, provide the right email");
+                $GLOBALS["errors"]["email"] = "User not found. Please, provide the right email";
+                http_response_code(404);
+                throw new InvalidArgumentException();
             }
             if ($user->get_id() == $admin->get_id()) {
-                throw new BadMethodCallException(
-                    "You can't delete yourself through the admin's panel. Please, use user's panel"
-                );
+                $GLOBALS["errors"]["email"] = "You can't delete yourself through the admin's panel. Please, use user's panel";
+                http_response_code(400);
+                throw new BadMethodCallException();
             }
             if ($user->get_role() == Roles::ADMIN) {
-                throw new BadMethodCallException("You can't delete admins");
+                $GLOBALS["errors"]["email"] = "You can't delete admins";
+                http_response_code(400);
+                throw new BadMethodCallException();
             }
             $this->user_repository->delete_user($user);
         }
@@ -57,13 +60,19 @@
 
             $user = $this->user_repository->find_user_by_email($userDTO->email);
             if ($user == null) {
-                throw new InvalidArgumentException("User not found. Please, provide the right email");
+                $GLOBALS["errors"]["email"] = "User not found. Please, provide the right email";
+                http_response_code(404);
+                throw new InvalidArgumentException();
             }
             if ($user->get_id() == $admin->get_id()) {
-                throw new BadMethodCallException("You can't promote yourself");
+                $GLOBALS["errors"]["email"] = "You can't promote yourself";
+                http_response_code(400);
+                throw new BadMethodCallException();
             }
             if ($user->get_role() == Roles::ADMIN) {
-                throw new BadMethodCallException("You can't promote admins");
+                $GLOBALS["errors"]["email"] = "You can't promote admins";
+                http_response_code(400);
+                throw new BadMethodCallException();
             }
 
             $user->set_role(Roles::ADMIN);
