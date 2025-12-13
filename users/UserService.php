@@ -45,8 +45,8 @@
         }
 
         public function check_if_phone_is_in_user_dto(UserDTO $userDTO): void {
-            if (empty($userDTO->phone_number)) {
-                $GLOBALS["errors"]["phone_number"] = "Phone number is required";
+            if (empty($userDTO->phone)) {
+                $GLOBALS["errors"]["phone"] = "Phone number is required";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -97,7 +97,7 @@
                 "email" => $user->get_email(), 
                 "name" => $user->get_name(),
                 "surname" => $user->get_surname(),
-                "phone_number" => $user->get_phone_number(),
+                "phone" => $user->get_phone(),
                 "role" => $user->get_role(),
                 "avatar_path" => $user->get_avatar_path(),
                 "comment" => $user->get_comment(),
@@ -148,15 +148,15 @@
             }
         }
 
-        private function validate_phone_number($phone_number) : void {
-            $sanitized_number = preg_replace('/[\s\-\(\)]+/', '', $phone_number);
+        private function validate_phone($phone) : void {
+            $sanitized_number = preg_replace('/[\s\-\(\)]+/', '', $phone);
             if (empty($sanitized_number)) {
-                $GLOBALS["errors"]["phone_number"] = "Phone number can't be empty or without digits";
+                $GLOBALS["errors"]["phone"] = "Phone number can't be empty or without digits";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
             if (!preg_match('/^(\+|0)?\d{1,20}$/', $sanitized_number)) {
-                $GLOBALS["errors"]["phone_number"] = "Phone number is invalid. It must be up to 20 digits (and optional + sign)";
+                $GLOBALS["errors"]["phone"] = "Phone number is invalid. It must be up to 20 digits (and optional + sign)";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -197,8 +197,8 @@
             $this->validate_name($userDTO->name);
             $this->validate_surname($userDTO->surname);
 
-            $this->validate_phone_number($userDTO->phone_number);
-            $userDTO->phone_number = intval($userDTO->phone_number);
+            $this->validate_phone($userDTO->phone);
+            $userDTO->phone = intval($userDTO->phone);
             $hashed_password = $this->get_hashed_password($userDTO->password);
 
             $user = new User(
@@ -206,7 +206,7 @@
                 $userDTO->email, 
                 $userDTO->name,
                 $userDTO->surname,
-                $userDTO->phone_number,
+                $userDTO->phone,
                 $hashed_password, 
                 Roles::USER
             );
@@ -287,9 +287,9 @@
             }
 
             // Handle Phone Number
-            if ($userDTO->phone_number !== null && $userDTO->phone_number !== $user->get_phone_number()) {
-                $this->validate_phone_number($userDTO->phone_number);
-                $user->set_phone_number($userDTO->phone_number);
+            if ($userDTO->phone !== null && $userDTO->phone !== $user->get_phone()) {
+                $this->validate_phone($userDTO->phone);
+                $user->set_phone($userDTO->phone);
                 $isUpdated = true;
             }
 

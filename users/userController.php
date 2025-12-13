@@ -11,6 +11,7 @@
     // set_exception_handler("exception_handler");
     $GLOBALS["errors"] = [];
 
+    // TODO fix phone accepts with "+" from frontend, but saves without "+"
     // TODO add try/catch in controllers
     class UserController {
 
@@ -83,8 +84,8 @@
         if (isset($_POST["surname"])) {
             $userDTO->surname = trim($_POST["surname"]);
         }
-        if (isset($_POST["phone_number"])) {
-            $userDTO->phone_number = trim($_POST["phone_number"]);
+        if (isset($_POST["phone"])) {
+            $userDTO->phone = trim($_POST["phone"]);
         }
         if (isset($_POST["comment"])) {
             $userDTO->comment = trim($_POST["comment"]);
