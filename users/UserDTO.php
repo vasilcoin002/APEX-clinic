@@ -7,7 +7,7 @@
         public string $password;
         public string $name;
         public string $surname;
-        public string $phone_number;
+        public string $phone;
         public string $role;
         public string $avatar_path;
         public string $comment;
@@ -19,7 +19,7 @@
                 "password" => $this->password,
                 "name" => $this->name,
                 "surname" => $this->surname,
-                "phone_number" => $this->phone_number,
+                "phone" => $this->phone,
                 "role" => $this->role,
                 "avatar_path" => $this->avatar_path,
                 "comment" => $this->comment,
