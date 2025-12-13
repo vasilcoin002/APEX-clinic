@@ -6,6 +6,26 @@ function highlightField(fieldId) {
     field.classList.add("error-border");
 }
 
+async function handleExceptionResponse(response) {
+    const data = await response.json();
+    console.log(data);
+    
+    inputNames = Object.keys(data);
+    inputNames.forEach(function (inputName) {
+        highlightField(inputName);
+        document.getElementById(inputName + "-error-message").innerText = data[inputName];
+    });
+}
+
+async function handleResponse(response) {
+    if (response.status !== 200) {
+        handleExceptionResponse(response);
+        return;
+    }
+
+    window.location.replace("index.php");
+}
+
 function validateRegistrationForm(event) {
     event.preventDefault(); // Останавливаем отправку формы
     let fields = ["surname", "name", "email", "phone", "password", "confirm_password"];
@@ -98,13 +118,36 @@ function validateRegistrationForm(event) {
         return false;
     }
 
-    // let userData = {
-    //     surname: surname,
-    //     name: name,
-    //     email: email,
-    //     phone: phone,
-    //     password: password
-    // };
+    let userData = {
+        surname: surnameInput.value,
+        name: nameInput.value,
+        email: emailInput.value,
+        phone_number: phoneInput.value,
+        password: passwordInput.value,
+        action: "register",
+    };
+
+    const formData = new FormData();
+    formData.append("action", "register");
+    formData.append("email", emailInput.value);
+    formData.append("password", password);
+    formData.append("phone_number", phoneInput.value);
+    formData.append("name", nameInput.value);
+    formData.append("surname", surnameInput.value);
+    // let request = new XMLHttpRequest();
+    // request.addEventListener("load", function (e) {
+    //     console.log(e.target.responseText);
+    // });
+    // request.open("POST", "../users/userController.php", true);
+    // request.setRequestHeader("Content-Type", "application/json");
+    // request.send(JSON.stringify(userData));
+
+    fetch('../users/userController.php', {
+            method: "POST",
+            body: formData
+    })
+    .then((response) => handleResponse(response));
+
 }
 
 let surnameInput = document.getElementById("surname");
