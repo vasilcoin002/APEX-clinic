@@ -1,6 +1,5 @@
 // Функция для подсветки поля с ошибкой
 
-
 function highlightField(fieldId) {
     const field = document.getElementById(fieldId);
     field.classList.add("error-border");
@@ -23,7 +22,10 @@ async function handleResponse(response) {
         return;
     }
 
-    window.location.replace("index.php");
+    console.log(response);
+    
+
+    // window.location.replace("frmLogin.php");
 }
 
 function validateRegistrationForm(event) {
@@ -131,7 +133,7 @@ function validateRegistrationForm(event) {
     formData.append("action", "register");
     formData.append("email", emailInput.value);
     formData.append("password", password);
-    formData.append("phone_number", phoneInput.value);
+    formData.append("phone", phoneInput.value);
     formData.append("name", nameInput.value);
     formData.append("surname", surnameInput.value);
     // let request = new XMLHttpRequest();

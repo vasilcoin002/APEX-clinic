@@ -144,12 +144,9 @@
     </main>  
 
 
-      <!-- FOOTER -->
       <div class="container">
         <?php require_once "footer.php" ?>
-        <!-- FOOTER -->
-      </div> <!--container-->
-  
+      </div>
     <div class="copyright sz12">&copy; 2024 APEX Medical Center. Všechna práva vyhrazena.</div>
 
   </div> <!-- wrapper -->

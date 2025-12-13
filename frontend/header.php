@@ -25,11 +25,11 @@
                 <!-- AVATAR LOGIN -->
                 <div id="user_avatar" class="header_btn-box"> 
                     <div class="header_user"> 
-                        <a href="frmLogin.html">
+                        <a href="frmLogin.php">
                             <img class="header_user-avatar" src="./images/avatar.png" height="21" alt="avatar">
                         </a>
                     </div>
-                </div> 
+                </div>
             <!-- -->
 
             </div> <!-- header_top-inner -->
