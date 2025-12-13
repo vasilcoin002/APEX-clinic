@@ -13,10 +13,15 @@ function validateRegistrationForm(event) {
         document.getElementById(id).classList.remove("error-border");
     });
 
-    document.getElementById("email").style.border = "";
+    let errorMessages = ["surname-error-message", "name-error-message", "email-error-message", "phone-error-message", "password-error-message", "confirm_password-error-message"];
+    errorMessages.forEach(function(id) {
+        // Устанавливаем текст ошибки в пустую строку
+        document.getElementById(id).innerText = ""; 
+    });
+    // **
+
 
     let hasError = false;
-
     if (surnameInput.value === "") {
         document.getElementById("surname-error-message").innerText = "Příjmení musí být vyplněno!";
         highlightField("surname");
@@ -26,6 +31,14 @@ function validateRegistrationForm(event) {
     if (nameInput.value === "") {
         document.getElementById("name-error-message").innerText = "Jméno musí být vyplněno!";
         highlightField("name");
+        hasError = true;
+    }
+
+    // (Регулярное выражение для проверки телефона: С плюсом ИЛИ только цифры ИЛИ пустая строка)
+    const phoneNumberRegex = /^(\+\d+|\d*)$/;
+    if (!phoneNumberRegex.test(phoneInput.value)) {
+        document.getElementById("phone-error-message").innerText = "Telefonní číslo by nemělo obsahovat nic jiného než číslice a znamenko +";
+        highlightField("phone");
         hasError = true;
     }
 
@@ -39,6 +52,32 @@ function validateRegistrationForm(event) {
         document.getElementById("password-error-message").innerText = "Heslo musí být vyplněno!";
         highlightField("password");
         hasError = true;
+    }
+
+    const password = passwordInput.value
+
+    const isLengthValid = /.{8,}/.test(password);
+    // 2. Проверка заглавной буквы
+    const hasUpperCase = /[A-Z]/.test(password);
+    // 3. Проверка строчной буквы
+    const hasLowerCase = /[a-z]/.test(password);
+    // 4. Проверка цифры
+    const hasDigit = /\d/.test(password);
+    // Общий результат проверки
+    const isValid = isLengthValid && hasUpperCase && hasLowerCase && hasDigit;
+    if (!isValid) {
+        const messages = [];
+        if (!isLengthValid) messages.push("musí být minimálně 8 symbolů dlouhé");
+        if (!hasUpperCase) messages.push("musí obsahovat velké písmeno");
+        if (!hasLowerCase) messages.push("musí obsahovat malé písmeno");
+        if (!hasDigit) messages.push("musí obsahovat číslici");
+
+        let message = "Heslo je příliš slabé: " + messages.join(", ");
+
+        document.getElementById("password-error-message").innerText = message;
+        highlightField("password");
+        hasError = true;
+
     }
 
     if (confirmPasswordInput.value === "") {
