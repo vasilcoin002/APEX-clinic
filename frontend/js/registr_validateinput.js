@@ -1,81 +1,92 @@
-function validaceRegistrace() {
-    let form = document.forms["Registration"];
-    let surname = document.forms["surname"].value;
-    let name = document.forms["name"].value;
-    let email = document.forms["email"].value;
-    let phone = document.forms["phone"].value;
-    let password = document.forms["password"].value;
-    let confirm_password = document.forms["confirm_password"].value;
+function validateRegistrationForm(event) {
+  event.preventDefault(); // Останавливаем отправку формы
+
+    let surname = document.getElementById("surname").value;
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirm_password").value;
+
+    document.getElementById("errorMessage").innerText = "";
+    document.getElementById("email").style.border = "";
 
     if (surname === "") {
-        alert("Zadejte své příjmení!");
-        return false;
-    }
-
-    if (name === "") {
-        alert("Zadejte své jméno!");
-        return false;
-    }
-
-    if (email === "") {
-        alert("Zadejte svůj e-mail!");
-        return false;
-    }
-
-    if (email.indexOf("@") == -1) {
-        alert("E-mail není ve správném formátu!");
-        return false;
-    }
-
-    if (email.includes(".") == -1) {
-        alert("V e-mailu chybí tečka!");
-        return false;
-    }
-
-
-    if (phone === "") {
-        alert("Zadejte telefonní číslo!");
-        return false;
-    }
-
-
-    // Ищем большую букву
-    let maVelke = /[A-Z]/.test(password);
-    if (maVelke === false) {
-        alert("Heslo musí obsahovat alespoň jedno velké písmeno!");
-        return false;
-    }
-
-    // Ищем цифру
-    let maCislo = /[0-9]/.test(password);
-    if (maCislo === false) {
-        alert("Heslo musí obsahovat alespoň jednu číslici!");
-        return false;
-    }
-
-    // Проверяем подтверждение пароля
-    if (password !== confirm_password) {
-        alert("Hesla se neshodují!");
-        return false;
-    }
-
-    // 7. Отправка на сервер (чтобы не перезагружать страницу)
-    // let formData = new FormData(form);
-    // let response = await fetch('php/registrovat.php', {
-    //     method: 'POST',
-    //     body: formData
-    // });
-
-    // let result = await response.json();
-
-    // if (result.status === "email_obsazen") {
-    //     alert("Tento e-mail už někdo používá, zadejte jiný!");
-    //     return false;
-    // }
-
-    // if (result.status === "ok") {
-    //     window.location.href = "ucet.php";
-    // }
-
+    showError("Příjmení musí být vyplněno!");
     return false;
+}
+
+if (name === "") {
+    showError("Jméno musí být vyplněno!");
+    return false;
+}
+
+if (email === "") {
+    showError("E-mail musí být vyplněn!");
+    return false;
+}
+
+if (phone === "") {
+    showError("Telefonní číslo musí být vyplněno!");
+    return false;
+}
+
+if (password === "") {
+    showError("Heslo musí být vyplněno!");
+    return false;
+}
+
+if (confirmPassword === "") {
+    showError("Potvrzení hesla musí být vyplněno!");
+    return false;
+}
+
+if (password !== confirmPassword) {
+    showError("Hesla se neshodují!");
+    return false;
+}
+
+let userData = {
+    surname: surname,
+    name: name,
+    email: email,
+    phone: phone,
+    password: password
+};
+
+fetch("register_handler.html", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(userData)
+})
+.then(function(response) {
+    return response.json();
+})
+.then(function(data) {
+    data = { error: "email_taken" };
+    if (data.success === true) {
+        alert("Registrace byla úspěšná!");
+        document.forms["Registration"].reset();
+}
+
+else if (data.error === "email_taken") {
+    showError("Tento e-mail je již používán, napište jiný.");
+    document.getElementById("email").style.border = "2px solid red";
+}
+
+else {
+    showError("Došlo k chybě. Zkuste to znovu.");
+    }
+})
+.catch(function(error) {
+    showError("Chyba připojení k serveru.");
+});
+
+return false;
+}
+
+function showError(message) {
+    document.getElementById("errorMessage").innerText = message;
 }

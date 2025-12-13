@@ -1,10 +1,9 @@
-/* ================================================= */
 /* 1. БАЗОВЫЕ СТИЛИ СТРАНИЦЫ И КОНТЕЙНЕР */
 /* ================================================= */
 
 html, body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f5f5f5; /* Светло-серый фон страницы */
+    background-color: #f5f5f5; 
     color: var(--color-black);
 }
 
@@ -15,11 +14,9 @@ html, body {
     justify-content: center;
     align-items: center;
 
-    /* Обеспечиваем, что контейнер занимает всю высоту между шапкой и подвалом */
-    /* Значение 120px - это примерная высота шапки и подвала в сумме */
     min-height: calc(100vh - 120px); 
     
-    padding: 10px 20px; /* Уменьшили вертикальный padding */
+    padding: 10px 20px; 
     box-sizing: border-box;
 }
 
@@ -189,18 +186,31 @@ input[type="checkbox"] {
 /* НОВЫЕ СТИЛИ ДЛЯ АВАТАРА В ОДНОЙ СТРОКЕ */
 /* ================================================= */
 
-/* Контейнер, который выравнивает текст и кнопку в один ряд */
 .avatar-inline-wrapper {
     display: flex;
-    align-items: center; /* Центрирует элементы по вертикали */
-    gap: 10px; /* Добавляет небольшой отступ между текстом и кнопкой */
+    align-items: center; 
+    gap: 10px; 
 }
 
-/* Убеждаемся, что текстовая метка в этом блоке не использует свойства блочного элемента */
 .avatar-inline-wrapper label:not(.custom-file-upload) {
     display: inline-block;
-    margin-bottom: 0; /* Убираем лишний вертикальный отступ */
+    margin-bottom: 0;   
     white-space: nowrap; /* Запрещаем перенос текста на новую строку */
+}
+input {
+    padding: 5px;
+    margin-bottom: 5px;
+    width: 200px;
+}
+
+.error-border {
+    border: 2px solid red;
+}
+
+#errorMessage {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
 }
 
 

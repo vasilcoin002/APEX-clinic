@@ -149,3 +149,18 @@ html, body {
 .txt_rem {
     margin-top: 10px;
 }
+input {
+    padding: 5px;
+    margin-bottom: 5px;
+    width: 200px;
+}
+
+.error-border {
+    border: 2px solid red;
+    }
+
+#errorMessage {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+}
