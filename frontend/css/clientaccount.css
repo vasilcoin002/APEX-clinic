@@ -1,3 +1,111 @@
+html,body {
+    background-color: #e6f0ff; 
+    font-family: Arial, sans-serif;
+    background-color: var(--color-white);
+}
+
+.account-title {
+    color: #0056b3; 
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.account-sections-wrapper {
+    display: flex;
+    gap: 30px; 
+    max-width: 1200px; 
+    margin: 0 auto;
+    align-items: flex-start; 
+}
+
+
+.info-box {
+    background-color: #ffffff; 
+    padding: 30px;
+    border-radius: 8px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    flex: 1;
+}
+
+.info-box h2 {
+    color: #0056b3;
+    font-size: 20px;
+    margin-top: 0;
+    border-bottom: 2px solid #e0e0e0; 
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input[type="text"], 
+.form-group input[type="email"], 
+.form-group input[type="tel"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #007bff; 
+    outline: none;
+}
+
+.save-button {
+    background-color: #007bff; 
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.save-button:hover {
+    background-color: #0056b3; 
+}
+
+
+.save-confirmation {
+    color: #28a745; 
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    text-align: center;
+    display: none; /* Původně skryto, ukáže se po uložení přes JavaScript */
+}
+
+.last-edited {
+    color: #777;
+    font-size: 14px;
+    margin-top: 20px;
+    text-align: right;
+}
+
+
+
 :root{
     --color-bg: #cce2f7;
     --color-site-bg: #cce2f7;
@@ -6,11 +114,6 @@
     --color-blue: #007bff;
     --color-blue-light: #85c1ff;
     --color-text-gray: #666; /* Добавим для удобства */
-}
-
-html, body {
-    font-family: 'arial', sans-serif;
-    background-color: var(--color-white);
 }
 
 /* ================================================= */
@@ -28,26 +131,10 @@ html, body {
     padding: 0 15px;
 }
 
-h1 {
-    font-size: 28px;
-    color: var(--color-blue);
-    margin-bottom: 30px;
-    text-align: center;
-}
 h2 {
     font-size: 22px;
     color: var(--color-blue);
     margin: -30px auto 21px;
-    text-align: center;
-}
-
-/* Общий стиль для параграфов внутри right_side */
-.right_side p {
-    font-size: 16px;
-    color: var(--color-black);
-    font-weight: 700;
-    line-height: 1.6;
-    margin-bottom: 15px; 
     text-align: center;
 }
 
@@ -57,101 +144,9 @@ h2 {
 /* ================================================= */
 
 .body_top {
-    display: flex;
-    align-items: flex-start; 
-    gap: 30px;
-    max-width: 1200px;
     margin: 0 auto 50px; 
-    padding: 0 20px;
 }
 
-/* ЛЕВАЯ КОЛОНКА (Меню/Карточки) */
-.left_side {
-    flex: 0 0 300px; /* Фиксированная ширина */
-    padding-top: 0;
-}
-
-.cards-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
-    margin: 0; /* Убираем лишний margin-top */
-    padding: 0;
-}
-
-/* ПРАВАЯ КОЛОНКА (Основной контент) */
-.right_side {
-    flex: 1; 
-    margin-right: 20px; 
-    padding-top: 5px; /* Небольшое смещение для точного выравнивания */
-}
-
-.info_content {
-    background-color: transparent;
-    width: 100%;
-    padding: 20px 20px 10px 20px;
-}
-
-
-
-/* ================================================= */
-/*     СТИЛИ КАРТОЧЕК (.card) */
-/* ================================================= */
-
-.card {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    padding: 20px; /* Общий padding */
-    min-height: 140px; 
-
-    /* Внешний вид */
-    border: 1px solid var(--color-blue-light);
-    border-radius: 15px;
-    background-color: #f0f0f0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
-    /* Интерактивность */
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-    cursor: pointer;
-}
-
-/* СТИЛЬ ПРИ НАВЕДЕНИИ (HOVER) - ИСПРАВЛЕННЫЙ */
-.card:hover {
-    transform: translateY(-2px); /* Слегка поднимаем */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    border-color: var(--color-lightblue);
-    
-    /* ЗАМЕНА ЖЕЛТОГО ЦВЕТА НА СВЕТЛО-ГОЛУБОЙ */
-    background-color: var(--color-blue-light); 
-}
-
-/* ВНУТРЕННИЕ ЭЛЕМЕНТЫ КАРТОЧКИ */
-.card .icon {
-    width: 35px; /* Увеличим размер иконки, если вы планируете их использовать */
-    height: 35px;
-    margin: 0 auto 10px; /* Центрируем иконку */
-}
-
-.card-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--color-blue-light);
-    margin: 0;
-}
-/* Перекрытие стилей для h3 внутри карточки, чтобы избежать конфликтов */
-.card h3 {
-    margin-top: 0;
-    margin-bottom: 3px;
-    font-size: 20px;
-    color: var(--color-blue);
-}
-
-.card-text {
-    font-size: 14px;
-    color: var(--color-text-gray);
-    margin-top: 5px;
-}
 
 /* ================================================= */
 /*     СТИЛИ ДЛЯ АКТИВНЫХ ВКЛАДОК (TABS) */
@@ -167,376 +162,4 @@ h2 {
     display: block;
 }
 
-/* Визуальное выделение АКТИВНОЙ карточки слева */
-.card-link.active {
-    background-color: var(--color-blue);
-    color: white;
-    transform: none; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border-color: var(--color-blue); /* Активная рамка */
-}
 
-/* Изменяем цвет текста и иконки внутри АКТИВНОЙ карточки */
-.card-link.active .card-title,
-.card-link.active .card-text {
-    color: white;
-}
-/* Сброс эффекта hover для активной вкладки, чтобы не было конфликтов */
-.card-link.active:hover {
-    background-color: var(--color-blue);
-}
-
-
-
-/* ============================== */
-/* Стили для раздела welcome-txt */
-.welcome-list {
-    text-align: left; /* Выравнивание текста по левому краю */
-    list-style: disc; /* Маркеры - точки */
-    margin: 15px auto 25px 20px; /* Отступы: ..., авто (для центрирования), ... */
-    padding-left: 20px; /* Отступ слева для маркеров */
-    max-width: 90%;
-}
-
-.welcome-list li {
-    font-size: 16px;
-    color: var(--color-black);
-    line-height: 1.8;
-    margin-bottom: 8px;
-    font-weight: 700;
-}
-/* ============================== */
-
-
-
-
-
-
-
-
-/* CSS для ФОРМЫ Login to the Admin Panel */
-.login-wrap {
-    width: 100%;
-    margin: auto;
-    max-width: 500px;
-    min-height: 282px;
-    position: relative;
-    background-color: burlywood;
-    background-size: cover;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,.1);
-    padding: 10px 20px;
-}
-
-.login-form .group{
-    margin-bottom: 12px;
-}
-.login-form .group .label {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--color-black);
-    text-align: left;
-    margin: 20px 0px 2px 4px;
-    display: block;
-    width: 100%;
-}
-
-.login-form .group .input, .login-form .group .button{
-    width: 95%;
-    color: whitesmoke;
-    padding: 10px;
-    border: 1px solid var(--color-site-black);
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    outline: none;
-}
-.login-form .group .input:focus{
-    /* background: rgba(177, 200, 233, 0.7); */
-    /* box-shadow: 0 0 9px var(--color-golden-rod); */
-    color: black;
-}
-
-.login-form .group .button{
-    background: var(--color-golden-rod);
-    cursor: pointer;
-    font-weight: 700;
-    margin-top: 30px;
-    width: 100%;
-
-}
-.login-form .group .button:hover{
-    background: #c49b63;
-}
-
-.login-form .group .check {
-    display: none;
-    font-size: 12px;
-    text-align: center;
-}
-
-.login-form .group label .icon{
-    width: 15px;
-    height: 15px;
-    font-weight: 500;
-    border-radius: 2px;
-    position: relative;
-    display: inline-block;
-    background: rgba(255,255,255,.1);
-    margin-right: 8px;
-    margin-top: 10px;
-}
-.login-form .group .check + label {
-    font-size: 18px;
-    color: whitesmoke;
-    justify-content: left;
-    text-align: center;
-}
-.login-form .group .check:checked + label {
-    color: whitesmoke;
-}
-.login-form .group .check:checked + label .icon{
-    background: gray;
-}
-.login-form .group label .icon:before, 
-.login-form .group label .icon:after{
-    content: '';
-    background: whitesmoke;
-    position: absolute;
-    transform: all .2s ease-in-out;
-}
-.login-form .group label .icon:before{
-    width: 5px;
-    height: 2px;
-    left: 3px;
-    top: 6px;
-    transform: scale(0) rotate(0);
-}
-.login-form .group label .icon:after{
-    width: 10px;
-    height: 2px;
-    right: 0px;
-    top: 6px;
-    transform: scale(0) rotate(0);
-}
-.login-form .group .check:checked + label .icon:before{
-    transform: scale(1) rotate(45deg);
-}
-.login-form .group .check:checked + label .icon:after{
-    transform: scale(1) rotate(-45deg);
-}
-
-
-
-/* ================================================= */
-/*  СТИЛИ ДЛЯ РАЗДЕЛА "МОИ ЗАПИСИ" (notes-content)   */
-/* ================================================= */
-
-/* Карточка предстоящей записи */
-.appointment-card {
-    padding: 20px;
-    border: 1px solid var(--color-blue, #0080ff);
-    border-radius: 8px;
-    background-color: #e6f7ff; /* Очень светлый синий фон */
-    margin-bottom: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.appointment-card h3 {
-    color: var(--color-blue, #0080ff);
-    margin-top: 0;
-    font-size: 24px;
-    border-bottom: 2px solid var(--color-blue, #0080ff);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-}
-
-.appointment-detail {
-    display: flex;
-    justify-content: space-between;
-    padding: 3px 0;
-    font-size: 18px;
-}
-
-.detail-label {
-    font-weight: 400;
-    color: #555;
-    min-width: 150px;
-}
-
-.detail-value {
-    font-weight: 600;
-    color: var(--color-black, #333);
-}
-
-.btn-cancel {
-    margin-top: 10px;
-    background-color: var(--color-red) !important;
-    border: 1px solid lightgray;
-    border-radius: 7px;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--color-white);
-    padding: 8px 10px;
-}
-
-.btn-cancel:hover {
-    background-color: #f06b78 !important;
-}
-
-/* Таблица истории посещений */
-.visit-history-table {
-    width: 100%;
-    border-collapse: collapse; /* объединяет границы ячеек в одну линию */
-    border: 2px solid var(--color-blue); 
-    border-radius: 8px; /* Скругляем углы всей таблицы */
-    overflow: hidden; /* Обрезает контент, чтобы углы были скруглены */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-
-.visit-history-table th, .visit-history-table td {
-    padding: 10px 14px;
-    text-align: left;
-    font-size: 14px;
-    /* Изменяем нижнюю границу на тонкую серую (вместо 2px solid #ddd) */
-    border-bottom: 1px solid #ddd; 
-}
-
-.visit-history-table th {
-    background-color: var(--color-blue, #0080ff);
-    color: white;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-/* Добавляем вертикальные разделители (слева) для лучшей структуры */
-.visit-history-table th:not(:first-child), 
-.visit-history-table td:not(:first-child) {
-    border-left: 1px solid rgba(255, 255, 255, 0.2); /* Светлая линия для TH */
-}
-.visit-history-table td:not(:first-child) {
-    border-left: 1px solid #eee; /* Тонкая линия для TD */
-}
-
-.visit-history-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.visit-history-table tbody tr:hover {
-    background-color: #f1f1f1;
-}
-
-
-/* ================================================= */
-/* СТИЛИ ДЛЯ РАЗДЕЛА "МОИ ДАННЫЕ" (data-content) */
-/* ================================================= */
-
-.profile-form h3 {
-    text-align: left;
-    color: var(--color-black);
-    font-size: 20px;
-    margin-top: 25px;
-    margin-bottom: 15px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #ddd;
-}
-
-.group-data {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.label-data {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--color-text-gray);
-    margin-bottom: 5px;
-    text-align: left; /* Важно для выравнивания */
-}
-
-.input-data {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
-    box-sizing: border-box; /* Учитываем padding и border в ширине */
-    color: var(--color-black);
-}
-
-.input-data:focus {
-    border-color: var(--color-blue);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-}
-
-/* Стилизация для неактивных полей (например, Имя и Дата рождения) */
-.input-data[disabled] {
-    background-color: #eee;
-    color: #666;
-    cursor: not-allowed;
-    font-weight: 700;
-}
-
-.group-data-submit {
-    margin-top: 30px;
-    text-align: right; /* Кнопка сохранения справа */
-}
-
-.btn-save-data {
-    background-color: var(--color-blue);
-    color: white;
-    padding: 10px 25px;
-    border: none;
-    border-radius: 6px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.btn-save-data:hover {
-    background-color: #0056b3;
-}
-
-
-
-
-/* ================================================= */
-/* СТИЛИ ДЛЯ ИНДИКАТОРА ЗАГРУЗКИ (СПИННЕР) */
-/* ================================================= */
-
-/* Контейнер для выравнивания и текста */
-.loading-indicator-wrapper {
-    text-align: center;
-    padding: 30px;
-}
-
-.loading-indicator-wrapper p {
-    font-size: 16px;
-    color: var(--color-text-gray);
-    font-weight: 500;
-}
-
-/* Стили самого спиннера (вращающийся круг) */
-.spinner {
-    border: 5px solid #f0f0f0; /* Светло-серый фон круга */
-    border-top: 5px solid var(--color-blue); /* Активный синий цвет для верхней границы */
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    /* Анимация: имя, длительность, тип, повторение */
-    animation: spin 1s linear infinite; 
-    margin: 0 auto 15px; /* Центрируем и добавляем отступ снизу */
-}
-
-/* Определение анимации вращения */
-@keyframes spin {
-    0% { 
-        transform: rotate(0deg); 
-    }
-    100% { 
-        transform: rotate(360deg); 
-    }
-}
