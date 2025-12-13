@@ -6,9 +6,10 @@
     require_once "UserService.php";
     require_once "User.php";
     require_once "Roles.php";
-    require_once "../exceptionHandler.php";
+    // require_once "../exceptionHandler.php";
 
-    set_exception_handler("exception_handler");
+    // set_exception_handler("exception_handler");
+    $GLOBALS["errors"] = [];
 
     // TODO add try/catch in controllers
     class UserController {
@@ -101,7 +102,11 @@
             "delete-avatar" => fn() => $user_controller->delete_avatar(),
         );
 
-        $endpoints[$_POST["action"]]();
+        try {
+            $endpoints[$_POST["action"]]();
+        } catch (Exception $e) {
+            echo json_encode($GLOBALS["errors"]);
+        }
     }
 
     // TODO make check_if_is_admin function
@@ -113,6 +118,10 @@
             "get-session-user-info" => fn() => $user_controller->get_session_user_info(),
         );
 
-        $endpoints[$_GET["action"]]();
+        try {
+            $endpoints[$_GET["action"]]();
+        } catch (Exception $e) {
+            echo json_encode($GLOBALS["errors"]);
+        }
     }
 ?>

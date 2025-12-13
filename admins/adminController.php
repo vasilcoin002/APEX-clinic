@@ -7,9 +7,10 @@
     require_once "../users/User.php";
     require_once "../users/Roles.php";
     require_once "AdminService.php";
-    require_once "../exceptionHandler.php";
+    // require_once "../exceptionHandler.php";
 
-    set_exception_handler("exception_handler");
+    // set_exception_handler("exception_handler");
+    $GLOBALS["errors"] = [];
 
     // TODO add try/catch in controllers
     class AdminController {
@@ -55,7 +56,11 @@
             "promote-user" => fn() => $admin_controller->promote_user($userDTO),
         );
 
-        $endpoints[$_POST["action"]]();
+        try {
+            $endpoints[$_POST["action"]]();
+        } catch (Exception $e) {
+            echo json_encode($GLOBALS["errors"]);
+        }
     }
     if (isset($_GET["action"])) {
         session_start();
@@ -73,6 +78,10 @@
             "get-range-of-users" => fn() => $admin_controller->get_range_of_users($from, $to),
         );
 
-        $endpoints[$_GET["action"]]();
+        try {
+            $endpoints[$_GET["action"]]();
+        } catch (Exception) {
+            echo json_encode($GLOBALS["errors"]);
+        }
     }
 ?>
