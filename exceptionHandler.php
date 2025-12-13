@@ -1,7 +1,8 @@
 <?php
 
     function exception_handler() {
-        echo json_encode($GLOBALS["errors"]);
+        // http_response_code(http_response_code());
+        // echo json_encode($GLOBALS["errors"]);
     };
 
 ?>
