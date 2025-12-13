@@ -24,35 +24,34 @@
                 <div class="frmCommon">
                     <h2>Registrace</h2>
                     <form name="Registration" action="register_handler.html" method="post" enctype="multipart/form-data">
-                        
                         <div class="form-group">
-                            <label for="surname">Zadejte své příjmení:</label>
-                            <input type="text" id="surname" name="surname" placeholder="Příjmení">
-                            <span id="surname-error-message" class="errorMessage"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Zadejte své jméno:</label>
-                            <input type="text" id="name" name="name" placeholder="Jméno">
+                            <label for="name">Jméno*:</label>
+                            <input type="text" id="name" name="name" placeholder="Jan">
                             <span id="name-error-message" class="errorMessage"></span>
                         </div>
                         <div class="form-group">
-                            <label for="email">Zadejte svůj E-mail:</label>
-                            <input type="email" id="email" name="email" placeholder="E-mail">
+                            <label for="surname">Příjmení*:</label>
+                            <input type="text" id="surname" name="surname" placeholder="Novák">
+                            <span id="surname-error-message" class="errorMessage"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail*:</label>
+                            <input type="email" id="email" name="email" placeholder="email@example.com">
                             <span id="email-error-message" class="errorMessage"></span>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Zadejte telefonní číslo:</label>
+                            <label for="phone">Telefonní číslo*:</label>
                             <input type="tel" id="phone" name="phone" placeholder="+123456789">
                             <span id="phone-error-message" class="errorMessage"></span>
                         </div>    
 
                         <div class="form-group">
-                            <label for="password">Zadejte heslo:</label>
+                            <label for="password">Heslo*:</label>
                             <input type="password" id="password" name="password" placeholder="Qwerty123">
                             <span id="password-error-message" class="errorMessage"></span>
                         </div>
                         <div class="form-group">
-                            <label for="confirm_password">Potvrďte heslo:</label>
+                            <label for="confirm_password">Potvrďte heslo*:</label>
                             <input type="password" id="confirm_password" name="confirm_password" placeholder="Qwerty123">
                             <span id="confirm_password-error-message" class="errorMessage"></span>
                         </div>

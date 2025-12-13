@@ -24,8 +24,7 @@ async function handleResponse(response) {
 
     console.log(response);
     
-
-    // window.location.replace("frmLogin.php");
+    window.location.replace("frmLogin.php");
 }
 
 function validateRegistrationForm(event) {
