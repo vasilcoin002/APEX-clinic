@@ -7,7 +7,6 @@ function highlightField(fieldId) {
 
 async function handleExceptionResponse(response) {
     const data = await response.json();
-    console.log(data);
     
     inputNames = Object.keys(data);
     inputNames.forEach(function (inputName) {
@@ -21,8 +20,6 @@ async function handleResponse(response) {
         handleExceptionResponse(response);
         return;
     }
-
-    console.log(response);
     
     window.location.replace("frmLogin.php");
 }
@@ -56,12 +53,17 @@ function validateRegistrationForm(event) {
     }
 
     // (Регулярное выражение для проверки телефона: С плюсом ИЛИ только цифры ИЛИ пустая строка)
-    const phoneNumberRegex = /^(\+\d+|\d*)$/;
-    if (!phoneNumberRegex.test(phoneInput.value)) {
-        document.getElementById("phone-error-message").innerText = "Telefonní číslo by nemělo obsahovat nic jiného než číslice a znamenko +";
+    // const phoneNumberRegex = /^(?=.*\d)[\d\s()+-]+$/;
+    if (phoneInput.value === "") {
+        document.getElementById("phone-error-message").innerText = "Telefonní číslo musí být vyplněno!";
         highlightField("phone");
         hasError = true;
-    }
+    } 
+    // else if (!phoneNumberRegex.test(phoneInput.value)) {
+    //     document.getElementById("phone-error-message").innerText = "Telefonní číslo by nemělo obsahovat nic jiného než číslice a znamenko +";
+    //     highlightField("phone");
+    //     hasError = true;
+    // }
 
     if (emailInput.value === "") {
         document.getElementById("email-error-message").innerText = "E-mail musí být vyplněno!";
