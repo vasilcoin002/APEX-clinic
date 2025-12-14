@@ -61,21 +61,17 @@
         }
 
         public function check_if_email_and_password_is_in_user_dto(UserDTO $userDTO): void {
-            $hasError = false;
 
             if (empty($userDTO->email)) {
                 $GLOBALS["errors"]["email"] = "Email is required";
-                http_response_code(400);
-                $hasError = true;
             }
 
             if (empty($userDTO->password)) {
                 $GLOBALS["errors"]["password"] = "Password is required";
-                http_response_code(400);
-                $hasError = true;
             }
 
-            if ($hasError) {
+            if (count($GLOBALS["errors"]) !== 0) {
+                http_response_code(400);
                 throw new InvalidArgumentException();
             }
         }
@@ -149,14 +145,8 @@
         }
 
         private function validate_phone($phone) : void {
-            $sanitized_number = preg_replace('/[\s\-\(\)]+/', '', $phone);
-            if (empty($sanitized_number)) {
+            if (!preg_match('/\d/', $phone)) {
                 $GLOBALS["errors"]["phone"] = "Phone number can't be empty or without digits";
-                http_response_code(400);
-                throw new InvalidArgumentException();
-            }
-            if (!preg_match('/^(\+|0)?\d{1,20}$/', $sanitized_number)) {
-                $GLOBALS["errors"]["phone"] = "Phone number is invalid. It must be up to 20 digits (and optional + sign)";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -190,15 +180,37 @@
             return isset($_SESSION["user_id"]);
         }
 
+        public function check_if_user_dto_is_complete_for_registration(UserDTO $userDTO): void {
+            if (!isset($userDTO->email)) {
+                $GLOBALS["errors"]["email"] = "Email is required";
+            }
+            if (!isset($userDTO->password)) {
+                $GLOBALS["errors"]["password"] = "Password is required";
+            }
+            if (!isset($userDTO->name)) {
+                $GLOBALS["errors"]["name"] = "Name is required";
+            }
+            if (!isset($userDTO->surname)) {
+                $GLOBALS["errors"]["surname"] = "Surname is required";
+            }
+            if (!isset($userDTO->phone)) {
+                $GLOBALS["errors"]["phone"] = "Phone is required";
+            }
+
+            if (count($GLOBALS["errors"]) !== 0) {
+                http_response_code(400);
+                throw new InvalidArgumentException();
+            }
+        }
+
         public function add_user(UserDTO $userDTO): ?User {
-            $this->check_if_email_and_password_is_in_user_dto($userDTO);
+            $this->check_if_user_dto_is_complete_for_registration($userDTO);
             $this->validate_email($userDTO->email);
             $this->validate_password($userDTO->password);
             $this->validate_name($userDTO->name);
             $this->validate_surname($userDTO->surname);
-
             $this->validate_phone($userDTO->phone);
-            $userDTO->phone = intval($userDTO->phone);
+            
             $hashed_password = $this->get_hashed_password($userDTO->password);
 
             $user = new User(
@@ -273,28 +285,28 @@
 
             // Check if provided AND if it is actually different
             // Handle Name
-            if ($userDTO->name !== null && $userDTO->name !== $user->get_name()) {
+            if (isset($userDTO->name) && $userDTO->name !== $user->get_name()) {
                 $this->validate_name($userDTO->name);
                 $user->set_name($userDTO->name);
                 $isUpdated = true;
             }
 
             // Handle Surname
-            if ($userDTO->surname !== null && $userDTO->surname !== $user->get_surname()) {
+            if (isset($userDTO->surname) && $userDTO->surname !== $user->get_surname()) {
                 $this->validate_surname($userDTO->surname);
                 $user->set_surname($userDTO->surname);
                 $isUpdated = true;
             }
 
             // Handle Phone Number
-            if ($userDTO->phone !== null && $userDTO->phone !== $user->get_phone()) {
+            if (isset($userDTO->phone) && $userDTO->phone !== $user->get_phone()) {
                 $this->validate_phone($userDTO->phone);
                 $user->set_phone($userDTO->phone);
                 $isUpdated = true;
             }
 
             // Handle Comment
-            if ($userDTO->comment !== null && $userDTO->comment !== $user->get_comment()) {
+            if (isset($userDTO->comment) && $userDTO->comment !== $user->get_comment()) {
                 $this->validate_comment($userDTO->comment);
                 $user->set_comment($userDTO->comment);
                 $isUpdated = true;
