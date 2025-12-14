@@ -30,14 +30,7 @@
                 <!-- AVATAR LOGIN -->
                 <div id="user_avatar" class="header_btn-box"> 
                     <div class="header_user"> 
-                        <a href=<?php 
-                            if (isset($_SESSION["user_id"])) {
-                                echo "clientaccount.php";
-                            }
-                            else {
-                                echo "frmLogin.php";
-                            }
-                        ?>>
+                        <a href="clientaccount.php">
                             <img class="header_user-avatar" src="./images/avatar.png" height="21" alt="avatar">
                         </a>
                     </div>
