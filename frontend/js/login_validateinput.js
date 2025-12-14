@@ -4,6 +4,25 @@ function highlightField(fieldId) {
     field.classList.add("error-border");
 }
 
+async function handleExceptionResponse(response) {
+    const data = await response.json();
+    
+    inputNames = Object.keys(data);
+    inputNames.forEach(function (inputName) {
+        highlightField(inputName);
+        document.getElementById(inputName + "-error-message").innerText = data[inputName];
+    });
+}
+
+async function handleResponse(response) {
+    if (response.status !== 200) {
+        handleExceptionResponse(response);
+        return;
+    }
+    
+    window.location.replace("index.php");
+}
+
 function validateLoginForm(event) {
     event.preventDefault(); // Останавливаем отправку формы
 
@@ -39,18 +58,29 @@ function validateLoginForm(event) {
         return false;
     }
 
-    // Имитируем проверку на сервере
-    // Здесь ты потом заменишь на fetch(...)
-    const serverResponse = {
-        error: "email_exists" // ← тестовая ошибка
-    };
+    const formData = new FormData();
+    formData.append("action", "login");
+    formData.append("email", emailInput.value);
+    formData.append("password", passwordInput.value);
 
-    if (serverResponse.error === "email_exists") {
-        document.getElementById("email-error-message").innerText =
-            "Tento e-mail již existuje!";
-        highlightField("email");
-        return false;
-    }
+    fetch('../users/userController.php', {
+            method: "POST",
+            body: formData
+    })
+    .then((response) => handleResponse(response));
+
+    // // Имитируем проверку на сервере
+    // // Здесь ты потом заменишь на fetch(...)
+    // const serverResponse = {
+    //     error: "email_exists" // ← тестовая ошибка
+    // };
+
+    // if (serverResponse.error === "email_exists") {
+    //     document.getElementById("email-error-message").innerText =
+    //         "Tento e-mail již existuje!";
+    //     highlightField("email");
+    //     return false;
+    // }
 
     // Если всё хорошо — можно отправлять форму
     // form.submit(); ← если понадобится
