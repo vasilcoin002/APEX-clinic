@@ -52,18 +52,17 @@ function validateRegistrationForm(event) {
         hasError = true;
     }
 
-    // (Регулярное выражение для проверки телефона: С плюсом ИЛИ только цифры ИЛИ пустая строка)
-    // const phoneNumberRegex = /^(?=.*\d)[\d\s()+-]+$/;
     if (phoneInput.value === "") {
         document.getElementById("phone-error-message").innerText = "Telefonní číslo musí být vyplněno!";
         highlightField("phone");
         hasError = true;
     } 
-    // else if (!phoneNumberRegex.test(phoneInput.value)) {
-    //     document.getElementById("phone-error-message").innerText = "Telefonní číslo by nemělo obsahovat nic jiného než číslice a znamenko +";
-    //     highlightField("phone");
-    //     hasError = true;
-    // }
+    // (Регулярное выражение для проверки, если в номере есть цифры или нет)
+    else if (!/\d/.test(phoneInput.value)) {
+        document.getElementById("phone-error-message").innerText = "Telefonní číslo musí obsahovat číslice";
+        highlightField("phone");
+        hasError = true;
+    }
 
     if (emailInput.value === "") {
         document.getElementById("email-error-message").innerText = "E-mail musí být vyplněno!";
