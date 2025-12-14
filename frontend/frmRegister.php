@@ -63,7 +63,7 @@
 
                     <div class="hr"></div>
                     <div class="foot-lnk">
-                        <a href="frmLogin.html">Máte účet? Přihlaste se</a>
+                        <a href="frmLogin.php">Máte účet? Přihlaste se</a>
                     </div>
                 </div>
             </div> 
@@ -74,6 +74,6 @@
         </div>
         <div class="copyright sz12">&copy; 2024 APEX Medical Center. Všechna práva vyhrazena.</div>
     </div>
-<script src="js/registr_validateinput.js"></script>
+<script src="js/registr_validateinput.js" defer></script>
 </body>
 </html>

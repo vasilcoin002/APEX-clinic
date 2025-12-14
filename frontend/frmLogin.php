@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="css/responsive/header-footer.css">
     <link rel="stylesheet" href="css/frmlogin.css"> 
     <title>APEX Medical - Přihlášení</title>
-    <script src="./js/login.js" defer></script>
 </head>
 <body>
     <div class="wrapper">
@@ -31,12 +30,14 @@
                         
                         <div class="form-group">
                             <label for="email">E-mail:</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email">
+                            <span id="email-error-message" class="errorMessage"></span>
                         </div>
 
                         <div class="form-group">
                             <label for="password">Heslo:</label>
-                            <input type="password" id="password" name="password" required>
+                            <input type="password" id="password" name="password">
+                            <span id="password-error-message" class="errorMessage"></span>
                         </div>
                         
                         <div>

@@ -22,14 +22,14 @@ function validateLoginForm(event) {
     let hasError = false;
 
     // Проверка email
-    if (loginEmailInput.value === "") {
+    if (emailInput.value === "") {
         document.getElementById("email-error-message").innerText = "E-mail musí být vyplněn!";
         highlightField("email");
         hasError = true;
     }
 
     // Проверка пароля
-    if (loginPasswordInput.value === "") {
+    if (passwordInput.value === "") {
         document.getElementById("password-error-message").innerText = "Heslo musí být vyplněno!";
         highlightField("password");
         hasError = true;
@@ -57,9 +57,10 @@ function validateLoginForm(event) {
 }
 
 // Получаем поля
-let loginEmailInput = document.getElementById("email");
-let loginPasswordInput = document.getElementById("password");
+let emailInput = document.getElementById("email");
+let passwordInput = document.getElementById("password");
+
 
 // Вешаем обработчик
-const loginForm = document.querySelector("form");
-loginForm.addEventListener("submit", validateLoginForm);
+const form = document.querySelector("form");
+form.addEventListener("submit", validateLoginForm);
