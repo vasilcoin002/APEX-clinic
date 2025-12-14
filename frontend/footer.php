@@ -7,10 +7,10 @@
 
         <div> <h4>Rychlé odkazy</h4>
             <div class="footer_links">
-            <a href="sluzby.html">Naše služby</a><br>
-            <a href="lekari.html">Naši lékaři</a><br>
-            <a href="about.html" >О nás</a><br>
-            <a href="contacts.html">Kontakty</a><br>
+            <a href="sluzby.php">Naše služby</a><br>
+            <a href="lekari.php">Naši lékaři</a><br>
+            <a href="about.php" >О nás</a><br>
+            <a href="contacts.php">Kontakty</a><br>
             <a href="admin_login.html">Administrační panel</a>
             </div>
         </div>
