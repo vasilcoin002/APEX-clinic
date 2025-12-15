@@ -69,21 +69,6 @@ function validateLoginForm(event) {
     })
     .then((response) => handleResponse(response));
 
-    // // Имитируем проверку на сервере
-    // // Здесь ты потом заменишь на fetch(...)
-    // const serverResponse = {
-    //     error: "email_exists" // ← тестовая ошибка
-    // };
-
-    // if (serverResponse.error === "email_exists") {
-    //     document.getElementById("email-error-message").innerText =
-    //         "Tento e-mail již existuje!";
-    //     highlightField("email");
-    //     return false;
-    // }
-
-    // Если всё хорошо — можно отправлять форму
-    // form.submit(); ← если понадобится
 }
 
 // Получаем поля

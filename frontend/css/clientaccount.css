@@ -162,4 +162,102 @@ h2 {
     display: block;
 }
 
+/* --- PŮVODNÍ KÓD (z minulé odpovědi) --- */
+/* ... ponechej stávající styly pro .info-box, .save-button atd. ... */
+
+
+/* --- NOVÉ STYLY PRO AVATAR --- */
+
+.avatar-container {
+    display: flex;
+    align-items: center; 
+    gap: 30px;
+    padding-bottom: 20px;
+    flex-wrap: wrap;
+
+}
+
+
+.avatar-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-direction: row; /* Tlačítka vedle sebe */
+    width: 100%;
+    justify-content: center;
+    
+}
+
+/* Společný styl pro akční tlačítka vedle avatara */
+.action-button {
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s;
+    width: 150px; /* Pevná šířka pro zarovnání */
+}
+
+/* Tlačítko Změnit avatar (Primární modrá) */
+.primary-button {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+
+.primary-button:hover {
+    background-color: #0056b3;
+}
+
+/* Tlačítko Odstranit avatar (Sekundární, světlejší) */
+.secondary-button {
+    background-color: #f8f9fa; /* Světle šedé/bílé pozadí */
+    color: #dc3545; /* Červený text pro smazání */
+    border: 1px solid #dc3545; /* Červený rámeček */
+}
+
+.secondary-button:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Zajištění správného zobrazení tlačítek formuláře pro nahrání */
+#upload-avatar-form, #delete-avatar-form {
+    margin: 0;
+}
+
+    .action-button {
+        width: auto; /* Umožní tlačítkům zmenšit se */
+    }
+/* --- NOVÉ STYLY PRO AVATAR --- */
+
+
+/* Styly pro zástupný kruhový prvek (placeholder) */
+.user-avatar {
+    width: 120px; 
+    height: 120px;
+    border-radius: 50%; 
+    border: 3px solid #007bff; /* Modrý rámeček */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+    /* Vlastnosti pro centrování textu uvnitř kruhu */
+    display: flex;
+    justify-content: center; /* Horizontální centrování */
+    align-items: center; /* Vertikální centrování */
+    background-color: #f0f7ff; /* Velmi světlé modré pozadí uvnitř kruhu */
+}
+
+/* Styl zástupného textu */
+.avatar-text {
+    color: #007bff; /* Modrá barva textu */
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.2;
+    padding: 10px;
+}
+
+
 
