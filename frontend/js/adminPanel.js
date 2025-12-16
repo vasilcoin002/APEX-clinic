@@ -77,8 +77,10 @@ async function renderUser(user) {
     controllForm.onsubmit = function (e) {
         e.preventDefault();
 
+        const buttonClicked = e.submitter;
         const formData = new FormData(controllForm);
-        // TODO дописать удаление и повышение юзеров
+        formData.append("action", buttonClicked.value);
+        
         fetch('../admins/adminController.php', {
             method: "POST",
             body: formData

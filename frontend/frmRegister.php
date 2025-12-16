@@ -18,7 +18,8 @@
             $page_name = "registration";
             require_once "header.php";
         ?>
-        <!-- TODO fix double submitting -->
+        <!-- TODO fix double submitting everywhere -->
+        <!-- TODO fix submitting after refreshing the page everywhere -->
         <!-- TODO write * where fields are required -->
         <!-- TODO rewrite validation: buggs in password writing (e.g for Qwerty shows taht passwords are not same) -->
         <main class="main">
