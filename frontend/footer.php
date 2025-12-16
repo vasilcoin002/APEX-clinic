@@ -11,7 +11,7 @@
             <a href="lekari.php">Naši lékaři</a><br>
             <a href="about.php" >О nás</a><br>
             <a href="contacts.php">Kontakty</a><br>
-            <a href="admin_login.html">Administrační panel</a>
+            <a href="adminPanel.php">Administrační panel</a>
             </div>
         </div>
 

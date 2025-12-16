@@ -102,8 +102,7 @@
         <h2 class="error-subtitle">Přístup zakázán</h2>
 
         <p class="error-message">
-            Litujeme, ale nemáte oprávnění pro přístup k požadovanému zdroji nebo administraci.
-            Tato akce byla z bezpečnostních důvodů zaznamenána.
+            Litujeme, ale nemáte oprávnění pro přístup k administrační paneli.
         </p>
 
         <a href="index.php" class="home-link">
