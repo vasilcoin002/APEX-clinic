@@ -16,8 +16,7 @@
             $this->user_repository = new UserRepository();
         }
 
-        public function get_admin_from_session(): User {
-            $this->user_service->check_if_session_is_active();
+        private function get_admin_from_session(): User {
             $admin = $this->user_service->get_user_from_session();
 
             if ($admin->get_role() != Roles::ADMIN) {
@@ -32,21 +31,21 @@
         public function delete_user(UserDTO $userDTO): void {
             $admin = $this->get_admin_from_session();
 
-            $this->user_service->check_if_email_is_in_user_dto($userDTO);
+            $this->user_service->check_if_id_is_in_user_dto($userDTO);
 
-            $user = $this->user_repository->find_user_by_email($userDTO->email);
+            $user = $this->user_repository->find_user_by_id($userDTO->id);
             if ($user == null) {
-                $GLOBALS["errors"]["email"] = "User not found. Please, provide the right email";
+                $GLOBALS["errors"]["id"] = "User not found. Please, provide the right id";
                 http_response_code(404);
                 throw new InvalidArgumentException();
             }
             if ($user->get_id() == $admin->get_id()) {
-                $GLOBALS["errors"]["email"] = "You can't delete yourself through the admin's panel. Please, use user's panel";
+                $GLOBALS["errors"]["id"] = "You can't delete yourself through the admin's panel. Please, use user's panel";
                 http_response_code(400);
                 throw new BadMethodCallException();
             }
             if ($user->get_role() == Roles::ADMIN) {
-                $GLOBALS["errors"]["email"] = "You can't delete admins";
+                $GLOBALS["errors"]["id"] = "You can't delete admins";
                 http_response_code(400);
                 throw new BadMethodCallException();
             }
@@ -56,21 +55,21 @@
         public function promote_user(UserDTO $userDTO): void {
             $admin = $this->get_admin_from_session();
 
-            $this->user_service->check_if_email_is_in_user_dto($userDTO);
+            $this->user_service->check_if_id_is_in_user_dto($userDTO);
 
-            $user = $this->user_repository->find_user_by_email($userDTO->email);
+            $user = $this->user_repository->find_user_by_id($userDTO->id);
             if ($user == null) {
-                $GLOBALS["errors"]["email"] = "User not found. Please, provide the right email";
+                $GLOBALS["errors"]["id"] = "User not found. Please, provide the right id";
                 http_response_code(404);
                 throw new InvalidArgumentException();
             }
             if ($user->get_id() == $admin->get_id()) {
-                $GLOBALS["errors"]["email"] = "You can't promote yourself";
+                $GLOBALS["errors"]["id"] = "You can't promote yourself";
                 http_response_code(400);
                 throw new BadMethodCallException();
             }
             if ($user->get_role() == Roles::ADMIN) {
-                $GLOBALS["errors"]["email"] = "You can't promote admins";
+                $GLOBALS["errors"]["id"] = "You can't promote admins";
                 http_response_code(400);
                 throw new BadMethodCallException();
             }

@@ -51,7 +51,7 @@
     <form action="admins/adminController.php" method="post" enctype="multipart/form-data">
         <div>
             <div>
-                <label>email: <input type="text" name="email"></label>
+                <label>id: <input type="number" name="id"></label>
             </div>
             <input type="submit" name="action" value="delete-user">
             <input type="submit" name="action" value="promote-user">

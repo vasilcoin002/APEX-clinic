@@ -1,18 +1,12 @@
 <?php
 
-    // ini_set('display_errors', 1);
-    // error_reporting(E_ALL);
-
     require_once "../users/UserService.php";
     require_once "../users/User.php";
     require_once "../users/Roles.php";
     require_once "AdminService.php";
-    // require_once "../exceptionHandler.php";
 
-    // set_exception_handler("exception_handler");
     $GLOBALS["errors"] = [];
 
-    // TODO add try/catch in controllers
     class AdminController {
 
         private AdminService $admin_service;
@@ -47,8 +41,8 @@
         session_start();
 
         $userDTO = new UserDTO;
-        if (isset($_POST["email"])) {
-            $userDTO->email = $_POST["email"];
+        if (isset($_POST["id"])) {
+            $userDTO->id = $_POST["id"];
         }
 
         $endpoints = array(
