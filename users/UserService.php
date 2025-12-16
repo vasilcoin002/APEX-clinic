@@ -38,7 +38,15 @@
 
         public function check_if_email_is_in_user_dto(UserDTO $userDTO): void {
             if (empty($userDTO->email)) {
-                $GLOBALS["errors"]["email"] = "Email is is required";
+                $GLOBALS["errors"]["email"] = "Email is required";
+                http_response_code(400);
+                throw new InvalidArgumentException();
+            }
+        }
+
+        public function check_if_id_is_in_user_dto(UserDTO $userDTO): void {
+            if (empty($userDTO->id)) {
+                $GLOBALS["errors"]["id"] = "Id is required";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }

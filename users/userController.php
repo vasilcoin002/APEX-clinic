@@ -1,14 +1,9 @@
 <?php
 
-    // ini_set('display_errors', 1);
-    // error_reporting(E_ALL);
-
     require_once "UserService.php";
     require_once "User.php";
     require_once "Roles.php";
-    // require_once "../exceptionHandler.php";
 
-    // set_exception_handler("exception_handler");
     $GLOBALS["errors"] = [];
 
     // TODO fix phone accepts with "+" from frontend, but saves without "+"
