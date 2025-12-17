@@ -2,18 +2,9 @@
 // Это гарантирует, что мы сможем найти все элементы на странице.
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 2. Ищем кнопку "Změnit avatar" по ее классу.
-    // Элемент: <button type="button" class="action-button primary-button">
     const changeAvatarButton = document.querySelector('.primary-button');
-
-    // 3. Ищем скрытый элемент <input type="file"> по его ID.
-    // Элемент: <input type="file" name="avatar_file" id="avatar-upload" ...>
     const avatarUploadInput = document.getElementById('avatar-upload');
-
-    // 4. Ищем форму загрузки аватара по ее ID.
-    // Элемент: <form action="upload_avatar.php" method="POST" ... id="upload-avatar-form">
     const uploadAvatarForm = document.getElementById('upload-avatar-form');
-
 
     // --- Логика для кнопки "Změnit avatar" (Изменить аватар) ---
 

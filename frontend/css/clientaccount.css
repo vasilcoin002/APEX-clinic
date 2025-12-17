@@ -171,12 +171,13 @@ h2 {
 .avatar-container {
     display: flex;
     align-items: center; 
+    justify-content: center;
+    flex-direction: column;
     gap: 30px;
     padding-bottom: 20px;
     flex-wrap: wrap;
 
 }
-
 
 .avatar-controls {
     display: flex;
@@ -228,36 +229,77 @@ h2 {
     margin: 0;
 }
 
-    .action-button {
-        width: auto; /* Umožní tlačítkům zmenšit se */
-    }
+.action-button {
+    width: auto; /* Umožní tlačítkům zmenšit se */
+}
 /* --- NOVÉ STYLY PRO AVATAR --- */
 
 
-/* Styly pro zástupný kruhový prvek (placeholder) */
-.user-avatar {
-    width: 120px; 
-    height: 120px;
-    border-radius: 50%; 
-    border: 3px solid #007bff; /* Modrý rámeček */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    
-    /* Vlastnosti pro centrování textu uvnitř kruhu */
-    display: flex;
-    justify-content: center; /* Horizontální centrování */
-    align-items: center; /* Vertikální centrování */
-    background-color: #f0f7ff; /* Velmi světlé modré pozadí uvnitř kruhu */
-}
-
 /* Styl zástupného textu */
-.avatar-text {
-    color: #007bff; /* Modrá barva textu */
+/* .avatar-text {
+    color: #007bff;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
     line-height: 1.2;
     padding: 10px;
+} */
+
+#logout-form {
+    display: flex;
+    justify-content: center;
 }
 
+#avatar-upload {
+    display: none;
+}
+
+/* Styly pro zástupný kruhový prvek (placeholder) */
+.user-avatar {
+    /* border-radius: 50%;  */
+    border: 3px solid #007bff; /* Modrý rámeček */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 480px;
+    max-height: 270px;
+    min-width: 50px;
+    min-height: 50px;
+    display: block;
+    position: relative;
+    object-fit: cover;
+    /* Vlastnosti pro centrování textu uvnitř kruhu */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    background-color: #f0f7ff; /* Velmi světlé modré pozadí uvnitř kruhu */
+}
+
+/* #user-avatar-placeholder {
+  /* 1. Define standard size and behavior */
+   /* Essential for absolute positioning of the alt text */
+  
+  /* Optional: Background color for the box */
 
 
+/* 2. Style the 'alt' text to overlay the broken image */
+#user-avatar-placeholder::after {
+  content: attr(alt); /* Grabs the text from the HTML alt attribute */
+  
+  /* Position it to cover the entire image area */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* 3. Center the text using Flexbox */
+  display: flex;
+  justify-content: center; /* Horizontal Center */
+  align-items: center;     /* Vertical Center */
+  
+  /* Styling to make it look nice */
+  background-color: #f0f0f0; /* Matches parent to hide the broken icon */
+  color: #666;
+  text-align: center; /* Ensures multi-line text is centered */
+  padding: 10px;      /* Prevents text from hitting the edges */
+  box-sizing: border-box;
+}

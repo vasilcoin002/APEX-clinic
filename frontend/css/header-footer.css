@@ -213,7 +213,7 @@
 
 .footer h4 {
     font-size: 16px;
-    color: var(-- color-black);
+    color: var(--color-black);
     font-weight: 600;
     margin-bottom: 7px;
 }
@@ -236,8 +236,6 @@
     font-weight: 700;
 }
 
-
-
 .copyright {
     margin-top: 10px;
     text-align: center;
@@ -245,9 +243,7 @@
     padding-top: 7px;
 }
 
-
-
- /* убрать меня после настроки с сервером! */
+ /* TODO убрать меня после настроки с сервером! */
 .testbtn {
     font-weight: bold;
     font-size: 14px;
