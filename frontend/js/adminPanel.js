@@ -1,15 +1,14 @@
-async function handleResponse(response) {
-    window.location.replace(window.location.href);
+async function handleResponse() {
+    // перезагружаем страницу
+    location.reload();
 }
 
 async function handleExceptionResponse(response) {
-    if (response.status === 403) {
-        window.location.replace("error.php");
+    // Когда ошибка "неавторизирован" либо "нет доступа", то перезагрузить страницу
+    if (response.status === 401 || response.status === 403) {
+        location.reload();
     }
-    else if (response.status === 401) {
-        window.location.replace("frmLogin.php");
-    }
-    return response.json()
+    return response.json();
 }
 
 async function renderPagination(numberOfUsers) {
@@ -47,6 +46,7 @@ async function renderPagination(numberOfUsers) {
 
 // TODO add error showing
 async function renderUser(user) {
+    // Создаем элементы, которые потом вставим в html
     const tableBody = document.querySelector("tbody");
     const tableRow = document.createElement("tr");
     const idCell = document.createElement("td");
@@ -55,29 +55,41 @@ async function renderUser(user) {
     const emailCell = document.createElement("td");
     const roleCell = document.createElement("td");
 
+    // Даем внутри этих клеток информацию
     idCell.textContent = user.id;
     nameCell.textContent = user.name;
     surnameCell.textContent = user.surname;
     emailCell.textContent = user.email;
     roleCell.textContent = user.role;
 
+    // Добавляем внутрь ряда все эти клетки
     tableRow.appendChild(idCell);
     tableRow.appendChild(nameCell);
     tableRow.appendChild(surnameCell);
     tableRow.appendChild(emailCell);
     tableRow.appendChild(roleCell);
+    tableBody.appendChild(tableRow);
 
+    // Когда рендерит админа, дальше по коду не идет, что бы не рисовать кнопки для него
+    if (user.role === "ADMIN") {
+        return;
+    }
+
+    // Клетки для контроля юзеров
     const controllCell = document.createElement("td");
     const controllForm = document.createElement("form");
-    
-
     controllForm.method = "post";
     controllCell.appendChild(controllForm);
 
+    // при сабмите будет запускаться функция:
     controllForm.onsubmit = function (e) {
         e.preventDefault();
 
+        // из ивента достаем ту кнопку, на которую кликнули
         const buttonClicked = e.submitter;
+
+        // симуляция того, что запрос на сервер будет послан из формы,
+        // хотя на самом деле из js
         const formData = new FormData(controllForm);
         formData.append("action", buttonClicked.value);
         
@@ -85,15 +97,10 @@ async function renderUser(user) {
             method: "POST",
             body: formData
         })
-        .then((response) => handleResponse(response));
+        .then(handleResponse);
     };
 
-    tableBody.appendChild(tableRow);
     tableRow.appendChild(controllCell);
-
-    if (user.role === "ADMIN") {
-        return;
-    }
 
     const idHiddenInput = document.createElement("input");
     idHiddenInput.type = "hidden";
@@ -119,11 +126,15 @@ async function renderUser(user) {
 }
 
 async function renderUsers(users) {
+    // для каждого пользователя вызываем функцию renderUser
     users.forEach(user => renderUser(user));
 }
 
+// Сами определяем, сколько будет пользователей на странице
 const numberOfUsersOnPage = 5;
+// Достаем из текущей ссылки все параметры
 const currentUrlParams = new URLSearchParams(window.location.search);
+// Достаем из всех параметров параметр page, но превращаем его из строки в число
 const page = parseInt(currentUrlParams.get("page"));
 
 const fetchUsersParams = {
@@ -132,11 +143,16 @@ const fetchUsersParams = {
     action: "get-range-of-users"
 }
 
+// Отправляем запрос на сервер, получаем оттуда общее количество пользователей
+// И от этого рендерим контроль в пагинации
 fetch('../admins/adminController.php?action=get-number-of-users')
 .then(response => handleExceptionResponse(response))
 .then(numberOfUsers => renderPagination(numberOfUsers));
 
+// Превращаем словник с параметрами для следующего запроса в строку,
+// потому что для get запроса параметры пишутся в строке
 const stringParams = new URLSearchParams(fetchUsersParams).toString();
+// Отправляем запрос на сервер, получаем оттуда список пользователей, рендерим его
 fetch('../admins/adminController.php?' + stringParams)
 .then((response) => handleExceptionResponse(response))
 .then((users) => renderUsers(users));
