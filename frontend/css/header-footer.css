@@ -242,14 +242,3 @@
     border-top: 3px solid silver;
     padding-top: 7px;
 }
-
- /* TODO убрать меня после настроки с сервером! */
-.testbtn {
-    font-weight: bold;
-    font-size: 14px;
-    color: red;
-    margin: 0; 
-    
-    display: block;   
-    text-align: center;
-}
