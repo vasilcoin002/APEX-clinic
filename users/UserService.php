@@ -5,8 +5,6 @@
     require_once "UserDTO.php";
     require_once "Roles.php";
 
-    // TODO rewrite validations and checks to return bool and make error throwing in methods directly
-    // TODO add max limits to string values
     class UserService {
 
         private UserRepository $user_repository;

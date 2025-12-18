@@ -6,8 +6,6 @@
 
     $GLOBALS["errors"] = [];
 
-    // TODO fix phone accepts with "+" from frontend, but saves without "+"
-    // TODO add try/catch in controllers
     class UserController {
 
         private UserService $user_service;
@@ -105,7 +103,6 @@
         }
     }
 
-    // TODO make check_if_is_admin function
     elseif (isset($_GET["action"])) {
         session_start();
 
