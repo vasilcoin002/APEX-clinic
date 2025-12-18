@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <!-- TODO make errors occure not sequenly but at one response -->
     <h2>UserController</h2>
     <p>Post methods</p>
     <form action="users/userController.php" method="post" enctype="multipart/form-data">
