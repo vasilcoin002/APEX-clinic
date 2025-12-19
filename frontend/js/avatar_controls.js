@@ -7,8 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const uploadAvatarForm = document.getElementById('upload-avatar-form');
 
     // --- Логика для кнопки "Změnit avatar" (Изменить аватар) ---
-
-    // 5. Проверяем, что кнопка найдена, чтобы избежать ошибок.
     if (changeAvatarButton) {
         // 6. Добавляем "слушателя событий" (event listener) к кнопке.
         // Когда пользователь нажмет на кнопку ('click'), выполнится функция внутри.
@@ -31,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
         avatarUploadInput.addEventListener('change', function() {
             // 11. Проверяем, что пользователь действительно выбрал файл (список файлов не пуст).
             if (this.files.length > 0) {
-                // 12. Если форма найдена, автоматически отправляем ее.
                 // Это запускает отправку файла на сервер (на "upload_avatar.php", как указано в HTML).
                 if (uploadAvatarForm) {
                     uploadAvatarForm.submit();
