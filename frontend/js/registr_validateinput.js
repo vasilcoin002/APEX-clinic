@@ -123,10 +123,6 @@ function validateRegistrationForm(event) {
         return false;
     }
 
-
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Probíhá registrace...";
-
     let userData = {
         surname: surnameInput.value,
         name: nameInput.value,
@@ -143,13 +139,9 @@ function validateRegistrationForm(event) {
     formData.append("phone", phoneInput.value);
     formData.append("name", nameInput.value);
     formData.append("surname", surnameInput.value);
-    // let request = new XMLHttpRequest();
-    // request.addEventListener("load", function (e) {
-    //     console.log(e.target.responseText);
-    // });
-    // request.open("POST", "../users/userController.php", true);
-    // request.setRequestHeader("Content-Type", "application/json");
-    // request.send(JSON.stringify(userData));
+
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Probíhá registrace...";
 
     fetch('../users/userController.php', {
             method: "POST",

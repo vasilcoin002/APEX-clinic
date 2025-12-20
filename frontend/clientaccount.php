@@ -1,9 +1,9 @@
 <?php 
-    // session_start();
-    // if (!isset($_SESSION["user_id"])) {
-    //     header("Location: frmLogin.php");
-    //     die();
-    // }
+    session_start();
+    if (!isset($_SESSION["user_id"])) {
+        header("Location: frmLogin.php");
+        die();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="cs">
