@@ -1,50 +1,83 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const tabLinks = document.querySelectorAll('.card-link');
-    const tabContents = document.querySelectorAll('.card-content');
 
-    // Вложенная функция switchTab для переключения карточек (вкладок)
-    function switchTab(targetId) {
-        // 1) Для начала скроем контент у всех карточек
-        tabContents.forEach(content => {
-            content.classList.remove('active');
-        });
+function showError(elementId, message) {
+    const errorElement = document.getElementById(elementId);
+    errorElement.textContent = message;
+}
 
-        // 2) Теперь уберем класс active со всех ссылок
-        tabLinks.forEach(link => {
-            link.classList.remove('active');
-        });
+function clearError(elementId) {
+    const errorElement = document.getElementById(elementId);
+    errorElement.textContent = '';
+}
 
-        // 3) ... наконец, покажем (справа) целевой контент (targetId) 
-        // путем добавления свойства active к элементу, у которого id=targetContentID
-        const targetContentID = document.getElementById(targetId);
-        if (targetContentID) { // если targetContentID найден, то добавить свойqтво 'active'
-            targetContentID.classList.add('active');
-        }
-    }  // == END: function switchTab()
+const avatarInput = document.getElementById('avatar-upload');
+const avatarPreview = document.getElementById('user-avatar-placeholder');
+const avatarForm = document.getElementById('upload-avatar-form');
+const changeAvatarBtn = avatarForm.querySelector('.primary-button');
 
+const AVATAR_ERROR_ID = 'avatar-error-message';
+const USER_CONTROLLER_PATH = '../users/userController.php';
+
+const MAX_SIZE = 5 * 1024 * 1024; // 5MB
+const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
+
+avatarInput.addEventListener('change', function(event) {
+    clearError(AVATAR_ERROR_ID); // Clear specific avatar errors
     
-    // Обработчик событий для каждой ссылки (карточки)
-    tabLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            // сначала определи, какую карточку кликнули (по атрибуту "data-target"?
-            // ( см.например в .html вот такой код: <div class="card card-link" data-target="personal_data"></div>
-            const targetId = this.getAttribute('data-target');
-            
-            // Переключаем контент
-            switchTab(targetId);
+    const file = event.target.files[0];
+    if (!file) return;
 
-            // Устанавливаем класс active на текущей карточке,
-            //чтобы она стала темно-синей
-            this.classList.add('active');
-        });
+    if (!ALLOWED_TYPES.includes(file.type)) {
+        showError(AVATAR_ERROR_ID, 'Chyba: Vyberte prosím obrázek ve formátu JPG, PNG nebo GIF.');
+        avatarInput.value = ''; 
+        return;
+    }
+
+    if (file.size > MAX_SIZE) {
+        showError(AVATAR_ERROR_ID, 'Chyba: Obrázek je příliš velký (max 5MB).');
+        avatarInput.value = ''; 
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        avatarPreview.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+});
+
+
+changeAvatarBtn.addEventListener('click', function() {
+    clearError(AVATAR_ERROR_ID);
+
+    if (!avatarInput.files.length) {
+        showError(AVATAR_ERROR_ID, 'Prosím, nejprve vyberte obrázek kliknutím na avatar.');
+        return;
+    }
+
+    const formData = new FormData(avatarForm);
+    formData.append("action", "update-avatar");
+    const originalText = changeAvatarBtn.innerText;
+    
+    // UI Loading
+    changeAvatarBtn.innerText = "Nahrávám...";
+    changeAvatarBtn.disabled = true;
+
+    fetch(USER_CONTROLLER_PATH, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) return response.text();
+        throw new Error('Chyba sítě nebo serveru');
+    })
+    .then(data => {
+        // window.location.reload();
+    })
+    .catch(error => {
+        console.error('Chyba:', error);
+        showError(AVATAR_ERROR_ID, 'Nastala chyba při nahrávání obrázku. Zkuste to prosím znovu.');
+        
+        changeAvatarBtn.innerText = originalText;
+        changeAvatarBtn.disabled = false;
     });
-
-    // Устанавливаем начальное активное состояние при загрузке
-    // Показываем приветствие (ID: welcome-content)
-    switchTab('welcome-txt'); 
-
-    // можно активировать карточку "Moje poznámky" при загрузке
-    // if (tabLinks.length > 0) {
-        // tabLinks[0].classList.add('active');
-    // }
 });
