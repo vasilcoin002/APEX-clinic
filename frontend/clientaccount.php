@@ -28,7 +28,7 @@
     ?>
         <div class="PageContent">
             <div class="body_top">
-                <div class="section_top"> 
+                <div class="section_top">
                     <div class="account-container">
                         <h1 class="account-title">Osobní účet | APEX Medical</h1>
                         <div class="account-sections-wrapper">
@@ -54,25 +54,27 @@
                                 <hr class="separator">
                                 <div class="password-section">
                                     <h2>Přístupové údaje</h2>
-                                    <form action="#" method="POST" class="password-form">
+                                    <form action="#" method="POST" id="email-form">
                                         <div class="form-group">
                                             <label for="email">E-mail*:</label>
                                             <input type="email" id="email" name="email" required>
+                                            <span id="email-error-message"></span>
                                         </div>
-                                        <button type="submit" class="save-button password-button">Uložit změny</button>
+                                        <button type="submit" class="save-button">Uložit změny</button>
                                     </form>
                                     <hr class="separator">
-                                    <form action="#" method="POST" class="password-form">
+                                    <form action="#" method="POST" id="password-form">
                                         <div class="form-group">
-                                            <label for="new-password">Nové heslo*:</label>
-                                            <input type="password" id="new-password" name="new-password" required>
+                                            <label for="password">Nové heslo*:</label>
+                                            <input type="password" id="password" name="password" required>
+                                            <span id="password-error-message"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="confirm-password">Potvrďte heslo*:</label>
                                             <input type="password" id="confirm-password" name="confirm-password" required>
+                                            <span id="confirm-password-error-message"></span>
                                         </div>
-                                        
-                                        <button type="submit" class="save-button password-button">Uložit změny</button>
+                                        <button type="submit" class="save-button">Uložit změny</button>
                                     </form>
                                     <hr class="separator">
                                     <form action="#" method="POST" id="logout-form">
@@ -80,32 +82,34 @@
                                             Odhlásit se
                                         </button>
                                     </form>
-                                    <p class="save-confirmation password-success-msg" style="display: none;">Heslo bylo úspěšně změněno!</p>
                                 </div>
                             </div>
                             <div class="info-box notes-data-box">
-                                <form action="#" method="POST" class="data-form">
+                                <form action="#" method="POST" id="personal-data-form">
                                     <h2>Osobní a kontaktní údaje</h2>
                                     <div class="form-group">
-                                        <label for="prijmeni">Příjmení*:</label>
-                                        <input type="text" id="prijmeni" name="prijmeni" required>
+                                        <label for="name">Jméno*:</label>
+                                        <input type="text" id="name" name="name" required>
+                                        <span id="name-error-message"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="jmeno">Jméno*:</label>
-                                        <input type="text" id="jmeno" name="jmeno" required>
+                                        <label for="surname">Příjmení*:</label>
+                                        <input type="text" id="surname" name="surname" required>
+                                        <span id="surname-error-message"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="telefon">Telefon*:</label>
-                                        <input type="tel" id="telefon" name="telefon" required>
+                                        <label for="phone">Telefon*:</label>
+                                        <input type="tel" id="phone" name="phone" required>
+                                        <span id="phone-error-message"></span>
                                     </div>
-                                    
                                     <button type="submit" class="save-button">Uložit změny</button>
                                     <hr class="separator">
 
                                     <h2>Moje zdravotní poznámky</h2>
                                     <div class="form-group">
-                                        <label for="health-notes">Poznámky (pro Vás a Vašeho lékaře):</label>
-                                        <textarea id="health-notes" name="health-notes" rows="10" placeholder="Zde můžete psát poznámky o svém zdraví, které chcete mít na jednom místě, např. reakce na léky, otázky pro lékaře, apod."></textarea>
+                                        <label for="comment">Poznámky (pro Vás a Vašeho lékaře):</label>
+                                        <textarea id="comment" name="comment" rows="10" placeholder="Zde můžete psát poznámky o svém zdraví, které chcete mít na jednom místě, např. reakce na léky, otázky pro lékaře, apod."></textarea>
+                                        <span id="comment-error-message"></span>
                                     </div>
                                     <button type="submit" class="save-button">Uložit změny</button>
                                 </form>

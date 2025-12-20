@@ -8,6 +8,12 @@ function clearError(elementId) {
     errorElement.textContent = '';
 }
 
+// TODO move all error styles to separate file
+function highlightField(fieldId) {
+    const field = document.getElementById(fieldId);
+    field.classList.add("error-border");
+}
+
 function disableAllButtons() {
     allButtons.forEach(button => button.disabled = true)
 }
@@ -39,28 +45,45 @@ async function handleResponse(response) {
 
 const avatarInput = document.querySelector('#avatar-upload');
 const emailInput = document.querySelector("#email");
-const passwordInput = document.querySelector("#new-password");
+const passwordInput = document.querySelector("#password");
 const confirmPasswordInput = document.querySelector("#confirm-password");
-const surnameInput = document.querySelector("#prijmeni");
-const nameInput = document.querySelector("#jmeno");
-const telefonInput = document.querySelector("#telefon");
-const notesInput = document.querySelector("#health-notes");
+const nameInput = document.querySelector("#name");
+const surnameInput = document.querySelector("#surname");
+const telefonInput = document.querySelector("#phone");
+const notesInput = document.querySelector("#comment");
 
 const avatarPreview = document.querySelector('#user-avatar-placeholder');
 const avatarForm = document.querySelector('#avatar-form');
+const emailForm = document.querySelector("#email-form");
+const passwordForm = document.querySelector("#password-form");
+const personalDataForm = document.querySelector("#personal-data-form");
+
 const updateAvatarBtn = avatarForm.querySelector('#update-avatar-button');
 const deleteAvatarBtn = avatarForm.querySelector('#delete-avatar-button');
+const updateEmailBtn = emailForm.querySelector("button");
+const updatePasswordBtn = passwordForm.querySelector("button");
+const updatePersonalDataBtn = personalDataForm.querySelectorAll("button")[0];
+const updateNotesBtn = personalDataForm.querySelectorAll("button")[1];
 
-allButtons = [updateAvatarBtn, deleteAvatarBtn];
+allButtons = document.querySelectorAll("button");
+allForms = document.querySelectorAll("form");
+allForms.forEach(form => form.addEventListener("submit", e => e.preventDefault()));
 
 const AVATAR_ERROR_ID = 'avatar-error-message';
+const EMAIL_ERROR_ID = 'email-error-message';
+const PASSWORD_ERROR_ID = 'password-error-message';
+const CONFIRM_PASSWORD_ERROR_ID = 'confirm-password-error-message';
+const NAME_ERROR_ID = 'name-error-message';
+const SURNAME_ERROR_ID = 'surname-error-message';
+const PHONE_ERROR_ID = 'phone-error-message';
+const COMMENT_ERROR_ID = 'comment-error-message'
+
 const USER_CONTROLLER_PATH = '../users/userController.php';
 
-const MAX_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_SIZE = 16 * 1024 * 1024; // 16MB
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
-
 avatarInput.addEventListener('change', function(event) {
-    clearError(AVATAR_ERROR_ID); // Clear specific avatar errors
+    clearError(AVATAR_ERROR_ID);
     
     const file = event.target.files[0];
     if (!file) return;
@@ -122,9 +145,6 @@ const initialRequestParams = new URLSearchParams({
     action: "get-session-user-info"
 });
 
-allForms = document.querySelectorAll("form");
-allForms.forEach(form => form.addEventListener("submit", e => e.preventDefault()));
-
 fetch(USER_CONTROLLER_PATH + "?" + initialRequestParams)
 .then(response => response.json())
 .then(data => {
@@ -134,4 +154,4 @@ fetch(USER_CONTROLLER_PATH + "?" + initialRequestParams)
     nameInput.value = data["name"];
     telefonInput.value = data["phone"];
     notesInput.value = data["comment"];
-})
+});
