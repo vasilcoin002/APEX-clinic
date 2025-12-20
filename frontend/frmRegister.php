@@ -27,7 +27,7 @@
                 
                 <div class="frmCommon">
                     <h2>Registrace</h2>
-                    <form name="Registration" action="register_handler.html" method="post" enctype="multipart/form-data">
+                    <form id="registrationForm" name="Registration" action="register_handler.php" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="name">Jméno*:</label>
                             <input type="text" id="name" name="name" placeholder="Jan">
@@ -61,7 +61,7 @@
                         </div>
                         
                         <div>
-                            <button class="submitBtn" type="submit">Registrovat se</button>
+                            <button id="submitBtn" class="submitBtn" type="submit">Registrovat se</button>
                         </div>
                     </form>
 
