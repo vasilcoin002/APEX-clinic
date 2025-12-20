@@ -7,17 +7,24 @@ function highlightField(fieldId) {
 
 async function handleExceptionResponse(response) {
     const data = await response.json();
-    
-    inputNames = Object.keys(data);
+    // Если произошла ошибка на сервере, нужно снова включить кнопку
+    const submitBtn = document.querySelector(".submitBtn");
+    if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Registrovat se";
+    }
+    const inputNames = Object.keys(data);
     inputNames.forEach(function (inputName) {
         highlightField(inputName);
-        document.getElementById(inputName + "-error-message").innerText = data[inputName];
+
+        const errorElement = document.getElementById(inputName + "-error-message");
+        if(errorElement) errorElement.innerText = data[inputName];
     });
 }
 
 async function handleResponse(response) {
     if (response.status !== 200) {
-        handleExceptionResponse(response);
+        await handleExceptionResponse(response);
         return;
     }
     
@@ -26,18 +33,14 @@ async function handleResponse(response) {
 
 function validateRegistrationForm(event) {
     event.preventDefault(); // Останавливаем отправку формы
+    const submitBtn = document.querySelector(".submitBtn");
     let fields = ["surname", "name", "email", "phone", "password", "confirm_password"];
     fields.forEach(function(id) {
-        document.getElementById(id).classList.remove("error-border");
+        const field = document.getElementById(id);
+        const errorMessage = document.getElementById(id + "-error-message");
+        if(field) field.classList.remove("error-border");
+        if(errorMessage) errorMessage.innerText = "";
     });
-
-    let errorMessages = ["surname-error-message", "name-error-message", "email-error-message", "phone-error-message", "password-error-message", "confirm_password-error-message"];
-    errorMessages.forEach(function(id) {
-        // Устанавливаем текст ошибки в пустую строку
-        document.getElementById(id).innerText = ""; 
-    });
-    // **
-
 
     let hasError = false;
     if (surnameInput.value === "") {
@@ -120,6 +123,10 @@ function validateRegistrationForm(event) {
         return false;
     }
 
+
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Probíhá registrace...";
+
     let userData = {
         surname: surnameInput.value,
         name: nameInput.value,
@@ -148,7 +155,12 @@ function validateRegistrationForm(event) {
             method: "POST",
             body: formData
     })
-    .then((response) => handleResponse(response));
+    .then((response) => handleResponse(response))
+    .catch((error) => {
+        console.error('Error:', error);
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Registrovat se";
+    });
 
 }
 
