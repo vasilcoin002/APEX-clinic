@@ -9,10 +9,42 @@ function clearError(elementId) {
     errorElement.textContent = '';
 }
 
+function disableAllButtons() {
+    allButtons.forEach(button => button.disabled = true)
+}
+
+function enableAllButtons() {
+    allButtons.forEach(button => button.disabled = false)
+}
+
+async function handleExceptionResponse(response) {
+    const data = await response.json();
+    
+    inputNames = Object.keys(data);
+    inputNames.forEach(function (inputName) {
+        console.log(inputName);
+
+        highlightField(inputName);
+        document.getElementById(inputName + "-error-message").innerText = data[inputName];
+    });
+    enableAllButtons();
+}
+
+async function handleResponse(response) {
+    if (!response.ok) {
+        handleExceptionResponse(response);
+        return;
+    }
+    window.location.reload();
+}
+
 const avatarInput = document.getElementById('avatar-upload');
 const avatarPreview = document.getElementById('user-avatar-placeholder');
-const avatarForm = document.getElementById('upload-avatar-form');
-const changeAvatarBtn = avatarForm.querySelector('.primary-button');
+const avatarForm = document.getElementById('avatar-form');
+const updateAvatarBtn = avatarForm.querySelector('#update-avatar-button');
+const deleteAvatarBtn = avatarForm.querySelector('#delete-avatar-button');
+
+allButtons = [updateAvatarBtn, deleteAvatarBtn];
 
 const AVATAR_ERROR_ID = 'avatar-error-message';
 const USER_CONTROLLER_PATH = '../users/userController.php';
@@ -46,7 +78,7 @@ avatarInput.addEventListener('change', function(event) {
 });
 
 
-changeAvatarBtn.addEventListener('click', function() {
+updateAvatarBtn.addEventListener('click', function() {
     clearError(AVATAR_ERROR_ID);
 
     if (!avatarInput.files.length) {
@@ -56,28 +88,25 @@ changeAvatarBtn.addEventListener('click', function() {
 
     const formData = new FormData(avatarForm);
     formData.append("action", "update-avatar");
-    const originalText = changeAvatarBtn.innerText;
-    
-    // UI Loading
-    changeAvatarBtn.innerText = "Nahrávám...";
-    changeAvatarBtn.disabled = true;
 
+    disableAllButtons();
     fetch(USER_CONTROLLER_PATH, {
         method: 'POST',
         body: formData
     })
-    .then(response => {
-        if (response.ok) return response.text();
-        throw new Error('Chyba sítě nebo serveru');
+    .then(response => handleResponse(response));
+});
+
+deleteAvatarBtn.addEventListener('click', function() {
+    clearError(AVATAR_ERROR_ID);
+
+    const formData = new FormData();
+    formData.append("action", "delete-avatar");
+
+    disableAllButtons();
+    fetch(USER_CONTROLLER_PATH, {
+        method: 'POST',
+        body: formData
     })
-    .then(data => {
-        // window.location.reload();
-    })
-    .catch(error => {
-        console.error('Chyba:', error);
-        showError(AVATAR_ERROR_ID, 'Nastala chyba při nahrávání obrázku. Zkuste to prosím znovu.');
-        
-        changeAvatarBtn.innerText = originalText;
-        changeAvatarBtn.disabled = false;
-    });
+    .then(response => handleResponse(response));
 });

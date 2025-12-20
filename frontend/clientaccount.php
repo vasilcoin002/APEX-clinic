@@ -39,14 +39,12 @@
                                     </label>
                                     <span id="avatar-error-message" class="error-message"></span>
                                     <div class="avatar-controls">
-                                        <form action="../users/userController.php" method="POST" enctype="multipart/form-data" id="upload-avatar-form">
+                                        <form action="../users/userController.php" method="POST" enctype="multipart/form-data" id="avatar-form">
                                             <input type="file" name="avatar" id="avatar-upload" accept="image/*">
-                                            <button type="button" class="action-button primary-button">
+                                            <button type="button" class="action-button primary-button" id="update-avatar-button">
                                                 Změnit avatar
                                             </button>
-                                        </form>
-                                        <form action="delete_avatar.php" method="POST" id="delete-avatar-form">
-                                            <button type="submit" class="action-button secondary-button">
+                                            <button type="button" class="action-button secondary-button" id="delete-avatar-button">
                                                 Odstranit avatar
                                             </button>
                                         </form>
