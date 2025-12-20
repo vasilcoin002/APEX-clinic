@@ -37,9 +37,10 @@
                                     <label for="avatar-upload">
                                         <img src="" alt="Avatar zatím nenastáven" id="user-avatar-placeholder" class="user-avatar">
                                     </label>
+                                    <span id="avatar-error-message" class="error-message"></span>
                                     <div class="avatar-controls">
-                                        <form action="upload_avatar.php" method="POST" enctype="multipart/form-data" id="upload-avatar-form">
-                                            <input type="file" name="avatar_file" id="avatar-upload" accept="image/*">
+                                        <form action="../users/userController.php" method="POST" enctype="multipart/form-data" id="upload-avatar-form">
+                                            <input type="file" name="avatar" id="avatar-upload" accept="image/*">
                                             <button type="button" class="action-button primary-button">
                                                 Změnit avatar
                                             </button>
@@ -119,6 +120,6 @@
             </div>
         </div>
     </div>
-    <script src="js/avatar_controls.js"></script>
+    <script src="js/clientaccount.js"></script>
 </body>
 </html>
