@@ -1,4 +1,3 @@
-
 function showError(elementId, message) {
     const errorElement = document.getElementById(elementId);
     errorElement.textContent = message;
@@ -38,9 +37,17 @@ async function handleResponse(response) {
     window.location.reload();
 }
 
-const avatarInput = document.getElementById('avatar-upload');
-const avatarPreview = document.getElementById('user-avatar-placeholder');
-const avatarForm = document.getElementById('avatar-form');
+const avatarInput = document.querySelector('#avatar-upload');
+const emailInput = document.querySelector("#email");
+const passwordInput = document.querySelector("#new-password");
+const confirmPasswordInput = document.querySelector("#confirm-password");
+const surnameInput = document.querySelector("#prijmeni");
+const nameInput = document.querySelector("#jmeno");
+const telefonInput = document.querySelector("#telefon");
+const notesInput = document.querySelector("#health-notes");
+
+const avatarPreview = document.querySelector('#user-avatar-placeholder');
+const avatarForm = document.querySelector('#avatar-form');
 const updateAvatarBtn = avatarForm.querySelector('#update-avatar-button');
 const deleteAvatarBtn = avatarForm.querySelector('#delete-avatar-button');
 
@@ -110,3 +117,21 @@ deleteAvatarBtn.addEventListener('click', function() {
     })
     .then(response => handleResponse(response));
 });
+
+const initialRequestParams = new URLSearchParams({
+    action: "get-session-user-info"
+});
+
+allForms = document.querySelectorAll("form");
+allForms.forEach(form => form.addEventListener("submit", e => e.preventDefault()));
+
+fetch(USER_CONTROLLER_PATH + "?" + initialRequestParams)
+.then(response => response.json())
+.then(data => {
+    avatarPreview.src = data["avatar_path"];
+    emailInput.value = data["email"];
+    surnameInput.value = data["surname"];
+    nameInput.value = data["name"];
+    telefonInput.value = data["phone"];
+    notesInput.value = data["comment"];
+})

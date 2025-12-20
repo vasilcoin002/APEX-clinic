@@ -56,19 +56,19 @@
                                     <h2>Přístupové údaje</h2>
                                     <form action="#" method="POST" class="password-form">
                                         <div class="form-group">
-                                            <label for="email">E-mail:</label>
-                                            <input type="email" id="email" name="email" value="klara.novakova@email.cz" required>
+                                            <label for="email">E-mail*:</label>
+                                            <input type="email" id="email" name="email" required>
                                         </div>
                                         <button type="submit" class="save-button password-button">Uložit změny</button>
                                     </form>
                                     <hr class="separator">
                                     <form action="#" method="POST" class="password-form">
                                         <div class="form-group">
-                                            <label for="new-password">Nové heslo:</label>
+                                            <label for="new-password">Nové heslo*:</label>
                                             <input type="password" id="new-password" name="new-password" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="confirm-password">Potvrzení nového hesla:</label>
+                                            <label for="confirm-password">Potvrďte heslo*:</label>
                                             <input type="password" id="confirm-password" name="confirm-password" required>
                                         </div>
                                         
@@ -82,23 +82,21 @@
                                     </form>
                                     <p class="save-confirmation password-success-msg" style="display: none;">Heslo bylo úspěšně změněno!</p>
                                 </div>
-                                
-                                <p class="save-confirmation data-success-msg" style="display: none;">Údaje byly úspěšně uloženy!</p>
                             </div>
                             <div class="info-box notes-data-box">
                                 <form action="#" method="POST" class="data-form">
                                     <h2>Osobní a kontaktní údaje</h2>
                                     <div class="form-group">
-                                        <label for="prijmeni">Příjmení:</label>
-                                        <input type="text" id="prijmeni" name="prijmeni" value="Nováková" required>
+                                        <label for="prijmeni">Příjmení*:</label>
+                                        <input type="text" id="prijmeni" name="prijmeni" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="jmeno">Jméno:</label>
-                                        <input type="text" id="jmeno" name="jmeno" value="Klára" required>
+                                        <label for="jmeno">Jméno*:</label>
+                                        <input type="text" id="jmeno" name="jmeno" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="telefon">Telefon:</label>
-                                        <input type="tel" id="telefon" name="telefon" value="+420 123 456 789" required>
+                                        <label for="telefon">Telefon*:</label>
+                                        <input type="tel" id="telefon" name="telefon" required>
                                     </div>
                                     
                                     <button type="submit" class="save-button">Uložit změny</button>
