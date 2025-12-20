@@ -34,7 +34,9 @@
                 <div class="account-sections-wrapper">
                     <div class="info-box personal-data-box">
                         <div class="avatar-container">
-                            <img alt="Avatar zatím nenastáven" id="user-avatar-placeholder" class="user-avatar">
+                            <label for="avatar-upload">
+                                <img alt="Avatar zatím nenastáven" id="user-avatar-placeholder" class="user-avatar">
+                            </label>
                             <div class="avatar-controls">
                                 <form action="upload_avatar.php" method="POST" enctype="multipart/form-data" id="upload-avatar-form">
                                     
@@ -74,7 +76,7 @@
                                     <input type="password" id="confirm-password" name="confirm-password" required>
                                 </div>
                                 
-                                <button type="submit" class="save-button password-button">Změnit změny</button>
+                                <button type="submit" class="save-button password-button">Uložit změny</button>
                             </form>
                         <hr class="separator">
                             <form action="#" method="POST" id="logout-form">
@@ -90,8 +92,8 @@
                     </div>
 
                     <div class="info-box notes-data-box">
-                        <h2>Osobní a kontaktní údaje</h2>
                         <form action="#" method="POST" class="data-form">
+                            <h2>Osobní a kontaktní údaje</h2>
                             <div class="form-group">
                                 <label for="prijmeni">Příjmení:</label>
                                 <input type="text" id="prijmeni" name="prijmeni" value="Nováková" required>
@@ -106,14 +108,14 @@
                             </div>
                             
                             <button type="submit" class="save-button">Uložit změny</button>
-                        <hr class="separator">
+                            <hr class="separator">
 
-                        <h2>Moje zdravotní poznámky</h2>
+                            <h2>Moje zdravotní poznámky</h2>
                             <div class="form-group">
                                 <label for="health-notes">Poznámky (pro Vás a Vašeho lékaře):</label>
                                 <textarea id="health-notes" name="health-notes" rows="10" placeholder="Zde můžete psát poznámky o svém zdraví, které chcete mít na jednom místě, např. reakce na léky, otázky pro lékaře, apod."></textarea>
                             </div>
-                            <button type="submit" class="save-button">Uložit poznámky</button>
+                            <button type="submit" class="save-button">Uložit změny</button>
                         </form>
                 </div>
             </div>
