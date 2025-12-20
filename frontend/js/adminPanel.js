@@ -8,9 +8,16 @@ async function handleExceptionResponse(response) {
     if (response.status === 401 || response.status === 403) {
         location.reload();
     }
-    return response.json();
-}
+    // return response.json();
 
+
+    const allButtons = document.querySelectorAll('button');
+    allButtons.forEach(btn => btn.disabled = false);
+    const data = await response.json();
+    // Здесь можно добавить alert или вывод сообщения об ошибке в UI
+    console.error("Server error:", data);
+    return data;
+}
 async function renderPagination(numberOfUsers) {
     let totalPages = Math.ceil(numberOfUsers / numberOfUsersOnPage);
 
@@ -87,6 +94,9 @@ async function renderUser(user) {
 
         // из ивента достаем ту кнопку, на которую кликнули
         const buttonClicked = e.submitter;
+        const buttonsInRow= controllForm.querySelectorAll("button");
+        // блокируем все кнопки в этой строке, чтобы не было двойных кликов
+        buttonsInRow.forEach(btn => { btn.disabled = true; btn.style.opacity = "0.5"; });
 
         // симуляция того, что запрос на сервер будет послан из формы,
         // хотя на самом деле из js
@@ -97,7 +107,12 @@ async function renderUser(user) {
             method: "POST",
             body: formData
         })
-        .then(handleResponse);
+        .then(handleResponse)
+        .catch((error) => {
+            console.error('Error:', error);
+            buttonsInRow.forEach(btn => { btn.disabled = false; btn.style.opacity = "1"; });
+        });
+    
     };
 
     tableRow.appendChild(controllCell);
