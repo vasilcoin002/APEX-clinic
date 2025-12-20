@@ -6,17 +6,23 @@ function highlightField(fieldId) {
 
 async function handleExceptionResponse(response) {
     const data = await response.json();
-    
+    const submitBtn = document.querySelector(".submitBtn");
+    if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Přihlásit se";
+    }
+
     inputNames = Object.keys(data);
     inputNames.forEach(function (inputName) {
         highlightField(inputName);
-        document.getElementById(inputName + "-error-message").innerText = data[inputName];
+        const errorElement = document.getElementById(inputName + "-error-message");
+        errorElement.innerText = data[inputName];
     });
 }
 
 async function handleResponse(response) {
     if (response.status !== 200) {
-        handleExceptionResponse(response);
+        await handleExceptionResponse(response);
         return;
     }
     
@@ -25,17 +31,14 @@ async function handleResponse(response) {
 
 function validateLoginForm(event) {
     event.preventDefault(); // Останавливаем отправку формы
-
-    // Убираем старую подсветку
+    const submitBtn = document.querySelector(".submitBtn");
     let fields = ["email", "password"];
+// сброс старых ошибок и рамок
     fields.forEach(function(id) {
-        document.getElementById(id).classList.remove("error-border");
-    });
-
-    // Очищаем старые сообщения об ошибках
-    let errorMessages = ["email-error-message", "password-error-message"];
-    errorMessages.forEach(function(id) {
-        document.getElementById(id).innerText = "";
+        const field = document.getElementById(id);
+        const errorMessage = document.getElementById(id + "-error-message");
+        if(field) field.classList.remove("error-border");
+        if(errorMessage) errorMessage.innerText = "";
     });
 
     let hasError = false;
@@ -58,6 +61,10 @@ function validateLoginForm(event) {
         return false;
     }
 
+
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Přihlašování...";
+
     const formData = new FormData();
     formData.append("action", "login");
     formData.append("email", emailInput.value);
@@ -67,7 +74,12 @@ function validateLoginForm(event) {
             method: "POST",
             body: formData
     })
-    .then((response) => handleResponse(response));
+    .then((response) => handleResponse(response))
+    .catch((error) => {
+        console.error('Error:', error);
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Přihlásit se";
+    });
 
 }
 
