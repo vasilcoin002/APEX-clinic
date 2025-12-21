@@ -62,8 +62,8 @@ const updateAvatarBtn = avatarForm.querySelector('#update-avatar-button');
 const deleteAvatarBtn = avatarForm.querySelector('#delete-avatar-button');
 const updateEmailBtn = emailForm.querySelector("button");
 const updatePasswordBtn = passwordForm.querySelector("button");
-const updatePersonalDataBtn = personalDataForm.querySelectorAll("button")[0];
-const updateNotesBtn = personalDataForm.querySelectorAll("button")[1];
+const updatePersonalDataBtn = personalDataForm.querySelector("button");
+const logoutBtn = document.querySelector("#logout-form").querySelector("button");
 
 allButtons = document.querySelectorAll("button");
 allForms = document.querySelectorAll("form");
@@ -106,7 +106,6 @@ avatarInput.addEventListener('change', function(event) {
     };
     reader.readAsDataURL(file);
 });
-
 
 updateAvatarBtn.addEventListener('click', function() {
     clearError(AVATAR_ERROR_ID);
@@ -155,6 +154,57 @@ updateEmailBtn.addEventListener('click', function() {
     })
     .then(response => handleResponse(response));
 });
+
+updatePasswordBtn.addEventListener("click", function() {
+    clearError(PASSWORD_ERROR_ID);
+    clearError(CONFIRM_PASSWORD_ERROR_ID);
+
+    if (passwordInput.value != confirmPasswordInput.value) {
+        showError(PASSWORD_ERROR_ID, "Hesla se neshodují");
+        showError(CONFIRM_PASSWORD_ERROR_ID, "Hesla se neshodují");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("password", passwordInput.value);
+    formData.append("action", "update-password");
+
+    disableAllButtons();
+    fetch(USER_CONTROLLER_PATH, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => handleResponse(response));
+})
+
+logoutBtn.addEventListener("click", function() {
+    const formData = new FormData();
+    formData.append("action", "logout");
+
+    disableAllButtons();
+    fetch(USER_CONTROLLER_PATH, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => handleResponse(response));
+})
+
+updatePersonalDataBtn.addEventListener("click", function() {
+    clearError(NAME_ERROR_ID);
+    clearError(SURNAME_ERROR_ID);
+    clearError(PHONE_ERROR_ID);
+    clearError(COMMENT_ERROR_ID);
+
+    const formData = new FormData(personalDataForm);
+    formData.append("action", "update-profile");
+
+    disableAllButtons();
+    fetch(USER_CONTROLLER_PATH, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => handleResponse(response));
+})
 
 const initialRequestParams = new URLSearchParams({
     action: "get-session-user-info"
