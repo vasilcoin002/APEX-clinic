@@ -109,7 +109,7 @@
             </div> <!--content_list-grid-->
 
             <div class="block_show_all_services">
-              <a href="sluzby.html" class="btn_common-blue sz18">
+              <a href="sluzby.php" class="btn_common-blue sz18">
               Zobrazit všechny služby
               </a>
             </div> <!--block_show_all_services-->
