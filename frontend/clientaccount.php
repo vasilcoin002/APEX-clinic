@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="css/vars.css" media="screen">
 <link rel="stylesheet" href="css/vars_print.css" media="print">
 <link rel="stylesheet" href="css/clientaccount.css">
+<link rel="stylesheet" href="css/errors.css">
 
 <title>APEX Medical</title>
 </head>

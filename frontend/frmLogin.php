@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/header-footer.css">
     <link rel="stylesheet" href="css/responsive/header-footer.css">
     <link rel="stylesheet" href="css/frmlogin.css"> 
+    <link rel="stylesheet" href="css/errors.css">
     <title>APEX Medical - Přihlášení</title>
 </head>
 <body>

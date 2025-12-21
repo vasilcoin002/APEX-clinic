@@ -105,22 +105,10 @@
     box-shadow: 0 8px 20px rgba(0, 112, 255, 0.3);
 }
 
-
-
-
 .menu .div a.active {
     color: #dfa52b;
     padding-bottom: 5px;
     border-bottom: 3px solid #ebb217;
-}
-.error-border {
-    border: 2px solid red !important;
-}
-
-#errorMessage {
-    color: red;
-    margin-top: 10px;
-    font-size: 14px;
 }
 
 

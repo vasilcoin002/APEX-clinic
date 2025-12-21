@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/header-footer.css">
     <link rel="stylesheet" href="css/responsive/header-footer.css">
     <link rel="stylesheet" href="css/frmRegister.css"> 
+    <link rel="stylesheet" href="css/errors.css">
     <title>APEX Medical - Registrace</title>
 </head>
 <body>
@@ -18,7 +19,6 @@
             $page_name = "registration";
             require_once "header.php";
         ?>
-        <!-- TODO rewrite validation: buggs in password writing (e.g for Qwerty shows taht passwords are not same) -->
         <main class="main">
             <div class="container center-form-container">
                 
