@@ -391,6 +391,7 @@
             $renamed_file_name = $target_dir . "{$user->get_id()}.{$image_file_type}";
 
             move_uploaded_file($_FILES["avatar"]["tmp_name"], $renamed_file_name);
+            unlink($user->get_avatar_path());
             $user->set_avatar_path($renamed_file_name);
             $this->user_repository->update_user($user);
         }
