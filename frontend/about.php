@@ -76,18 +76,12 @@
                 <li>Fyzická rehabilitace</li>
               </ul>
             </div>
-            <img src="images/logo.png" class="logo-box alt="APEX Medical">
+            <img src="images/logo.png" class="logo-box" alt="APEX Medical">
         </div>  <!-- grid -->
 
     </div> <!--container-->
   
-  
-
-
-        <!-- FOOTER -->
-         <?php require_once "footer.php" ?>   
-        <!-- FOOTER -->
-
+    <?php require_once "footer.php" ?>   
 
   <div class="copyright sz12">&copy; 2024 APEX Medical Center. Všechna práva vyhrazena.</div>
 

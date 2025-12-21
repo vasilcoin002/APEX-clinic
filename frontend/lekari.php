@@ -162,15 +162,10 @@
                Zobrazit více lékařů <span class="arrow-icon">▼</span>
             </button>
          </div>
-         <!-- КНОПКА "показать больше врачей" -->
 
-
-      <!-- FOOTER -->
       <div class="container">
          <?php require_once "footer.php" ?>
-         <!-- FOOTER -->
-
-      </div> <!--container-->
+      </div>
 
       </div> <!--container-->
    </div> <!-- wrapper -->  

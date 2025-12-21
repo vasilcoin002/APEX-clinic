@@ -135,23 +135,12 @@
             </div> 
           </div>
       </div>
-      <!-- #####################################################################################  -->
 
-
-
-        <!-- FOOTER -->
-         <?php require_once "footer.php" ?>   
-        <!-- FOOTER -->
-
+      <?php require_once "footer.php" ?>   
 
     </div> <!--container-->
-  
   </div> <!-- wrapper -->
-
   <div class="copyright sz12">&copy; 2024 APEX Medical Center. Všechna práva vyhrazena.</div>
 
-
-  <!-- Подключение внешнего файла script.js -->
-  <!-- <script src="js/script.js"></script> -->
 </body> 
 </html>

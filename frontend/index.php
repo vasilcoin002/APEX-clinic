@@ -125,8 +125,8 @@
               </div>
 
               <div class="hero-buttons">
-                <a href="lekari.html" class="btn_common-blue">Prohlédnout lékaře</a>
-                <a href="contacts.html" class="btn_common-blue">Kontaktovat nás</a>
+                <a href="lekari.php" class="btn_common-blue">Prohlédnout lékaře</a>
+                <a href="contacts.php" class="btn_common-blue">Kontaktovat nás</a>
               </div>
             </div> 
 
@@ -151,11 +151,6 @@
     <div class="copyright sz12">&copy; 2024 APEX Medical Center. Všechna práva vyhrazena.</div>
 
   </div> <!-- wrapper -->
-
-
-  
-<!-- Подключение внешнего файла script.js -->
-<!-- <script src="js/script.js"></script> -->
 
 </body> 
 </html>
