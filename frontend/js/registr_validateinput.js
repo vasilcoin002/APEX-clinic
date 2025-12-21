@@ -1,4 +1,4 @@
-import { Validators } from 'validators.js';
+import { Validators } from './validators.js';
 
 function highlightField(fieldId) {
     const field = document.getElementById(fieldId);
@@ -33,7 +33,7 @@ async function handleResponse(response) {
 
 function setFieldError(fieldId, message) {
     const errorElement = document.getElementById(`${fieldId}-error-message`);
-    const fieldElement = document.getElementById(fieldId); // Assuming input IDs match field names
+    const fieldElement = document.getElementById(fieldId);
     
     if (errorElement) errorElement.innerText = message;
     
@@ -54,20 +54,20 @@ function clearErrors(fields) {
 }
 
 export function validateRegistrationForm(event) {
-    event.preventDefault(); 
+    event.preventDefault();
     
     const submitBtn = document.querySelector(".submitBtn");
     
     const inputs = {
-        surname: document.getElementById('surnameInput'), // Adjust IDs if needed
-        name: document.getElementById('nameInput'),
-        phone: document.getElementById('phoneInput'),
-        email: document.getElementById('emailInput'),
-        password: document.getElementById('passwordInput'),
-        confirm: document.getElementById('confirmPasswordInput')
+        surname: document.getElementById('surname'),
+        name: document.getElementById('name'),
+        phone: document.getElementById('phone'),
+        email: document.getElementById('email'),
+        password: document.getElementById('password'),
+        confirm: document.getElementById('confirm-password')
     };
 
-    const fieldNames = ["surname", "name", "email", "phone", "password", "confirm_password"];
+    const fieldNames = ["surname", "name", "email", "phone", "password", "confirm-password"];
     clearErrors(fieldNames);
 
     let hasError = false;
@@ -118,10 +118,10 @@ export function validateRegistrationForm(event) {
 
     // 4. Проверка если оба поля с паролями одинаковые
     if (!Validators.isRequired(inputs.confirm.value)) {
-        setFieldError("confirm_password", "Potvrzení hesla musí být vyplněno!");
+        setFieldError("confirm-password", "Potvrzení hesla musí být vyplněno!");
         hasError = true;
     } else if (!Validators.doPasswordsMatch(inputs.password.value, inputs.confirm.value)) {
-        setFieldError("confirm_password", "Hesla se neshodují!");
+        setFieldError("confirm-password", "Hesla se neshodují!");
         setFieldError("password", "Hesla se neshodují!");
         hasError = true;
     }
@@ -151,12 +151,5 @@ export function validateRegistrationForm(event) {
     });
 }
 
-let surnameInput = document.getElementById("surname");
-let nameInput = document.getElementById("name");
-let emailInput = document.getElementById("email");
-let phoneInput = document.getElementById("phone");
-let passwordInput = document.getElementById("password");
-let confirmPasswordInput = document.getElementById("confirm_password");
-
 const form = document.querySelector("form");
-form.addEventListener("submit", validateRegistrationForm)
+form.addEventListener("submit", validateRegistrationForm);
