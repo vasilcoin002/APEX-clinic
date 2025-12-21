@@ -102,9 +102,6 @@
                                         <input type="tel" id="phone" name="phone" required>
                                         <span id="phone-error-message"></span>
                                     </div>
-                                    <button type="submit" class="save-button">Uložit změny</button>
-                                    <hr class="separator">
-
                                     <h2>Moje zdravotní poznámky</h2>
                                     <div class="form-group">
                                         <label for="comment">Poznámky (pro Vás a Vašeho lékaře):</label>

@@ -141,6 +141,21 @@ deleteAvatarBtn.addEventListener('click', function() {
     .then(response => handleResponse(response));
 });
 
+// TODO add validation
+updateEmailBtn.addEventListener('click', function() {
+    clearError(EMAIL_ERROR_ID);
+
+    const formData = new FormData(emailForm);
+    formData.append("action", "update-email");
+
+    disableAllButtons();
+    fetch(USER_CONTROLLER_PATH, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => handleResponse(response));
+});
+
 const initialRequestParams = new URLSearchParams({
     action: "get-session-user-info"
 });
