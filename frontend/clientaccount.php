@@ -57,7 +57,7 @@
                                     <form action="#" method="POST" id="email-form">
                                         <div class="form-group">
                                             <label for="email">E-mail*:</label>
-                                            <input type="email" id="email" name="email" required>
+                                            <input type="email" id="email" name="email">
                                             <span id="email-error-message"></span>
                                         </div>
                                         <button type="submit" class="save-button">Uložit změny</button>
@@ -66,12 +66,12 @@
                                     <form action="#" method="POST" id="password-form">
                                         <div class="form-group">
                                             <label for="password">Nové heslo*:</label>
-                                            <input type="password" id="password" name="password" required>
+                                            <input type="password" id="password" name="password">
                                             <span id="password-error-message"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="confirm-password">Potvrďte heslo*:</label>
-                                            <input type="password" id="confirm-password" name="confirm-password" required>
+                                            <input type="password" id="confirm-password" name="confirm-password">
                                             <span id="confirm-password-error-message"></span>
                                         </div>
                                         <button type="submit" class="save-button">Uložit změny</button>
@@ -89,17 +89,17 @@
                                     <h2>Osobní a kontaktní údaje</h2>
                                     <div class="form-group">
                                         <label for="name">Jméno*:</label>
-                                        <input type="text" id="name" name="name" required>
+                                        <input type="text" id="name" name="name">
                                         <span id="name-error-message"></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="surname">Příjmení*:</label>
-                                        <input type="text" id="surname" name="surname" required>
+                                        <input type="text" id="surname" name="surname">
                                         <span id="surname-error-message"></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Telefon*:</label>
-                                        <input type="tel" id="phone" name="phone" required>
+                                        <input type="tel" id="phone" name="phone">
                                         <span id="phone-error-message"></span>
                                     </div>
                                     <h2>Moje zdravotní poznámky</h2>
@@ -117,6 +117,6 @@
             </div>
         </div>
     </div>
-    <script src="js/clientaccount.js"></script>
+    <script type="module" src="js/clientaccount.js"></script>
 </body>
 </html>

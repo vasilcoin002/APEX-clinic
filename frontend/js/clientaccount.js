@@ -1,36 +1,44 @@
+import { Validators } from './validators.js';
+
 function showError(elementId, message) {
     const errorElement = document.getElementById(elementId);
-    errorElement.textContent = message;
+    if (errorElement) errorElement.textContent = message;
+    const inputId = elementId.replace("-error-message", ""); 
+    highlightField(inputId);
 }
 
 function clearError(elementId) {
     const errorElement = document.getElementById(elementId);
-    errorElement.textContent = '';
+    if (errorElement) errorElement.textContent = '';
+    const inputId = elementId.replace("-error-message", "");
+    const field = document.getElementById(inputId);
+    if (field) field.classList.remove("error-border");
 }
 
-// TODO move all error styles to separate file
 function highlightField(fieldId) {
     const field = document.getElementById(fieldId);
-    field.classList.add("error-border");
+    if (field) field.classList.add("error-border");
 }
 
 function disableAllButtons() {
-    allButtons.forEach(button => button.disabled = true)
+    allButtons.forEach(button => button.disabled = true);
 }
 
 function enableAllButtons() {
-    allButtons.forEach(button => button.disabled = false)
+    allButtons.forEach(button => button.disabled = false);
 }
 
 async function handleExceptionResponse(response) {
     const data = await response.json();
     
-    inputNames = Object.keys(data);
+    const inputNames = Object.keys(data);
     inputNames.forEach(function (inputName) {
         console.log(inputName);
 
         highlightField(inputName);
-        document.getElementById(inputName + "-error-message").innerText = data[inputName];
+        const errorId = inputName + "-error-message";
+        const errorEl = document.getElementById(errorId);
+        if(errorEl) errorEl.textContent = data[inputName];
     });
     enableAllButtons();
 }
@@ -65,8 +73,8 @@ const updatePasswordBtn = passwordForm.querySelector("button");
 const updatePersonalDataBtn = personalDataForm.querySelector("button");
 const logoutBtn = document.querySelector("#logout-form").querySelector("button");
 
-allButtons = document.querySelectorAll("button");
-allForms = document.querySelectorAll("form");
+const allButtons = document.querySelectorAll("button");
+const allForms = document.querySelectorAll("form");
 allForms.forEach(form => form.addEventListener("submit", e => e.preventDefault()));
 
 const AVATAR_ERROR_ID = 'avatar-error-message';
@@ -80,8 +88,10 @@ const COMMENT_ERROR_ID = 'comment-error-message'
 
 const USER_CONTROLLER_PATH = '../users/userController.php';
 
+// Avatar logic
 const MAX_SIZE = 16 * 1024 * 1024; // 16MB
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
+
 avatarInput.addEventListener('change', function(event) {
     clearError(AVATAR_ERROR_ID);
     
@@ -95,7 +105,7 @@ avatarInput.addEventListener('change', function(event) {
     }
 
     if (file.size > MAX_SIZE) {
-        showError(AVATAR_ERROR_ID, 'Chyba: Obrázek je příliš velký (max 5MB).');
+        showError(AVATAR_ERROR_ID, 'Chyba: Obrázek je příliš velký (max 16MB).');
         avatarInput.value = ''; 
         return;
     }
@@ -140,9 +150,22 @@ deleteAvatarBtn.addEventListener('click', function() {
     .then(response => handleResponse(response));
 });
 
-// TODO add validation
+// Email Logic
 updateEmailBtn.addEventListener('click', function() {
     clearError(EMAIL_ERROR_ID);
+
+    const emailValue = emailInput.value;
+    let hasError = false;
+
+    if (!Validators.isRequired(emailValue)) {
+        showError(EMAIL_ERROR_ID, "E-mail musí být vyplněno!");
+        hasError = true;
+    } else if (!Validators.isValidEmail(emailValue)) {
+        showError(EMAIL_ERROR_ID, "E-mail není ve správném formátu!");
+        hasError = true;
+    }
+
+    if (hasError) return;
 
     const formData = new FormData(emailForm);
     formData.append("action", "update-email");
@@ -155,19 +178,95 @@ updateEmailBtn.addEventListener('click', function() {
     .then(response => handleResponse(response));
 });
 
+// Password Logic
 updatePasswordBtn.addEventListener("click", function() {
     clearError(PASSWORD_ERROR_ID);
     clearError(CONFIRM_PASSWORD_ERROR_ID);
 
-    if (passwordInput.value != confirmPasswordInput.value) {
-        showError(PASSWORD_ERROR_ID, "Hesla se neshodují");
-        showError(CONFIRM_PASSWORD_ERROR_ID, "Hesla se neshodují");
-        return;
+    const passValue = passwordInput.value;
+    const confirmValue = confirmPasswordInput.value;
+    let hasError = false;
+
+    // 1. Required Check
+    if (!Validators.isRequired(passValue)) {
+        showError(PASSWORD_ERROR_ID, "Heslo musí být vyplněno!");
+        hasError = true;
+    } else {
+        // 2. Complexity Check
+        const passCheck = Validators.getPasswordErrors(passValue);
+        if (!passCheck.isValid) {
+            const messages = [];
+            if (passCheck.missing.includes("length")) messages.push("musí být minimálně 8 symbolů dlouhé");
+            if (passCheck.missing.includes("uppercase")) messages.push("musí obsahovat velké písmeno");
+            if (passCheck.missing.includes("lowercase")) messages.push("musí obsahovat malé písmeno");
+            if (passCheck.missing.includes("digit")) messages.push("musí obsahovat číslici");
+
+            showError(PASSWORD_ERROR_ID, "Heslo je příliš slabé: " + messages.join(", "));
+            hasError = true;
+        }
     }
 
+    // 3. Confirm Required
+    if (!Validators.isRequired(confirmValue)) {
+        showError(CONFIRM_PASSWORD_ERROR_ID, "Potvrzení hesla musí být vyplněno!");
+        hasError = true;
+    }
+
+    // 4. Matching Check
+    if (!hasError && !Validators.doPasswordsMatch(passValue, confirmValue)) {
+        showError(PASSWORD_ERROR_ID, "Hesla se neshodují!");
+        showError(CONFIRM_PASSWORD_ERROR_ID, "Hesla se neshodují!");
+        hasError = true;
+    }
+
+    if (hasError) return;
+
     const formData = new FormData();
-    formData.append("password", passwordInput.value);
+    formData.append("password", passValue);
     formData.append("action", "update-password");
+
+    disableAllButtons();
+    fetch(USER_CONTROLLER_PATH, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => handleResponse(response));
+})
+
+// Personal Data Logic 
+updatePersonalDataBtn.addEventListener("click", function() {
+    clearError(NAME_ERROR_ID);
+    clearError(SURNAME_ERROR_ID);
+    clearError(PHONE_ERROR_ID);
+    clearError(COMMENT_ERROR_ID);
+
+    let hasError = false;
+
+    // Validate Name
+    if (!Validators.isRequired(nameInput.value)) {
+        showError(NAME_ERROR_ID, "Jméno musí být vyplněno!");
+        hasError = true;
+    }
+
+    // Validate Surname
+    if (!Validators.isRequired(surnameInput.value)) {
+        showError(SURNAME_ERROR_ID, "Příjmení musí být vyplněno!");
+        hasError = true;
+    }
+
+    // Validate Phone
+    if (!Validators.isRequired(telefonInput.value)) {
+        showError(PHONE_ERROR_ID, "Telefonní číslo musí být vyplněno!");
+        hasError = true;
+    } else if (!Validators.isValidPhone(telefonInput.value)) {
+        showError(PHONE_ERROR_ID, "Telefonní číslo musí obsahovat číslice");
+        hasError = true;
+    }
+
+    if (hasError) return;
+
+    const formData = new FormData(personalDataForm);
+    formData.append("action", "update-profile");
 
     disableAllButtons();
     fetch(USER_CONTROLLER_PATH, {
@@ -189,23 +288,8 @@ logoutBtn.addEventListener("click", function() {
     .then(response => handleResponse(response));
 })
 
-updatePersonalDataBtn.addEventListener("click", function() {
-    clearError(NAME_ERROR_ID);
-    clearError(SURNAME_ERROR_ID);
-    clearError(PHONE_ERROR_ID);
-    clearError(COMMENT_ERROR_ID);
 
-    const formData = new FormData(personalDataForm);
-    formData.append("action", "update-profile");
-
-    disableAllButtons();
-    fetch(USER_CONTROLLER_PATH, {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => handleResponse(response));
-})
-
+// Initial Data Load
 const initialRequestParams = new URLSearchParams({
     action: "get-session-user-info"
 });

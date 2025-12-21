@@ -1,3 +1,4 @@
+// TODO move all error styles to separate file and connect clientaccount to them
 export const Validators = {
     isRequired: (value) => {
         return value && value.trim() !== "";
