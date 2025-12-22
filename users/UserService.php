@@ -20,13 +20,13 @@
             $user = $this->user_repository->find_user_by_email($userDTO->email);
 
             if (!isset($user)) {
-                $GLOBALS["errors"]["email"] = "User not found. Please, provide the rigth email";
+                $GLOBALS["errors"]["email"] = "Uživatel nenalezen. Zadejte prosím správný e-mail.";
                 http_response_code(404);
                 throw new InvalidArgumentException();
             }
 
             if (!password_verify($userDTO->password, $user->get_hashed_password())) {
-                $GLOBALS["errors"]["password"] = "Password is incorrect. Please, provide the right one";
+                $GLOBALS["errors"]["password"] = "Heslo je nesprávné. Zadejte prosím správné heslo.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -36,7 +36,7 @@
 
         public function check_if_email_is_in_user_dto(UserDTO $userDTO): void {
             if (empty($userDTO->email)) {
-                $GLOBALS["errors"]["email"] = "Email is required";
+                $GLOBALS["errors"]["email"] = "E-mail je povinný.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -44,7 +44,7 @@
 
         public function check_if_id_is_in_user_dto(UserDTO $userDTO): void {
             if (empty($userDTO->id)) {
-                $GLOBALS["errors"]["id"] = "Id is required";
+                $GLOBALS["errors"]["id"] = "ID je povinné.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -52,7 +52,7 @@
 
         public function check_if_phone_is_in_user_dto(UserDTO $userDTO): void {
             if (empty($userDTO->phone)) {
-                $GLOBALS["errors"]["phone"] = "Phone number is required";
+                $GLOBALS["errors"]["phone"] = "Telefonní číslo je povinné.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -60,7 +60,7 @@
 
         public function check_if_password_is_in_user_dto(UserDTO $userDTO): void {
             if (empty($userDTO->password)) {
-                $GLOBALS["errors"]["password"] = "Password is required";
+                $GLOBALS["errors"]["password"] = "Heslo je povinné.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -69,11 +69,11 @@
         public function check_if_email_and_password_is_in_user_dto(UserDTO $userDTO): void {
 
             if (empty($userDTO->email)) {
-                $GLOBALS["errors"]["email"] = "Email is required";
+                $GLOBALS["errors"]["email"] = "E-mail je povinný.";
             }
 
             if (empty($userDTO->password)) {
-                $GLOBALS["errors"]["password"] = "Password is required";
+                $GLOBALS["errors"]["password"] = "Heslo je povinné.";
             }
 
             if (count($GLOBALS["errors"]) !== 0) {
@@ -86,7 +86,7 @@
             $this->check_if_session_is_active();
             $user = $this->user_repository->find_user_by_id($_SESSION["user_id"]);
             if ($user == null) {
-                $GLOBALS["errors"]["session"] = "User from session is not found";
+                $GLOBALS["errors"]["session"] = "Uživatel ze sezení (session) nebyl nalezen.";
                 http_response_code(404);
                 throw new UnexpectedValueException();
             }
@@ -114,7 +114,7 @@
 
         private function validate_email($email): void {
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-                $GLOBALS["errors"]["email"] = "Email is not valid. Please, provide the valid";
+                $GLOBALS["errors"]["email"] = "E-mail není platný. Zadejte prosím platný formát.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -125,26 +125,26 @@
 
             $minLengthPattern = '/.{8,}/';
             if (!preg_match($minLengthPattern, $password)) {
-                $failures[] = 'it must be at least 8 characters long';
+                $failures[] = 'musí být alespoň 8 znaků dlouhé';
             }
 
             $uppercasePattern = '/[A-Z]/';
             if (!preg_match($uppercasePattern, $password)) {
-                $failures[] = 'it must contain at least one uppercase letter (A-Z)';
+                $failures[] = 'musí obsahovat alespoň jedno velké písmeno (A-Z)';
             }
 
             $lowercasePattern = '/[a-z]/';
             if (!preg_match($lowercasePattern, $password)) {
-                $failures[] = 'it must contain at least one lowercase letter (a-z)';
+                $failures[] = 'musí obsahovat alespoň jedno malé písmeno (a-z)';
             }
 
             $digitPattern = '/\d/';
             if (!preg_match($digitPattern, $password)) {
-                $failures[] = 'it must contain at least one number (0-9)';
+                $failures[] = 'musí obsahovat alespoň jednu číslici (0-9)';
             }
 
             if (!empty($failures)) {
-                $GLOBALS["errors"]["password"] = "Password is too weak: " . implode(", ", $failures);
+                $GLOBALS["errors"]["password"] = "Heslo je příliš slabé: " . implode(", ", $failures);
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -152,7 +152,7 @@
 
         private function validate_phone($phone) : void {
             if (!preg_match('/\d/', $phone)) {
-                $GLOBALS["errors"]["phone"] = "Phone number can't be empty or without digits";
+                $GLOBALS["errors"]["phone"] = "Telefonní číslo nesmí být prázdné a musí obsahovat číslice.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -160,7 +160,7 @@
 
         private function validate_name($name): void {
             if (strlen($name) === 0) {
-                $GLOBALS["errors"]["name"] = "Name is required";
+                $GLOBALS["errors"]["name"] = "Jméno je povinné.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -168,7 +168,7 @@
 
         private function validate_surname($surname): void {
             if (strlen($surname) === 0) {
-                $GLOBALS["errors"]["surname"] = "Surname must be filled";
+                $GLOBALS["errors"]["surname"] = "Příjmení musí být vyplněno.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -176,7 +176,7 @@
 
         private function validate_comment($comment): void {
             if (strlen($comment) > 1000) {
-                $GLOBALS["errors"]["comment"] = "Comment is too long. Please, write it in 1000 symbols";
+                $GLOBALS["errors"]["comment"] = "Komentář je příliš dlouhý. Prosím, omezte jej na 1000 znaků.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -188,19 +188,19 @@
 
         public function check_if_user_dto_is_complete_for_registration(UserDTO $userDTO): void {
             if (!isset($userDTO->email)) {
-                $GLOBALS["errors"]["email"] = "Email is required";
+                $GLOBALS["errors"]["email"] = "E-mail je povinný.";
             }
             if (!isset($userDTO->password)) {
-                $GLOBALS["errors"]["password"] = "Password is required";
+                $GLOBALS["errors"]["password"] = "Heslo je povinné.";
             }
             if (!isset($userDTO->name)) {
-                $GLOBALS["errors"]["name"] = "Name is required";
+                $GLOBALS["errors"]["name"] = "Jméno je povinné.";
             }
             if (!isset($userDTO->surname)) {
-                $GLOBALS["errors"]["surname"] = "Surname is required";
+                $GLOBALS["errors"]["surname"] = "Příjmení je povinné.";
             }
             if (!isset($userDTO->phone)) {
-                $GLOBALS["errors"]["phone"] = "Phone is required";
+                $GLOBALS["errors"]["phone"] = "Telefon je povinný.";
             }
 
             if (count($GLOBALS["errors"]) !== 0) {
@@ -257,7 +257,7 @@
 
         public function check_if_session_is_active(): void {
             if (!$this->check_if_logined()) {
-                $GLOBALS["errors"]["session"] = "You need to be authorized to do this action";
+                $GLOBALS["errors"]["session"] = "K provedení této akce musíte být přihlášeni.";
                 http_response_code(401);
                 throw new BadMethodCallException();
             }
@@ -273,7 +273,7 @@
             $this->check_if_email_is_in_user_dto($userDTO);
 
             if ($userDTO->email == $user->get_email()) {
-                $GLOBALS["errors"]["email"] = "You provided the same email as you already have";
+                $GLOBALS["errors"]["email"] = "Zadali jste stejný e-mail, jaký již používáte.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -330,7 +330,7 @@
 
             $this->check_if_password_is_in_user_dto($userDTO);
             if (password_verify($userDTO->password, $user->get_hashed_password())) {
-                $GLOBALS["errors"]["password"] = "You provided the same password as you already have";
+                $GLOBALS["errors"]["password"] = "Zadali jste stejné heslo, jaké již používáte.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -344,7 +344,7 @@
             $user = $this->get_user_from_session();
 
             if ($user->get_avatar_path() == null) {
-                $GLOBALS["errors"]["avatar"] = "You don't have avatar to delete";
+                $GLOBALS["errors"]["avatar"] = "Nemáte žádný avatar k smazání.";
                 http_response_code(400);
                 throw new BadMethodCallException();
             }
@@ -358,7 +358,7 @@
             $user = $this->get_user_from_session();
 
             if (!isset($_FILES['avatar']) || $_FILES['avatar']['error'] === UPLOAD_ERR_NO_FILE) {
-                $GLOBALS["errors"]["avatar"] = "File is not provided. Please, provide an image";
+                $GLOBALS["errors"]["avatar"] = "Soubor nebyl poskytnut. Nahrajte prosím obrázek.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -369,21 +369,21 @@
 
             $ALLOWED_IMAGE_FORMATS = ["png", "jpg", "jpeg", "gif"];
             if (!in_array($image_file_type, $ALLOWED_IMAGE_FORMATS)) {
-                $GLOBALS["errors"]["avatar"] = "File is not an image. Please, provide an image in one of those formats: " . implode(", ", $ALLOWED_IMAGE_FORMATS);
+                $GLOBALS["errors"]["avatar"] = "Soubor není obrázek. Nahrajte prosím obrázek v jednom z těchto formátů: " . implode(", ", $ALLOWED_IMAGE_FORMATS);
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
             
             $image_size = getimagesize($_FILES["avatar"]["tmp_name"]);
             if ($image_size == false) {
-                $GLOBALS["errors"]["avatar"] = "File is not an image. Please, provide a real image";
+                $GLOBALS["errors"]["avatar"] = "Soubor není platný obrázek.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
 
             $MAX_SIZE_MB = 16;
             if ($_FILES["avatar"]["size"] > $MAX_SIZE_MB * 1048576 - 1) {
-                $GLOBALS["errors"]["avatar"] = "File size is too big. Please, provide image with max size " . $MAX_SIZE_MB . "Mb";
+                $GLOBALS["errors"]["avatar"] = "Soubor je příliš velký. Nahrajte prosím obrázek o maximální velikosti " . $MAX_SIZE_MB . "Mb";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -391,6 +391,7 @@
             $renamed_file_name = $target_dir . "{$user->get_id()}.{$image_file_type}";
 
             move_uploaded_file($_FILES["avatar"]["tmp_name"], $renamed_file_name);
+            unlink($user->get_avatar_path());
             $user->set_avatar_path($renamed_file_name);
             $this->user_repository->update_user($user);
         }

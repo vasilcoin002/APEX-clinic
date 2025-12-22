@@ -6,7 +6,6 @@
 
     $GLOBALS["errors"] = [];
 
-    // TODO fix previous avatar stays in storage when user updated avatar to avatar with another extention.
     class UserController {
 
         private UserService $user_service;

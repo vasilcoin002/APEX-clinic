@@ -1,4 +1,4 @@
-// Функция для подсветки поля с ошибкой
+import { Validators } from './validators.js';
 
 function highlightField(fieldId) {
     const field = document.getElementById(fieldId);
@@ -31,114 +31,110 @@ async function handleResponse(response) {
     window.location.replace("frmLogin.php");
 }
 
-function validateRegistrationForm(event) {
-    event.preventDefault(); // Останавливаем отправку формы
-    const submitBtn = document.querySelector(".submitBtn");
-    let fields = ["surname", "name", "email", "phone", "password", "confirm_password"];
-    fields.forEach(function(id) {
+function setFieldError(fieldId, message) {
+    const errorElement = document.getElementById(`${fieldId}-error-message`);
+    const fieldElement = document.getElementById(fieldId);
+    
+    if (errorElement) errorElement.innerText = message;
+    
+    if (typeof highlightField === "function") {
+        highlightField(fieldId);
+    } else if (fieldElement) {
+        fieldElement.classList.add("error-border");
+    }
+}
+
+function clearErrors(fields) {
+    fields.forEach(id => {
         const field = document.getElementById(id);
-        const errorMessage = document.getElementById(id + "-error-message");
+        const errorMessage = document.getElementById(`${id}-error-message`);
         if(field) field.classList.remove("error-border");
         if(errorMessage) errorMessage.innerText = "";
     });
+}
+
+export function validateRegistrationForm(event) {
+    event.preventDefault();
+    
+    const submitBtn = document.querySelector(".submitBtn");
+    
+    const inputs = {
+        surname: document.getElementById('surname'),
+        name: document.getElementById('name'),
+        phone: document.getElementById('phone'),
+        email: document.getElementById('email'),
+        password: document.getElementById('password'),
+        confirm: document.getElementById('confirm-password')
+    };
+
+    const fieldNames = ["surname", "name", "email", "phone", "password", "confirm-password"];
+    clearErrors(fieldNames);
 
     let hasError = false;
-    if (surnameInput.value === "") {
-        document.getElementById("surname-error-message").innerText = "Příjmení musí být vyplněno!";
-        highlightField("surname");
+
+    // 1. Проверка если заполнены все необходимые поля
+    if (!Validators.isRequired(inputs.surname.value)) {
+        setFieldError("surname", "Příjmení musí být vyplněno!");
         hasError = true;
     }
 
-    if (nameInput.value === "") {
-        document.getElementById("name-error-message").innerText = "Jméno musí být vyplněno!";
-        highlightField("name");
+    if (!Validators.isRequired(inputs.name.value)) {
+        setFieldError("name", "Jméno musí být vyplněno!");
         hasError = true;
     }
 
-    if (phoneInput.value === "") {
-        document.getElementById("phone-error-message").innerText = "Telefonní číslo musí být vyplněno!";
-        highlightField("phone");
-        hasError = true;
-    } 
-    // (Регулярное выражение для проверки, если в номере есть цифры или нет)
-    else if (!/\d/.test(phoneInput.value)) {
-        document.getElementById("phone-error-message").innerText = "Telefonní číslo musí obsahovat číslice";
-        highlightField("phone");
+    if (!Validators.isRequired(inputs.email.value)) {
+        setFieldError("email", "E-mail musí být vyplněno!");
         hasError = true;
     }
 
-    if (emailInput.value === "") {
-        document.getElementById("email-error-message").innerText = "E-mail musí být vyplněno!";
-        highlightField("email");
+    // 2. Валидация телефона
+    if (!Validators.isRequired(inputs.phone.value)) {
+        setFieldError("phone", "Telefonní číslo musí být vyplněno!");
+        hasError = true;
+    } else if (!Validators.isValidPhone(inputs.phone.value)) {
+        setFieldError("phone", "Telefonní číslo musí obsahovat číslice");
         hasError = true;
     }
 
-    if (passwordInput.value === "") {
-        document.getElementById("password-error-message").innerText = "Heslo musí být vyplněno!";
-        highlightField("password");
+    // 3. Валидация пароля
+    if (!Validators.isRequired(inputs.password.value)) {
+        setFieldError("password", "Heslo musí být vyplněno!");
+        hasError = true;
+    } else {
+        const passCheck = Validators.getPasswordErrors(inputs.password.value);
+        
+        if (!passCheck.isValid) {
+            const messages = [];
+            if (passCheck.missing.includes("length")) messages.push("musí být minimálně 8 symbolů dlouhé");
+            if (passCheck.missing.includes("uppercase")) messages.push("musí obsahovat velké písmeno");
+            if (passCheck.missing.includes("lowercase")) messages.push("musí obsahovat malé písmeno");
+            if (passCheck.missing.includes("digit")) messages.push("musí obsahovat číslici");
+
+            setFieldError("password", "Heslo je příliš slabé: " + messages.join(", "));
+            hasError = true;
+        }
+    }
+
+    // 4. Проверка если оба поля с паролями одинаковые
+    if (!Validators.isRequired(inputs.confirm.value)) {
+        setFieldError("confirm-password", "Potvrzení hesla musí být vyplněno!");
+        hasError = true;
+    } else if (!Validators.doPasswordsMatch(inputs.password.value, inputs.confirm.value)) {
+        setFieldError("confirm-password", "Hesla se neshodují!");
+        setFieldError("password", "Hesla se neshodují!");
         hasError = true;
     }
 
-    const password = passwordInput.value
-
-    const isLengthValid = /.{8,}/.test(password);
-    // 2. Проверка заглавной буквы
-    const hasUpperCase = /[A-Z]/.test(password);
-    // 3. Проверка строчной буквы
-    const hasLowerCase = /[a-z]/.test(password);
-    // 4. Проверка цифры
-    const hasDigit = /\d/.test(password);
-    // Общий результат проверки
-    const isValid = isLengthValid && hasUpperCase && hasLowerCase && hasDigit;
-    if (!isValid) {
-        const messages = [];
-        if (!isLengthValid) messages.push("musí být minimálně 8 symbolů dlouhé");
-        if (!hasUpperCase) messages.push("musí obsahovat velké písmeno");
-        if (!hasLowerCase) messages.push("musí obsahovat malé písmeno");
-        if (!hasDigit) messages.push("musí obsahovat číslici");
-
-        let message = "Heslo je příliš slabé: " + messages.join(", ");
-
-        document.getElementById("password-error-message").innerText = message;
-        highlightField("password");
-        hasError = true;
-
-    }
-
-    if (confirmPasswordInput.value === "") {
-        document.getElementById("confirm_password-error-message").innerText = "Potvrzení hesla musí být vyplněno!";
-        highlightField("confirm_password");
-        hasError = true;
-    }
-
-    if (passwordInput.value !== confirmPasswordInput.value) {
-        document.getElementById("confirm_password-error-message").innerText = "Hesla se neshodují!";
-        document.getElementById("password-error-message").innerText = "Hesla se neshodují!";
-        highlightField("password");
-        highlightField("confirm_password");
-        hasError = true;
-    }
-
-    if (hasError) {
-        return false;
-    }
-
-    let userData = {
-        surname: surnameInput.value,
-        name: nameInput.value,
-        email: emailInput.value,
-        phone_number: phoneInput.value,
-        password: passwordInput.value,
-        action: "register",
-    };
+    if (hasError) return false;
 
     const formData = new FormData();
     formData.append("action", "register");
-    formData.append("email", emailInput.value);
-    formData.append("password", password);
-    formData.append("phone", phoneInput.value);
-    formData.append("name", nameInput.value);
-    formData.append("surname", surnameInput.value);
+    formData.append("surname", inputs.surname.value);
+    formData.append("name", inputs.name.value);
+    formData.append("email", inputs.email.value);
+    formData.append("phone", inputs.phone.value);
+    formData.append("password", inputs.password.value);
 
     submitBtn.disabled = true;
     submitBtn.innerText = "Probíhá registrace...";
@@ -153,15 +149,7 @@ function validateRegistrationForm(event) {
         submitBtn.disabled = false;
         submitBtn.innerText = "Registrovat se";
     });
-
 }
 
-let surnameInput = document.getElementById("surname");
-let nameInput = document.getElementById("name");
-let emailInput = document.getElementById("email");
-let phoneInput = document.getElementById("phone");
-let passwordInput = document.getElementById("password");
-let confirmPasswordInput = document.getElementById("confirm_password");
-
 const form = document.querySelector("form");
-form.addEventListener("submit", validateRegistrationForm)
+form.addEventListener("submit", validateRegistrationForm);

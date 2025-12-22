@@ -1,31 +1,27 @@
-/* === style.css === */
-
-/* Основные настройки страницы */
 body { 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Современный шрифт */
-    background-color: #f4f6f9; /* Светло-серый фон */
-    color: #333; /* Цвет текста */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    color: #333; 
     margin: 0;
     padding: 20px;
 }
 
 h1, h2 { 
-    color: #2c3e50; /* Темно-синий цвет заголовков */
+    color: #2c3e50;
 }
 
-/* --- Стили таблицы --- */
 table { 
     width: 100%; 
     border-collapse: collapse; /* Убираем двойные границы */
     background: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Легкая тень */
-    border-radius: 8px; /* Закругленные углы */
+    border-radius: 8px; 
     overflow: hidden; /* Чтобы углы не обрезались */
     margin-bottom: 20px;
 }
 
 th { 
-    background-color: #34495e; /* Темная шапка таблицы */
+    background-color: #34495e;
     color: white; 
     padding: 12px 15px; 
     text-align: left; 
@@ -47,7 +43,6 @@ tr:hover {
     background-color: #f1f1f1; 
 }
 
-/* --- Кнопки --- */
 form { 
     display: inline-block; /* Чтобы формы стояли в ряд */
     margin-right: 5px; 
@@ -68,25 +63,24 @@ button:hover {
 }
 
 /* Цвета кнопок */
-.btn-edit { background-color: #3498db; }   /* Синий */
-.btn-del { background-color: #e74c3c; }    /* Красный */
+.btn-edit { background-color: #3498db; }
+.btn-del { background-color: #e74c3c; }
 .btn-admin { 
-    background-color: #f1c40f;             /* Желтый */
+    background-color: #f1c40f;
     color: #333; 
     font-weight: bold; 
 } 
 .btn-save { 
-    background-color: #27ae60;             /* Зеленый */
+    background-color: #27ae60;
     margin-top: 10px; 
 }
 
-/* --- Формы (Добавление/Редактирование) --- */
 .user-form {
     background: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    max-width: 500px; /* Ограничение ширины формы */
+    max-width: 500px;
 }
 
 .user-form label { 
@@ -104,7 +98,7 @@ button:hover {
     box-sizing: border-box; 
 }
 
-/* --- Пагинация (Страницы 1, 2, 3...) --- */
+
 .pagination { 
     text-align: center; 
     margin-top: 20px; 
@@ -121,7 +115,6 @@ button:hover {
     border-radius: 4px;
 }
 
-/* Активная страница (на которой мы сейчас) */
 .pagination a.active {
     background-color: #3498db;
     color: white;
@@ -130,5 +123,5 @@ button:hover {
 
 td form {
   display: flex;
-  gap: 5px; /* Forces 5px space between all buttons, regardless of JS or PHP */
+  gap: 5px; /* Пробел 5px между кнопками */
 }

@@ -10,7 +10,9 @@
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/header-footer.css">
   <link rel="stylesheet" href="css/sluzby.css" media="screen">
+  <link rel="stylesheet" href="css/print.css" media="print">
   <link rel="stylesheet" href="css/sluzby_print.css" media="print">
+
 
   <title>Naše služby|APEX Medical</title>
 </head>
@@ -36,8 +38,7 @@
       </section>
 
 
-      <!-- ГАЛЕРЕЯ УСЛУГ - 6 БОКСОВ В 2 РЯДАХ ПО 3 БОКСА
-      #####################################################################################  -->      
+      <!-- ГАЛЕРЕЯ УСЛУГ - 6 БОКСОВ В 2 РЯДАХ ПО 3 БОКСА -->
       <div class="grid_3x3">
         <!-- 1-й ряд * 3 бокса -->
         <!-- box 1/1 -->
@@ -135,23 +136,12 @@
             </div> 
           </div>
       </div>
-      <!-- #####################################################################################  -->
 
-
-
-        <!-- FOOTER -->
-         <?php require_once "footer.php" ?>   
-        <!-- FOOTER -->
-
+      <?php require_once "footer.php" ?>   
 
     </div> <!--container-->
-  
   </div> <!-- wrapper -->
-
   <div class="copyright sz12">&copy; 2024 APEX Medical Center. Všechna práva vyhrazena.</div>
 
-
-  <!-- Подключение внешнего файла script.js -->
-  <!-- <script src="js/script.js"></script> -->
 </body> 
 </html>

@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/header-footer.css">
   <link rel="stylesheet" href="css/responsive/header-footer.css">
   <link rel="stylesheet" href="css/contacts.css" media="screen">
+  <link rel="stylesheet" href="css/print.css" media="print">
   <link rel="stylesheet" href="css/contacts_print.css" media="print">
   <title>Kontakty|APEX Medical</title>
 </head>

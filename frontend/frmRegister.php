@@ -18,16 +18,12 @@
             $page_name = "registration";
             require_once "header.php";
         ?>
-        <!-- TODO fix double submitting everywhere -->
-        <!-- TODO fix submitting after refreshing the page everywhere -->
-        <!-- TODO write * where fields are required -->
-        <!-- TODO rewrite validation: buggs in password writing (e.g for Qwerty shows taht passwords are not same) -->
         <main class="main">
-            <div class="container center-form-container"> 
+            <div class="container center-form-container">
                 
                 <div class="frmCommon">
                     <h2>Registrace</h2>
-                    <form id="registrationForm" name="Registration" action="register_handler.php" method="post" enctype="multipart/form-data">
+                    <form id="registrationForm" name="Registration" action="../users/userController.php" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="name">Jméno*:</label>
                             <input type="text" id="name" name="name" placeholder="Jan">
@@ -55,9 +51,9 @@
                             <span id="password-error-message" class="errorMessage"></span>
                         </div>
                         <div class="form-group">
-                            <label for="confirm_password">Potvrďte heslo*:</label>
-                            <input type="password" id="confirm_password" name="confirm_password" placeholder="Qwerty123">
-                            <span id="confirm_password-error-message" class="errorMessage"></span>
+                            <label for="confirm-password">Potvrďte heslo*:</label>
+                            <input type="password" id="confirm-password" name="confirm-password" placeholder="Qwerty123">
+                            <span id="confirm-password-error-message" class="errorMessage"></span>
                         </div>
                         
                         <div>
@@ -78,6 +74,6 @@
         </div>
         <div class="copyright sz12">&copy; 2024 APEX Medical Center. Všechna práva vyhrazena.</div>
     </div>
-<script src="js/registr_validateinput.js" defer></script>
+<script type="module" src="js/registr_validateinput.js" defer></script>
 </body>
 </html>

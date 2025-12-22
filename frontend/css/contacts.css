@@ -3,9 +3,6 @@ h2 {
 }
 
 
-/* ================================================= */
-/* 1. СТИЛИ КОНТАКТНОЙ ИНФОРМАЦИИ (contact_info) */
-/* ================================================= */
 .contact_info img {
     margin-right: 10px;
     vertical-align: middle;
@@ -23,7 +20,7 @@ h2 {
     font-weight: 700;
 }
 
-.email {  /* Переопределение цвета для email */
+.email {
     color: var(--color-blue);
 }
 
@@ -32,7 +29,6 @@ h2 {
     color: var(--color-blue);
 }
 
-/* для номера телефона экстренной службы */
 .emergency-phone {
     display: block;
     text-align: center;
@@ -43,7 +39,6 @@ h2 {
 }
 
 
-/* 2. СТИЛИ РАСПИСАНИЯ И ЧАСОВ (section_hours) */
 .section_hours {
     margin-top: 30px;
     padding-top: 20px;
@@ -74,11 +69,6 @@ h2 {
     margin: 5px 0;
 }
 
-
-
-/* ================================================= */
-/* 4. СТИЛИ СЕТКИ (grid)*/
-/* ================================================= */
 .grid {
     display: grid;
     max-width: 1200px;
@@ -92,7 +82,6 @@ h2 {
     padding: 0 20px;
 }
 
-/* Назначаем области Grid Area: */
 .contact_info {
     grid-area: info; 
     text-align: left;
@@ -112,9 +101,6 @@ h2 {
 }
 
 
-
-
-/* --- ВТОРОСТЕПЕННЫЕ СТИЛИ --- */
 .blue_bold {
     color: var(--color-blue);
     font-weight: 900;

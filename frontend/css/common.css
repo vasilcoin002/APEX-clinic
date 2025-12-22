@@ -1,16 +1,8 @@
-/* ОБЩИЕ (УНИФИКАЦИЯ) ДЛЯ ВСЕХ СТРАНИЦ СТИЛИ */
-/* ========================================= */
-
 html, body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f5f5f5; /* нейтральный фон- почти белый */
+    background-color: #f5f5f5;
 }
-/* ================================ */
 
-
-
-/* ------------------------------- */
-/* Стили для верхней части страниц */
 .section_top {
     margin-top: 80px;   /* ! смещение вниз, чтобы страница при загрузке не ушла под HAEDER */
 }
@@ -39,10 +31,7 @@ html, body {
     text-align: center;
     line-height: 130%;
 }
-/* -------------------------- */
 
-
-/* КНОПКА СИНЕГО ЦВЕТА */
 
 .btn_common-blue{
     display: inline-flex;
@@ -65,17 +54,12 @@ html, body {
 }
 
 
-
-
-
 .di-flex {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-
-/* СТИЛИ РАЗДЕЛОВ GRID С КАРТОЧКАМИ*/
 .grid_3x3{
     display: grid;
     grid-template-columns: repeat(3, 3fr);
@@ -86,7 +70,7 @@ html, body {
     margin: 0 auto;
     padding: 0px 0px;
 }
-/* СТИЛИ КАРТОЧЕК */
+
 .bx1, .bx2 {
     height: auto;
     max-height: 655px;
@@ -97,9 +81,7 @@ html, body {
     box-shadow: 0 2px 10px rgba(36, 27, 27, 0.5);
 }
 .bx1 {
-    /* min-width: 350px; */
     padding: 10px;
-
 }
 .bx2 {
     min-width: 280px;
@@ -116,26 +98,17 @@ html, body {
     font-weight: 700;
 }
 
-
-
-
-
-
-/* ================== */
-/* ДРУГИЕ ОБЩИЕ СТИЛИ */
 .blue_bold {
     color: #0070ff;
     font-weight: 900;
 }
 
-/* Использую в Footer */
 .footer .green_bold {
     color: #16a249;
     font-weight: 800;
     font-size: 16px;
 }
 
-/* Стиль разделителя */
 .hr {
     height: 2px; 
     margin: 30px 0px 10px;
@@ -143,9 +116,6 @@ html, body {
 }
 
 
-
-
-/* СТИЛИ ДЛЯ СТРАНИЦ LEKARI и SLUZBY */
 .txt_rem {
     margin-top: 10px;
 }
@@ -156,8 +126,8 @@ input {
 }
 
 .error-border {
-    border: 2px solid red;
-    }
+    border: 2px solid red !important;
+}
 
 #errorMessage {
     color: red;

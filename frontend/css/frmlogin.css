@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Уменьшил margin-top, чтобы форма была более центрирована */
     margin-top: 50px; 
     min-height: calc(100vh - 120px);
     padding: 20px;
@@ -14,7 +13,6 @@
     min-width: 400px;
     position: relative;
     padding: 18px 30px;
-    /* color: var(--color-gray); */
     text-align: center;
     background: #f0f0f0;
     border: 2px solid rgba(0, 112, 255, 0.2); /* легкая синяя рамка */
@@ -26,14 +24,10 @@
     font-size: 30px;
     margin-bottom: 30px;
     text-align: center;
-    color: var(--color-black); /* Заголовок теперь черный */
+    color: var(--color-black);
     font-weight: 700;
 }
 
-
-/* ================================================= */
-/*  СТИЛИ ПОЛЕЙ ВВОДА */
-/* ================================================= */
 
 .frmCommon .form-group {
     margin-bottom: 20px;
@@ -75,10 +69,6 @@
 }
 
 
-/* ================================================= */
-/* 4. СТИЛИ КНОПКИ                           */
-/* ================================================= */
-
 .submitBtn{
     display: inline-flex;
     justify-content: center;
@@ -105,22 +95,8 @@
     box-shadow: 0 8px 20px rgba(0, 112, 255, 0.3);
 }
 
-
-
-
 .menu .div a.active {
     color: #dfa52b;
     padding-bottom: 5px;
     border-bottom: 3px solid #ebb217;
 }
-.error-border {
-    border: 2px solid red !important;
-}
-
-#errorMessage {
-    color: red;
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-
