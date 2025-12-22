@@ -20,7 +20,7 @@
             $admin = $this->user_service->get_user_from_session();
 
             if ($admin->get_role() != Roles::ADMIN) {
-                $GLOBALS["errors"]["role"] = "You can't access AdminService. This service is accessible for users with role " . Roles::ADMIN . " only";
+                $GLOBALS["errors"]["role"] = "Nemáte přístup ke službě AdminService. Tato služba je přístupná pouze uživatelům s rolí " . Roles::ADMIN;
                 http_response_code(403);
                 throw new BadMethodCallException();
             }
@@ -35,17 +35,17 @@
 
             $user = $this->user_repository->find_user_by_id($userDTO->id);
             if ($user == null) {
-                $GLOBALS["errors"]["id"] = "User not found. Please, provide the right id";
+                $GLOBALS["errors"]["id"] = "Uživatel nenalezen. Zadejte prosím správné ID.";
                 http_response_code(404);
                 throw new InvalidArgumentException();
             }
             if ($user->get_id() == $admin->get_id()) {
-                $GLOBALS["errors"]["id"] = "You can't delete yourself through the admin's panel. Please, use user's panel";
+                $GLOBALS["errors"]["id"] = "V administračním panelu nemůžete smazat vlastní účet. Použijte prosím uživatelský panel.";
                 http_response_code(400);
                 throw new BadMethodCallException();
             }
             if ($user->get_role() == Roles::ADMIN) {
-                $GLOBALS["errors"]["id"] = "You can't delete admins";
+                $GLOBALS["errors"]["id"] = "Nemůžete smazat administrátory.";
                 http_response_code(400);
                 throw new BadMethodCallException();
             }
@@ -59,17 +59,17 @@
 
             $user = $this->user_repository->find_user_by_id($userDTO->id);
             if ($user == null) {
-                $GLOBALS["errors"]["id"] = "User not found. Please, provide the right id";
+                $GLOBALS["errors"]["id"] = "Uživatel nenalezen. Zadejte prosím správné ID.";
                 http_response_code(404);
                 throw new InvalidArgumentException();
             }
             if ($user->get_id() == $admin->get_id()) {
-                $GLOBALS["errors"]["id"] = "You can't promote yourself";
+                $GLOBALS["errors"]["id"] = "Nemůžete povýšit sami sebe.";
                 http_response_code(400);
                 throw new BadMethodCallException();
             }
             if ($user->get_role() == Roles::ADMIN) {
-                $GLOBALS["errors"]["id"] = "You can't promote admins";
+                $GLOBALS["errors"]["id"] = "Nemůžete povýšit administrátory.";
                 http_response_code(400);
                 throw new BadMethodCallException();
             }
