@@ -2,3 +2,5 @@ users/users.json
 users/avatars
 services/services.json
 .vscode
+.phpdoc/
+phpDocumentor.phar
