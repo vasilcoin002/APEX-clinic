@@ -45,7 +45,7 @@
 
         public function get_range_of_users(int $from, int $to): array {
             if ($to <= $from) {
-                $GLOBALS["errors"]["to"] = 'Value "to" can\'t be less than or equal to "from"';
+                $GLOBALS["errors"]["to"] = 'Hodnota "do" (to) nesmí být menší nebo rovna hodnotě "od" (from).';
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -70,7 +70,7 @@
         private function check_if_email_is_taken(string $email, ?int $user_id): void {
             $user_with_same_email = $this->find_user_by_email($email);
             if (isset($user_with_same_email) && $user_with_same_email->get_id() !== $user_id) {
-                $GLOBALS["errors"]["email"] = "This email is already taken. Please, provide another one";
+                $GLOBALS["errors"]["email"] = "Tento e-mail je již obsazen. Zadejte prosím jiný.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -115,7 +115,7 @@
         public function delete_user(User $user): void {
             $user_id = $user->get_id();
             if (!isset($user_id)) {
-                $GLOBALS["errors"]["id"] = "User does not have id. Please, provide user with id";
+                $GLOBALS["errors"]["id"] = "Uživatel nemá ID. Zadejte prosím uživatele s ID.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
@@ -136,7 +136,7 @@
         public function update_user(User $user): User {
             $user_id = $user->get_id();
             if (!isset($user_id)) {
-                $GLOBALS["errors"]["id"] = "User does not have id. Please, provide user with id";
+                $GLOBALS["errors"]["id"] = "Uživatel nemá ID. Zadejte prosím uživatele s ID.";
                 http_response_code(400);
                 throw new InvalidArgumentException();
             }
