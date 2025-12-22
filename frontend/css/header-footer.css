@@ -1,23 +1,21 @@
 .wrapper {
     min-height: 100%;
     width: 100%;
-
     overflow: hidden;
-    margin: 0 auto; /*добавил 08.11 - посмотреть, не мешает: */
+    margin: 0 auto;
     background: rgba(0,128,255,0.17);
 }
 .header {
     background-color:   var(--color-bg);
     display: flex;
     flex-direction: column;
-
     top: 0;
     position: fixed;
     width: 100%;
     z-index: 100;
 }
 .container {
-    max-width: 700%; /* размер содержимого сайта по отношению к экрану' */
+    max-width: 700%;
 }
 
 .header_top-inner {
@@ -34,11 +32,9 @@
     margin-right: 10px;
 }
 
-
-.company_logo{  /*логотип компании слева вверху */
+.company_logo{
     width: 60px;
 }
-
 
 .header_logo-text {
     display: flow;
@@ -46,9 +42,6 @@
     margin-bottom: 10px;
     color: #006bff;
 }
-
-
-
 
 .header_user {
     margin:20px;
@@ -61,11 +54,6 @@
     filter: invert(30%) sepia(85%) saturate(3000%) hue-rotate(200deg) brightness(95%); /*сделать иконку синей*/
 }
 
-
-
-/* -----------------
-СТИЛИ МЕНЮ
------------------ */
 .menu a {
     color: var(--color-menu-a);
     font-size: calc(var(--font-sz-base) + 7px);
@@ -82,14 +70,6 @@
 }
 
 
-
-
-
-/* ============================================== */
-/* СТИЛИ ДЛЯ ВЫПАДАЮЩЕГО МЕНЮ АВАТАРКИ - DROPDOWN */
-/* ============================================== */
-
-/* Основной контейнер, который позволяет позиционировать меню относительно него */
 .user-dropdown {
     position: relative; /* Обязательно для правильного позиционирования дочернего элемента */
     display: inline-block;
@@ -97,14 +77,11 @@
     z-index: 1000;  /* Устанавливаем z-index, чтобы меню было поверх других элементов */
 }
 
-/* Стили для самого выпадающего окна */
 .dropdown-content {
     visibility: hidden;  /* Изначально скрываем меню */
     opacity: 0;
-
-    /* Позиционирование: появляется справа от иконки */
     position: absolute;
-    top: 100%; /* Начинается ниже иконки */
+    top: 100%;
     right: 0; 
     
     min-width: 200px;
@@ -166,22 +143,10 @@
     opacity: 1;
 }
 
-
-
-
-/* Класс для элементов, которые должны быть скрыты по умолчанию */
 .hidden-item {
-    display: none !important; /* !important гарантирует, что он переопределит другие правила display */
+    display: none !important;
 }
 
-
-
-
-
-
-/* ------------------------------
-СТИЛИ FOOTER
------------------------------- */
 .footer {
    background-color: transparent;
    color: var(--color-black);
@@ -207,8 +172,6 @@
 }
 .footer-logo-image {
     width: 10px;
-    /* height: 10px; */
-    /* object-fit: contain; */
 }
 
 .footer h4 {

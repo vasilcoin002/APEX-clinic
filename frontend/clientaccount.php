@@ -11,11 +11,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href='images/favicon.png' rel="shortcut icon" type="image/x-icon">
+<link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/header-footer.css">
 <link rel="stylesheet" href="css/vars.css" media="screen">
 <link rel="stylesheet" href="css/vars_print.css" media="print">
 <link rel="stylesheet" href="css/clientaccount.css">
-<link rel="stylesheet" href="css/errors.css">
 
 <title>APEX Medical</title>
 </head>

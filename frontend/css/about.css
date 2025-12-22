@@ -2,7 +2,6 @@
    margin-top: 80px;
 }
 
-
 .section_top h1 {
     color: var(--color-black);
     font-size: 35px;
@@ -34,17 +33,14 @@
     padding-left: 65px;
 }
 .about_text ul li:before {
-    content: "•"; /* Используем собственный маркер */
-    color: var(--color-green); /* или var(--color-blue) */
+    content: "•";
+    color: var(--color-green);
     font-weight: bolder;
-    /* font-size: 24px; */
     display: inline-block; 
     width: 3em;
     margin-left: -3em;
 }
 
-
-/* Контейнер для изображений */
 .about_image-box {
     display: flex;
     gap: 10px;
@@ -54,10 +50,8 @@
     overflow: hidden;
 }
 
-
-/* Стиль для самих изображений */
 .about_image-box img {
-    width: 33.3%; /* Каждое изображение занимает половину ширины контейнера */
+    width: 33.3%;
     height: auto;
     object-fit: cover; /* Изображение будет покрывать область */
     border-radius: 8px;
@@ -65,7 +59,6 @@
     transition: transform 0.3s ease;
 }
 
-/* Эффект при наведении - красиво! */
 .about_image-box img:hover {
     transform: scale(1.02);
 }

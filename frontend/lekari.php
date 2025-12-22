@@ -10,6 +10,7 @@
    <link rel="stylesheet" href="css/common.css">
    <link rel="stylesheet" href="css/header-footer.css">
    <link rel="stylesheet" href="css/lekari.css" media="screen">
+   <link rel="stylesheet" href="css/print.css" media="print">
    <link rel="stylesheet" href="css/lekari_print.css" media="print">
    <title>Lékaři|APEX Medical</title>
 </head>
@@ -30,10 +31,8 @@
             </div>
          </div>  <!--section_top-->
 
-
          <!-- ГАЛЕРЕЯ ВРАЧЕЙ - 1-й РЯД ВИДЕН, А 2-ОЙ СКРЫТ-->
          <div class="grid_3x3">
-            <!-- 1-й ряд * бокс #1 -->
             <div class="bx1">
                <img src="images/Lekari/Lekar1.jpg" class="doctor-photo" alt="Doctor photo">
                <div class="sz20">Dr. Anna Veselá</div>

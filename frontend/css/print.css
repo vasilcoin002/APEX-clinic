@@ -118,10 +118,6 @@ h1 {
 }
 
 
-
-
-
-
 .gray_box1, .gray_box2 {
     height: auto;
     max-height: 655pt;
@@ -167,8 +163,6 @@ h1 {
     justify-content: center;
 } 
     
-
-/* СЕКЦИЯ "HERO" */
 .hero-section {
     width: auto;
     background: linear-gradient(#0080ff, #4e9af1);
@@ -178,14 +172,11 @@ h1 {
     border-radius: 10pt;
 }
 
-
 .hero-title {
     font-size: 20pt;
     font-weight: 700;
     margin-bottom: 20pt;
 }
-
-
 
 .doctors-photos {
     width: 30%;
@@ -193,13 +184,10 @@ h1 {
     border-radius: 10pt;
 }
 
-
-
 .di-flex {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    /* color: #ebb217; */
 }
 
 .left_side, .right_side {
@@ -225,7 +213,6 @@ h1 {
     max-width:1000pt; 
     margin: 0 auto;
     padding: 0pt 0pt;
-    /* margin-top: 5pt;  */
 }
 
 
@@ -234,8 +221,6 @@ h1 {
     font-size: 16pt;
     text-align: center;
 }
-/* -------------------------- */
-
 
 .body_top {
     display: flex;
@@ -244,9 +229,6 @@ h1 {
     align-items: center;
     margin-bottom: 40pt;
 }
-
-
-
 
 
 .text_rem {
@@ -288,50 +270,78 @@ footer .footer-container {
     font-size: 8pt;
 }
 
-/* ==================================== */
-/* 1. СТИЛИ ДЛЯ ПЕЧАТИ (@media print) */
-/* ==================================== */
+nav,
+aside, 
+footer, 
+.header, 
+.sidebar, 
+.ad-banner, 
+.btn_common-blue,
+.block_show_all_services,
+.copyright,
+.no-print,
+button, 
+form {
+    display: none !important;
+}
 
-    /* 1. Скрытие ненужных элементов (Навигация, кнопки, реклама) */
-    /* Важно: Добавьте сюда все классы и ID, которые не нужны на бумаге */
-    nav,
-    aside, 
-    /* footer,  */
-    .header, 
-    .sidebar, 
-    .ad-banner, 
-    .btn_common-blue,
-    .block_show_all_services,
-    .copyright,
-    .no-print, /* Скрываем любой элемент с этим классом */
-    button, 
-    form {
-        display: none !important;
-    }
+* {
+    /* Принудительное удаление фоновых цветов/изображений */
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
 
-    /* 2. Общие правила для экономии чернил и читаемости */
-    * {
-        /* Принудительное удаление фоновых цветов/изображений */
-        background: transparent !important;
-        color: #000 !important; /* Убеждаемся, что текст черный */
-        box-shadow: none !important; /* Удаляем тени */
-        text-shadow: none !important; /* Удаляем тени текста */
-    }
+body {
+    font-family: serif;
+    margin: 0;
+    padding: 0; 
+}
 
-    /* 3. Оформление тела документа */
-    body {
-        font-family: serif; /* Более традиционный шрифт для печати */
-        margin: 0; /* Удаляем внешние отступы, чтобы использовать больше места */
-        padding: 0; 
-    }
+img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+}
 
-    /* 4. Настройки для изображений */
-    img {
-        max-width: 100% !important; /* Гарантируем, что изображения не вылезут за пределы страницы */
-        page-break-inside: avoid; /* Не разрывать изображение между страницами */
-    }
-    
-    /* 5. Управление заголовками и блоками */
-    h1, h2, h3 {
-        page-break-after: avoid; /* Заголовок не должен оставаться в конце страницы без текста */
-    }
+h1, h2, h3 {
+    page-break-after: avoid;
+}
+
+
+pre, blockquote {
+    border: 1pt solid #999;
+    page-break-inside: avoid; 
+}
+
+a {
+    text-decoration: underline;
+}
+a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 80%;
+    color: #555;
+}
+
+a[href^="#"]:after {
+    content: ""; 
+}
+
+.section_top {
+    margin: 0;
+}
+
+.grid_3x3 {
+    display: grid;
+    grid-template-columns: repeat(3, 3fr);
+    gap: 0pt;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0pt 0pt;
+}
+
+.doctor-photo {
+    width:  100pt;
+    height: 100pt;
+}

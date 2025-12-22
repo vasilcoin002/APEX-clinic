@@ -1,116 +1,18 @@
-/* ==================================== */
-/* 1. СТИЛИ ДЛЯ ПЕЧАТИ (@media print) */
-/* ==================================== */
-
-
-/* 1. Скрытие второго ряда по умолчанию */
 .doctors-hidden-row {
-    display: none; /* 2-й ряд не показывать изначально */
+    display: none;
 }
 
-/* 2. Стиль для контейнера кнопки */
 .show-more-button-container {
-    margin: 15pt auto 15pt; /* Отступы сверху и снизу */
+    margin: 15pt auto 15pt;
     text-align: center;
 }
 
-/* 3. Стиль для иконки стрелки (чтобы она поворачивалась) */
 .arrow-icon {
     margin-left: 10pt;
     display: inline-block;
     transition: transform 0.3s ease;
 }
 
-/* Класс, который JS будет добавлять для показа контента */
 .visible-doctors {
-    display: contents; /* Показывает содержимое контейнера, не создавая дополнительного Flex/Grid-контекста */
-}
-
-
-
-
-
-   /* 1. Скрытие ненужных элементов (Навигация, кнопки, реклама) */
-    /* Важно: Добавьте сюда все классы и ID, которые не нужны на бумаге */
-    nav, 
-    aside, 
-    footer, 
-    .header, 
-    .sidebar, 
-    .ad-banner, 
-    .no-print, /* Скрываем любой элемент с этим классом */
-    /* .section_top_title-text, */
-    .copyright,
-    button, 
-    form {
-        display: none !important;
-    }
-
-    /* 2. Общие правила для экономии чернил и читаемости */
-    * {
-        /* Принудительное удаление фоновых цветов/изображений */
-        background: transparent !important;
-        color: #000 !important; /* Убеждаемся, что текст черный */
-        box-shadow: none !important; /* Удаляем тени */
-        text-shadow: none !important; /* Удаляем тени текста */
-    }
-
-    /* 3. Оформление тела документа */
-    body {
-        font-family: serif; /* Более традиционный шрифт для печати */
-        margin: 0; /* Удаляем внешние отступы, чтобы использовать больше места */
-        padding: 0; 
-    }
-
-    /* 4. Настройки для изображений */
-    img {
-        max-width: 100% !important; /* Гарантируем, что изображения не вылезут за пределы страницы */
-        page-break-inside: avoid; /* Не разрывать изображение между страницами */
-    }
-    
-    /* 5. Управление заголовками и блоками */
-    h1, h2, h3 {
-        page-break-after: avoid; /* Заголовок не должен оставаться в конце страницы без текста */
-    }
-    
-    pre, blockquote {
-        border: 1pt solid #999;
-        page-break-inside: avoid; /* Не разрывать блок кода или цитату между страницами */
-    }
-
-    /* 6. Отображение ссылок (полезно, чтобы пользователь видел URL) */
-    a {
-        text-decoration: underline; /* Подчеркиваем ссылки, если они не были подчеркнуты */
-    }
-    a[href]:after {
-        /* Добавляем URL ссылки после текста (кроме ссылок на якоря) */
-        content: " (" attr(href) ")";
-        font-size: 90%;
-        color: #555;
-    }
-    /* Скрываем отображение URL для ссылок, которые ведут на якоря (#) */
-    a[href^="#"]:after {
-        content: ""; 
-    }
-
-
-
-    
-.grid_3x3 {
-    display: grid;
-    grid-template-columns: repeat(3, 3fr);
-    gap: 0pt;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    padding: 0pt 0pt;
-   }
- 
-.section_top {
-    margin: 0;
-}
-
-.doctor-photo {
-    width:  100pt;
-    height: 100pt;
+    display: contents;
 }

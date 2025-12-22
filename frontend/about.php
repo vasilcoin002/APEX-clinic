@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/header-footer.css">    
   <link rel="stylesheet" href="css/about.css" media="screen">
+  <link rel="stylesheet" href="css/print.css" media="print">
   <link rel="stylesheet" href="css/about_print.css" media="print">
   <title>About|APEX Medical</title>
 </head>

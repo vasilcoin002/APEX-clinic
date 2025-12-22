@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="css/header-footer.css">
     <link rel="stylesheet" href="css/responsive/header-footer.css">
     <link rel="stylesheet" href="css/frmRegister.css"> 
-    <link rel="stylesheet" href="css/errors.css">
     <title>APEX Medical - Registrace</title>
 </head>
 <body>
