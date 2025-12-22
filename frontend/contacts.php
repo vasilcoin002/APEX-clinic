@@ -63,18 +63,6 @@
                     <p class="green_bold sz20">24 hodin denně, 7 dní v týdnu</p>
                 </div>
 
-            <!-- <h2>Napište nám zprávu:</h2>
-            <form class="contact-form">
-                <label for="name">Jméno a příjmení:</label>
-                <input type="text" id="name" name="name" required>
-                <label for="email_form">Váš E-mail:</label>
-                <input type="email" id="email_form" name="email" required>
-                <label for="phone_form">Telefon (nepovinné):</label>
-                <input type="tel" id="phone_form" name="phone">
-                <label for="message">Vaše zpráva:</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-                <button type="submit" class="btn_common-blue">Odeslat zprávu</button>
-            </form> -->
         </section> 
       </div>
 
